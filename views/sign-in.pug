@@ -1,0 +1,12 @@
+extends shared/layout
+
+block content
+  main.form-container
+    div.form-field
+      img(src="/images/icons8-user-64.png", alt="user")
+      h1 Anderer Benutzer
+      form(action="", method="post") 
+        input(type="text", name="username" value='' placeholder="Benutzername")
+        span.password-submit
+          input(type="password" name="password" value='' placeholder="Passwort")
+          input(type="submit" value="")

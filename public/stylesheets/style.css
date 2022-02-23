@@ -1,16 +1,43 @@
-body {
-    max-height: 100%;
+.grid-container {
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    background: url(/images/background_windows.jpg);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+    display: grid;
+    /* position: relative; */
+    position: absolute;
+    z-index: 1;
+    grid-template-columns: 5% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+    /* grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); */
+    grid-template-rows: 5% 10% 10% 10% 10% 10% 10% 10% 4% 10%;
+    /* grid-template-rows: 1fr; */
+    /* background-image: url("/images/background_windows.png");
+    background-size: contain;
+    background-repeat: no-repeat; */
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
-    grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+.aspect-ratio-box {
+    height: 0;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: calc(3202/5694 * 60%);
+    /* background: rgb(230, 118, 118) */
+    /* background-image: url("/images/background_windows.png");
+    background-size: contain;
+    background-repeat: no-repeat; */
+    position: relative;
+    z-index: 0;
+}
+
+.background {
+    object-fit: contain;
+    position: absolute;
+    width: 100%;
+    max-height: 100%;
+    z-index: 0;
+    top: 0;
+    left: 0;
 }
 
 .icon {
@@ -31,12 +58,60 @@ body {
     vertical-align: top;
 }
 
-#user-icon {
+#register-icon {
     text-align: center;
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 2;
-    grid-row-end: 3;
+    grid-column-start: 5;
+    grid-column-end: 6;
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+#steam-icon {
+    text-align: center;
+    grid-column-start: 5;
+    grid-column-end: 6;
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+#origin-icon {
+    text-align: center;
+    grid-column-start: 6;
+    grid-column-end: 7;
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+#battlenet-icon {
+    text-align: center;
+    grid-column-start: 7;
+    grid-column-end: 8;
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+#epic-icon {
+    text-align: center;
+    grid-column-start: 5;
+    grid-column-end: 6;
+    grid-row-start: 6;
+    grid-row-end: 7;
+}
+
+#add-game-icon {
+    text-align: center;
+    grid-column-start: 6;
+    grid-column-end: 7;
+    grid-row-start: 6;
+    grid-row-end: 7;
+}
+
+#login-icon {
+    text-align: center;
+    grid-column-start: 7;
+    grid-column-end: 8;
+    grid-row-start: 3;
+    grid-row-end: 4;
 }
 
 footer {
@@ -44,6 +119,10 @@ footer {
     grid-row-end: 10;
     grid-column-start: 1;
     grid-column-end: 10;
+}
+
+main {
+    height: 100%;
 }
 
 html {

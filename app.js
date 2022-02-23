@@ -1,16 +1,21 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+let createError = require('http-errors');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
+const AppDB = require('./database/db');
+const UserRepository = require('./database/UserRepository');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const gamingRouter = require('./routes/gaming');
 
-var app = express();
+let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+app.set('shared', path.join(__dirname, 'views/shared'));
+app.set('gaming', path.join(__dirname, 'views/gaming'));
 app.set('view engine', 'pug');
 
 app.use(logger('dev'));
@@ -18,9 +23,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use("/files", express.static(path.join(__dirname, 'files')));
 
+//Configure routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/users/sign-up', usersRouter);
+app.use('/users/sign-in', usersRouter);
+app.use('/gaming', gamingRouter);
+app.use('/gaming/steam', gamingRouter);
+
+//Configure database
+const db = new AppDB("./database/unevergamealone.sqlite");
+const userRepo = new UserRepository(db);
+userRepo.createTable();
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -39,3 +56,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+exports.userRepo = userRepo;
