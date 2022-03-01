@@ -1,4 +1,11 @@
 extends shared/layout
 
 block content
-  h1="Steam"
+  h1= title
+  main.form-container
+    each game in games
+      div
+        p=game.name
+        img(src=game.coverImage, alt=game.name)
+        each player in game.playerNames
+          p=player.usernameOfPlatform

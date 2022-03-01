@@ -1,7 +1,11 @@
+/**
+ * Class representing a user
+ */
 class User {
-    constructor(username, password) {
+    constructor(username, password, email) {
         this.username = username;
         this.password = password;
+        this.email = email;
         this.registered = Date.now();
     }
 }
