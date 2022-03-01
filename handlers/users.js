@@ -7,6 +7,21 @@ const validateRegister = (req, res, next) => {
             msg: 'Bitte geben Sie einen Benutzernamen mit mindestens 4 Zeichen ein.'
         })
     }
+    // password min 6 chars
+    if (!req.body.password || req.body.password.length < 6) {
+        return res.status(400).send({
+            msg: 'Please enter a password with min. 6 chars'
+        });
+    }
+    // password (repeat) does not match
+    if (!req.body.password_repeat ||
+        req.body.password != req.body.password_repeat
+    ) {
+        return res.status(400).send({
+            msg: 'Both passwords must match'
+        });
+    }
+    next();
 }
 
 let isLoggedIn = (req, res, next) => {

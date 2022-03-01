@@ -1,6 +1,19 @@
 extends shared/layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  input(type="text", name="username", value='')
+  main.form-container
+    div.form-field
+      img(src="/images/icons8-user-64.png", alt="user")
+      h1 Neuer Benutzer
+      form(action="", method="post") 
+        input(type="text", name="username" value='' placeholder="Benutzername")
+        input(type="email", name="email" value='' placeholder="E-Mail")
+        input(type="password" name="password" value='' placeholder="Passwort")
+        input(type="password" name="password_repeat" value='' placeholder="Passwort wiederholen")
+        each platform in platforms
+          span.form-checkbox
+            label(for=platform.id)  #{platform.name}
+            input(type="checkbox" name=platform.id id=platform.id)
+            input.invisible(type="text" name=platform.id+"_uName" id=platform.id+"_uName" placeholder="Benutzername")
+        input(type="submit" value="Registrieren")
+        script(src="/javascripts/userInteractions.js") 
