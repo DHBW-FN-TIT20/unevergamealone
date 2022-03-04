@@ -13,7 +13,7 @@ router.get('/', userValidater.isLoggedIn, (req, res, next) => {
     res.sendFile("platforms.html", { root: __dirname + "/../public/gaming" });
 });
 
-router.get('/:games', userValidater.isLoggedIn, (req, res, next) => {
+router.get('/show/:games', userValidater.isLoggedIn, (req, res, next) => {
     switch (req.params.games) {
         case "origin":
             let username = req.userData.username;
@@ -27,6 +27,17 @@ router.get('/:games', userValidater.isLoggedIn, (req, res, next) => {
         default:
             res.redirect("/gaming");
     }
+});
+
+//Get Request to add New Game to the User
+router.get('/add', userValidater.isLoggedIn, (req, res, next) => {
+    let username = req.userData.username
+    return res.render('add-games', {});
+});
+
+//Post Request to add New Game to the User
+router.post('/add', userValidater.isLoggedIn, (req, res, next) => {
+    let username = req.userData.username;
 });
 
 module.exports = router;

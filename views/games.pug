@@ -2,10 +2,11 @@ extends shared/layout
 
 block content
   h1= title
-  main.form-container
+  main.flex-container
     each game in games
-      div
+      div.game-panel
         p=game.name
-        img(src=game.coverImage, alt=game.name)
+        div.crop
+          img.game-panel-img(src=game.coverImage, alt=game.name)
         each player in game.playerNames
           p=player.usernameOfPlatform

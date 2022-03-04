@@ -4,45 +4,43 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>UNGA!</title>
+    <title>YNGA</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='/stylesheets/style.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='/stylesheets/layout-responsive.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='/stylesheets/basics.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/stylesheets/index-basics.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/stylesheets/index-layout-responsive.css'>
 </head>
 
 <body>
-    <header>
-        <a href="#">
-            <img id="logo" style="height: 10em; width: auto;" src="/images/UNeverGameAloneLogo.png">
-        </a>
+    <header id="navbar-fixed">
+        <nav>
+            <a href="#getting-started">Getting started</a>
+            <a href="/users/sign-in">Login</a>
+        </nav>
     </header>
-    <main class="aspect-ratio-box">
-        <img class="background">
-        <div class="grid-container">
-            <div id="register-icon">
-                <a class="icon" href="/users/sign-up"><img src="/images/icons8-sign-up-64.png">
-                    <br>
-                    <span class="icon-label">Registrieren</span></a>
+    <main>
+        <section id="heading" class="gradient">
+            <img id="logo" src="/images/UNeverGameAloneLogo.png">
+            <div>
+                <h1 id="slogan">You Never<br>Game Alone</h1>
+                <h3 id="sub-slogan">Jetzt Mitspieler finden!</h3>
+                <a class="btn" type="button" href="/users/sign-up">Hier registrieren</a>
             </div>
-            <div id="login-icon">
-                <a class="icon" href="/users/sign-in"><img src="/images/icons8-user-64.png">
-                    <br>
-                    <span class="icon-label">Login</span></a>
+        </section>
+        <section id="getting-started">
+            <div id="register">
+                <h3>Registrieren</h3>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad, fuga numquam? Saepe reiciendis accusamus voluptatibus nemo laudantium eveniet. Dolore commodi eveniet nihil fuga vero ipsa corrupti nulla, error laudantium ut?</p>
             </div>
-            <footer id="task-bar">
-                <a href="https://facebook.com">
-                    <img class="task-bar-icons" src="/images/icons8-facebook-neu-48.png">
-                </a>
-                <a href="#">
-                    <img class="task-bar-icons" src="/images/icons8-fingerabdruck-50.png">
-                </a>
-                <!-- <a href="http://www.freepik.com">Designed by brgfx / Freepik</a> -->
-                <!-- <a href='https://de.freepik.com/fotos/mockup'>Mockup Foto erstellt von Vectorium - de.freepik.com</a> -->
-            </footer>
-        </div>
+            <img id="register-img" alt="register-img">
+            <img id="add-game-img" alt="add-game-img">
+            <div id="add-game">
+                <h3>Spiel hinzufügen</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam quos veritatis, dolores ullam harum doloribus eius mollitia fugiat, iusto tempora facilis totam culpa. Illo consectetur magnam quod laborum libero reprehenderit!</p>
+            </div>
 
+        </section>
     </main>
-</body>
+    <footer>
 
-</html>
+    </footer>
+</body>

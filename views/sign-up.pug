@@ -5,7 +5,7 @@ block content
     div.form-field
       img(src="/images/icons8-user-64.png", alt="user")
       h1 Neuer Benutzer
-      form(action="", method="post") 
+      form(action="/users/sign-up", method="post")
         input(type="text", name="username" value='' placeholder="Benutzername")
         input(type="email", name="email" value='' placeholder="E-Mail")
         input(type="password" name="password" value='' placeholder="Passwort")

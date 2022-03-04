@@ -42,9 +42,7 @@ router.get('/sign-up', function(req, res, next) {
 });
 
 router.get('/sign-in', function(req, res, next) {
-
-    let user = app.userRepo.selectByUsername("Floqueboque");
-    res.render('sign-in', { title: 'Einloggen', user: user.username });
+    res.render('sign-in', { title: 'Einloggen' });
 });
 
 //User log-in
@@ -53,7 +51,7 @@ router.post('/sign-in', (req, res, next) => {
     const password = req.body.password;
     let user = app.userRepo.selectByUsername(username);
     if (!user) {
-        return res.send(alert("Username oder Passwort sind falsch."));
+        return res.send("Username oder Passwort sind falsch.");
     }
     if (bcrypt.compareSync(password, user.password)) {
         const token = jwt.sign({
