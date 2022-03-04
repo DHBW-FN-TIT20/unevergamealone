@@ -1,3 +1,4 @@
+const UserPlatform = require('./UserPlatform.js');
 const User = require('./UserPlatform.js');
 
 class UserPlatformRepository {
@@ -8,6 +9,14 @@ class UserPlatformRepository {
     createTable() {
         const sql = "CREATE TABLE IF NOT EXISTS userPlatformMapping(username text, usernameOfPlatform text, platformId integer)";
         return this.db.run(sql);
+    }
+
+    initialSetup() {
+        this.insert(new UserPlatform("demo", "demo_steam", 1))
+        this.insert(new UserPlatform("demo", "demo_origin", 2))
+        this.insert(new UserPlatform("demo", "demo_epic", 3))
+        this.insert(new UserPlatform("demo", "demo_ubisoft", 4))
+        this.insert(new UserPlatform("demo", "demo_battlenet", 5))
     }
 
     insert(userPlatform) {

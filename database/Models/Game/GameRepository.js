@@ -17,10 +17,10 @@ class GameRepository {
     }
 
     initialSetup() {
-        // this.insertNewGame(new GameCreate("Battlefield 2042", "/images/upload/bf2042.jpg"), 2);
-        this.addGameToUser(this.selectByName("Battlefield 2042").id, "Floqueboque");
+        this.insertNewGame(new GameCreate("Battlefield 2042", "/images/upload/bf2042.jpg"), 2);
+        this.addGameToUser(this.selectByName("Battlefield 2042").id, "demo");
         this.insertNewGame(new GameCreate("Battlefield V", "/images/upload/bf5.jpg"), 2);
-        this.addGameToUser(this.selectByName("Battlefield V").id, "Floqueboque");
+        this.addGameToUser(this.selectByName("Battlefield V").id, "demo");
     }
 
     /**
