@@ -6,6 +6,7 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
+const fs = require("fs");
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 
@@ -64,22 +65,29 @@ app.use('/gaming/:game', gamingRouter);
 app.use('/gaming/game/add', gamingRouter);
 
 //Configure database
-const db = new AppDB("./database/unevergamealone.sqlite");
+if (!fs.existsSync("./database/unevergamealone.sqlite")) {
+    const db = new AppDB("./database/unevergamealone.sqlite");
+    const userRepo = new UserRepository(db);
+    const platformRepo = new PlatformRepository(db);
+    const userPlatformRepo = new UserPlatformRepository(db);
+    const gameRepo = new GameRepository(db);
+    userRepo.createTable();
+    userRepo.initialSetup();
+    platformRepo.createTable();
+    platformRepo.initialSetup();
+    userPlatformRepo.createTable();
+    userPlatformRepo.initialSetup();
+    gameRepo.createGameTable();
+    gameRepo.createGameUserMappingTable();
+    gameRepo.initialSetup();
+}
+
+const db = new AppDB("./database/unevergamealone.sqlite", { fileMustExist: true });
 const userRepo = new UserRepository(db);
 const platformRepo = new PlatformRepository(db);
 const userPlatformRepo = new UserPlatformRepository(db);
 const gameRepo = new GameRepository(db);
 
-userRepo.createTable();
-// userRepo.initialSetup();
-platformRepo.createTable();
-// platformRepo.initialSetup();
-userPlatformRepo.createTable();
-gameRepo.createGameTable();
-gameRepo.createGameUserMappingTable();
-// gameRepo.initialSetup();
-// gameRepo.addGameToUser(1, "screetox");
-// gameRepo.addGameToUser(2, "screetox");
 
 
 // catch 404 and forward to error handler
