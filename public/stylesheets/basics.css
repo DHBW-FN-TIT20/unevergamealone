@@ -67,3 +67,9 @@ input:focus {
 .invisible {
     display: none;
 }
+
+.game-panel-img {
+    display: block;
+    width: 100%;
+    height: auto;
+}

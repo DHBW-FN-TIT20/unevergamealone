@@ -60,7 +60,8 @@ app.use('/users', usersRouter);
 app.use('/users/sign-up', usersRouter);
 app.use('/users/sign-in', usersRouter);
 app.use('/gaming', gamingRouter);
-app.use('/gaming/steam', gamingRouter);
+app.use('/gaming/:game', gamingRouter);
+app.use('/gaming/game/add', gamingRouter);
 
 //Configure database
 const db = new AppDB("./database/unevergamealone.sqlite");
@@ -77,6 +78,8 @@ userPlatformRepo.createTable();
 gameRepo.createGameTable();
 gameRepo.createGameUserMappingTable();
 // gameRepo.initialSetup();
+// gameRepo.addGameToUser(1, "screetox");
+// gameRepo.addGameToUser(2, "screetox");
 
 
 // catch 404 and forward to error handler

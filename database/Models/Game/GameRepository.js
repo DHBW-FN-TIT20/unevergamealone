@@ -12,24 +12,29 @@ class GameRepository {
     }
 
     createGameUserMappingTable() {
-        const sql = "CREATE TABLE IF NOT EXISTS gameUserMapping(game_id integer PRIMARY KEY, username text, FOREIGN KEY(game_id) REFERENCES games(id), FOREIGN KEY(username) REFERENCES users(username))";
+        const sql = "CREATE TABLE IF NOT EXISTS gameUserMapping(game_id integer, username text, FOREIGN KEY(game_id) REFERENCES games(id), FOREIGN KEY(username) REFERENCES users(username))";
         return this.db.run(sql);
     }
 
     initialSetup() {
-        this.insertNewGame(new GameCreate("Battlefield 2042", "/images/upload/bf2042.jpg", "Floqueboque"), 2);
-        this.insertNewGame(new GameCreate("Battlefield V", "/images/upload/bf5.jpg", "Floqueboque"), 2);
+        // this.insertNewGame(new GameCreate("Battlefield 2042", "/images/upload/bf2042.jpg"), 2);
+        this.addGameToUser(this.selectByName("Battlefield 2042").id, "Floqueboque");
+        this.insertNewGame(new GameCreate("Battlefield V", "/images/upload/bf5.jpg"), 2);
+        this.addGameToUser(this.selectByName("Battlefield V").id, "Floqueboque");
     }
 
+    /**
+     * @param {GameCreate} game Game to Add
+     * @param {int} platformID Id 
+     */
     insertNewGame(game, platformId) {
-        const sql1 = "INSERT INTO games(platform_id, name, coverImage) VALUES (? ,?, ?)";
-        this.db.run(sql1, [platformId, game.name, game.coverImage]);
-        let insertedGame = this.selectByName(game.name);
-        let idOfInsertedGame = insertedGame.id;
-        const sql2 = "INSERT INTO gameUserMapping(game_id, username) VALUES (?,?)";
-        return this.db.run(sql2, [idOfInsertedGame, game.username]);
+        const sql = "INSERT INTO games(platform_id, name, coverImage) VALUES (? ,?, ?)";
+        return this.db.run(sql, [platformId, game.name, game.coverImage]);
     }
 
+    /**
+     * @param 
+     */
     addGameToUser(gameId, username) {
         const sql = "INSERT INTO gameUserMapping(game_id, username) VALUES (?,?)";
         return this.db.run(sql, [gameId, username]);
@@ -51,8 +56,16 @@ class GameRepository {
     }
 
     selectUsersOfGame(gameId) {
-        const sql = "SELECT userPlatformMapping.username, userPlatformMapping.usernameOfPlatform AS usernameOfPlatform FROM userPlatformMapping JOIN games ON games.platform_id=userPlatformMapping.platformId JOIN gameUsermapping ON gameUserMapping.username = userPlatformMapping.username WHERE games.id=?";
-        return this.db.all(sql, [gameId]);
+        // const sql = "SELECT userPlatformMapping.username, userPlatformMapping.usernameOfPlatform AS usernameOfPlatform FROM userPlatformMapping JOIN games ON games.platform_id=userPlatformMapping.platformId JOIN gameUsermapping ON gameUserMapping.username = userPlatformMapping.username WHERE game_id=?";
+        // return this.db.all(sql, [gameId]);
+
+        let platformId = this.db.get("SELECT platform_id FROM games WHERE id = ?", [gameId]);
+        let playersOwning = this.db.all("SELECT username FROM gameUserMapping WHERE game_id = ?", [gameId]);
+        let playernames = [];
+        for (let player of playersOwning) {
+            playernames.push(this.db.get("SELECT usernameOfPlatform FROM userPlatformMapping WHERE username = ? AND platformId = ?", [player.username, platformId.platform_id]));
+        }
+        return playernames;
     }
 }
 

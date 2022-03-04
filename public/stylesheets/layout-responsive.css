@@ -16,9 +16,11 @@
         content: url("/images/background_windows.png");
     }
     #logo {
-        width: 250px;
-        height: 250px;
+        height: 10em;
+        width: auto;
         display: block;
+        margin-top: 1em;
+        margin-bottom: 1em;
         margin-left: auto;
         margin-right: auto;
     }
@@ -48,12 +50,49 @@
     .form-container {
         border: black solid 2px;
         height: 95%;
-        margin: 1%;
+        margin: 0.5%;
         background-image: url("/images/windows.jpg");
         background-size: 100%;
         display: grid;
         grid-template-columns: 40% 20% 40%;
         grid-template-rows: 1fr 2fr 0.5fr;
+        background-repeat: no-repeat;
+    }
+    .flex-container {
+        display: flex;
+        border: black solid 2px;
+        height: 95%;
+        margin: 0.5%;
+        background-image: url("/images/windows.jpg");
+        background-size: 100%;
+        background-repeat: no-repeat;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 1%;
+    }
+    .game-panel {
+        flex-basis: 10%;
+        padding: 0.5%;
+        border: black 1px solid;
+        /* height: 200px; */
+    }
+    .crop {
+        width: 200px;
+        height: 300px;
+        overflow: hidden;
+        position: relative;
+    }
+    .crop img {
+        position: absolute;
+        left: -1000%;
+        right: -1000%;
+        top: -1000%;
+        bottom: -1000%;
+        margin: auto;
+        min-height: 100%;
+        width: auto;
+    }
     }
     .form-field {
         grid-column-start: 2;
