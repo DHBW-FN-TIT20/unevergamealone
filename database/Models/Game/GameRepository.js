@@ -33,16 +33,26 @@ class GameRepository {
     }
 
     /**
-     * @param 
+     * @param {int} gameId
+     * @param {string} username
      */
     addGameToUser(gameId, username) {
         const sql = "INSERT INTO gameUserMapping(game_id, username) VALUES (?,?)";
         return this.db.run(sql, [gameId, username]);
     }
 
+    /**
+     * Return all saved Games
+     * @returns Array.<Game>
+     */
     selectAll() {
-        const sql = "SELECT games.id, games.name, games.coverImage, platforms.name FROM games JOIN platforms ON platform_id=platforms.id";
-        return this.db.all(sql);
+        const sql = "SELECT games.id, games.name, games.coverImage, platforms.name AS platformName FROM games JOIN platforms ON platform_id=platforms.id";
+        const sql_games = this.db.all(sql);
+        let games = [];
+        sql_games.forEach(sql_game => {
+            games.push(sql_game);
+        });
+        return games;
     }
 
     selectAllGamesWithPlatformByUser(platformName, username) {
@@ -50,9 +60,16 @@ class GameRepository {
         return this.db.all(sql, [username, platformName]);
     }
 
+    /**
+     * Get a Game by his name
+     * @param {string} name 
+     * @returns Game
+     */
     selectByName(name) {
-        const sql = "SELECT games.id, games.name, games.coverImage, platforms.name FROM games JOIN platforms ON platform_id=platforms.id WHERE games.name=?";
-        return this.db.get(sql, [name]);
+        const sql = "SELECT games.id, games.name, games.coverImage, platforms.name AS platformName FROM games JOIN platforms ON platform_id=platforms.id WHERE games.name=?";
+        const sql_game = this.db.get(sql, [name]);
+        const game = new Game(sql_game.id, sql_game.platformName, sql_game.name, sql_game.coverImage);
+        return game;
     }
 
     selectUsersOfGame(gameId) {

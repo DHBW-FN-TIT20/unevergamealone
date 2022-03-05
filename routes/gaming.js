@@ -31,13 +31,21 @@ router.get('/show/:games', userValidater.isLoggedIn, (req, res, next) => {
 
 //Get Request to add New Game to the User
 router.get('/add', userValidater.isLoggedIn, (req, res, next) => {
-    let username = req.userData.username
-    return res.render('add-games', {});
+    const games = app.gameRepo.selectAll();
+    const platforms = app.platformRepo.selectAll();
+    return res.render('add-games', {games: games, platforms: platforms});
 });
 
 //Post Request to add New Game to the User
 router.post('/add', userValidater.isLoggedIn, (req, res, next) => {
     let username = req.userData.username;
 });
+
+// Get Request to get a specific Game
+router.get('/game/:gamename', userValidater.isLoggedIn, (req, rest, next) =>{
+    let game_name = req.params.gamename;
+    let game = app.gameRepo.selectByName(game_name);
+    return rest.json(game);
+})
 
 module.exports = router;
