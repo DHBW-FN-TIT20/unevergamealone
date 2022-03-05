@@ -55,6 +55,12 @@ class GameRepository {
         return games;
     }
 
+    /**
+     * 
+     * @param {String} platformName 
+     * @param {String} username 
+     * @returns Array
+     */
     selectAllGamesWithPlatformByUser(platformName, username) {
         const sql = "SELECT games.id, games.name AS game, games.coverImage, platforms.name AS platformName, gameUserMapping.username FROM games JOIN platforms ON platform_id=platforms.id JOIN gameUserMapping ON gameUserMapping.game_id=games.id WHERE gameUserMapping.username=? AND platforms.name=?";
         return this.db.all(sql, [username, platformName]);
@@ -76,13 +82,33 @@ class GameRepository {
         // const sql = "SELECT userPlatformMapping.username, userPlatformMapping.usernameOfPlatform AS usernameOfPlatform FROM userPlatformMapping JOIN games ON games.platform_id=userPlatformMapping.platformId JOIN gameUsermapping ON gameUserMapping.username = userPlatformMapping.username WHERE game_id=?";
         // return this.db.all(sql, [gameId]);
 
-        let platformId = this.db.get("SELECT platform_id FROM games WHERE id = ?", [gameId]);
-        let playersOwning = this.db.all("SELECT username FROM gameUserMapping WHERE game_id = ?", [gameId]);
-        let playernames = [];
-        for (let player of playersOwning) {
+        const platformId = this.db.get("SELECT platform_id FROM games WHERE id = ?", [gameId]);
+        const playersOwning = this.db.all("SELECT username FROM gameUserMapping WHERE game_id = ?", [gameId]);
+        const playernames = [];
+        for (const player of playersOwning) {
             playernames.push(this.db.get("SELECT usernameOfPlatform FROM userPlatformMapping WHERE username = ? AND platformId = ?", [player.username, platformId.platform_id]));
         }
         return playernames;
+    }
+
+    /**
+     * Get all Games from a User
+     * @param {String} username 
+     * @returns Array.<Game>
+     */
+    selectAllGamesFromUser(username) {
+        const sql = "SELECT games.id, platforms.name AS platformName, games.name, games.coverImage, users.username AS playerName " +
+            "FROM users " +
+            "JOIN gameUserMapping ON users.username = gameUserMapping.username " +
+            "JOIN games ON gameUserMapping.game_id = games.id " +
+            "JOIN platforms ON games.platform_id = platforms.id " +
+            "WHERE users.username = ?";
+        const sql_games = this.db.all(sql, [username]);
+        let games = [];
+        sql_games.forEach(sql_game => {
+            games.push(new Game(sql_game.id, sql_game.platformName, sql_game.name, sql_game.coverImage, [sql_game.playerName]));
+        });
+        return games;
     }
 }
 

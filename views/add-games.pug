@@ -3,17 +3,22 @@ extends shared/layout
 block content
   h1 Add Game
   main
-    form(action="/gaming/add", method="post")
+    label(for="search") Searching:  
+    input(type="text", name="search", id="searching" placeholder="Searching")
+    a(href="/gaming/new")
+      p Spiel nicht gefunden?
+    form(onsubmit="return save_games(this)")
       each platform in platforms
         h1 #{platform.name}
         div.flex-container
           each game in games
             if game.platformName === platform.name
-              div.game-panel
-                input(type='checkbox' name=game.id)
+              div.game-panel(name=game.name)
+                input(type='checkbox' name=game.id value=game.id)
                 label(for=game.id) #{game.name}
                 div.crop
                   img.game-panel-img(src=game.coverImage, alt=game.name)
       input(type='submit', value='Speichern' disabled)
 
   script(src="/javascripts/add-games.js")
+  script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
