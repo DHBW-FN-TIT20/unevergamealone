@@ -1,0 +1,27 @@
+extends shared/layout
+
+block content
+    link(rel='stylesheet', href='/stylesheets/cropper.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css')
+    h1 New Game
+    main
+        form(onsubmit="return create_game(this)")
+            label(for="game_name")
+                p Name des Spiels
+            input#game-name(type="text", name="game_name", placeholder="Cyberpunk", required)
+            p.invisible#game-exists Spiel existiert bereits!
+            hr 
+            p Plattform:
+            each platform in platforms
+                label(for=platform.id) #{platform.name}
+                input(type='radio' id=platform.id name=`platform` value=platform.id)
+            hr
+            p Cover:
+            input(type="file", name="cover", onchange="changeCover()")
+            div
+                img#cropper-image(src="/images/default-game-image.png", alt="Cover from Spiel")
+            input(type='submit', value='Speichern', disabled)
+
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js") 
+    script(src="/javascripts/new-games.js") 
