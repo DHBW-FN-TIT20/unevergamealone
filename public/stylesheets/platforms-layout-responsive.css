@@ -1,0 +1,32 @@
+/*Screen width > 600px*/
+
+@media screen and (min-width: 600px) {
+    #task-bar a {
+        flex-basis: 2%;
+        min-width: auto;
+    }
+    .task-bar-icons {
+        display: block;
+        width: auto;
+        height: 100%;
+    }
+    #task-bar {
+        background-color: #1c1c1c;
+        grid-column-start: 4;
+        grid-column-end: 9;
+        grid-row-start: 9;
+        grid-row-end: 10;
+        margin-left: 2%;
+        margin-right: 2%;
+        display: flex;
+        justify-content: flex-end;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: stretch;
+    }
+}
+
+
+/*Screen width < 600px*/
+
+@media screen and (max-width: 600px) {}

@@ -4,16 +4,10 @@
     width: 100%;
     height: 100%;
     display: grid;
-    /* position: relative; */
     position: absolute;
     z-index: 1;
     grid-template-columns: 5% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
-    /* grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); */
     grid-template-rows: 5% 10% 10% 10% 10% 10% 10% 10% 4% 10%;
-    /* grid-template-rows: 1fr; */
-    /* background-image: url("/images/background_windows.png");
-    background-size: contain;
-    background-repeat: no-repeat; */
 }
 
 .aspect-ratio-box {
@@ -22,10 +16,6 @@
     margin-left: auto;
     margin-right: auto;
     padding-top: calc(3202/5694 * 60%);
-    /* background: rgb(230, 118, 118) */
-    /* background-image: url("/images/background_windows.png");
-    background-size: contain;
-    background-repeat: no-repeat; */
     position: relative;
     z-index: 0;
 }
@@ -119,12 +109,4 @@ footer {
     grid-row-end: 10;
     grid-column-start: 1;
     grid-column-end: 10;
-}
-
-main {
-    height: 100%;
-}
-
-html {
-    height: 100%;
 }

@@ -24,53 +24,6 @@
         margin-left: auto;
         margin-right: auto;
     }
-    #task-bar {
-        background-color: #1c1c1c;
-        grid-column-start: 4;
-        grid-column-end: 9;
-        grid-row-start: 9;
-        grid-row-end: 10;
-        margin-left: 2%;
-        margin-right: 2%;
-        display: flex;
-        justify-content: flex-end;
-        flex-wrap: nowrap;
-        flex-direction: row;
-        align-items: stretch;
-    }
-    #task-bar a {
-        flex-basis: 2%;
-        min-width: auto;
-    }
-    .task-bar-icons {
-        display: block;
-        width: auto;
-        height: 100%;
-    }
-    .form-container {
-        border: black solid 2px;
-        height: 95%;
-        margin: 0.5%;
-        background-image: url("/images/windows.jpg");
-        background-size: 100%;
-        display: grid;
-        grid-template-columns: 40% 20% 40%;
-        grid-template-rows: 1fr 2fr 0.5fr;
-        background-repeat: no-repeat;
-    }
-    .flex-container {
-        display: flex;
-        border: black solid 2px;
-        height: 95%;
-        margin: 0.5%;
-        background-image: url("/images/windows.jpg");
-        background-size: 100%;
-        background-repeat: no-repeat;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: flex-start;
-        gap: 1%;
-    }
     .game-panel {
         flex-basis: 10%;
         padding: 0.5%;
@@ -93,20 +46,7 @@
         min-height: 100%;
         width: auto;
     }
-    }
-    .form-field {
-        grid-column-start: 2;
-        grid-column-end: 2;
-        grid-row-start: 2;
-        grid-row-end: 2;
-        padding: 5%;
-    }
-    .form-field img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .form-field h1 {
-        text-align: center;
-    }
+}
+
+
 }
