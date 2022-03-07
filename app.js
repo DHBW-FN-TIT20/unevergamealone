@@ -61,8 +61,10 @@ app.use('/users', usersRouter);
 app.use('/users/sign-up', usersRouter);
 app.use('/users/sign-in', usersRouter);
 app.use('/gaming', gamingRouter);
-app.use('/gaming/:game', gamingRouter);
-app.use('/gaming/game/add', gamingRouter);
+app.use('/gaming/show/:game', gamingRouter);
+app.use('/gaming/game/:gamename', gamingRouter);
+app.use('/gaming/add', gamingRouter);
+app.use('/gaming/new', gamingRouter);
 
 //Configure database
 if (!fs.existsSync("./database/unevergamealone.sqlite")) {
