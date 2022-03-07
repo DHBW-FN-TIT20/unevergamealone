@@ -1,0 +1,32 @@
+/*Screen width > 600px*/
+
+@media screen and (min-width: 600px) {
+    .form-container {
+        height: 96%;
+        width: 98%;
+        margin: 1%;
+        display: grid;
+        grid-template-columns: 40% 20% 40%;
+        grid-template-rows: 1fr 2fr 0.5fr;
+    }
+    .form-field {
+        grid-column-start: 2;
+        grid-column-end: 2;
+        grid-row-start: 2;
+        grid-row-end: 2;
+        padding: 5%;
+    }
+    .form-field img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .form-field h1 {
+        text-align: center;
+    }
+}
+
+
+/*Screen width < 600px*/
+
+@media screen and (max-width: 600px) {}
