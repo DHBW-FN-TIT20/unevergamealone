@@ -16,6 +16,7 @@ block content
               div.game-panel(name=game.name)
                 input(type='checkbox' name=game.id value=game.id checked)
                 label(for=game.id) #{game.name}
+                input(type=type="button", name="delete"+game.id, value="Delete Game", data-gameId=game.id, onclick="delete_game(this)")
                 div.crop
                   img.game-panel-img(src=game.coverImage, alt=game.name)
           each game in unselected_games
@@ -28,4 +29,4 @@ block content
       input(type='submit', value='Speichern')
 
   script(src="/javascripts/manage-games.js")
-  script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
+  script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")  
