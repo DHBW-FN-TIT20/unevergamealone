@@ -1,7 +1,7 @@
 extends shared/layout
 
 block content
-  h1 Add Game
+  h1 Spiel entfernen oder hinzufügen
   main
     label(for="search") Searching:  
     input(type="text", name="search", id="searching" placeholder="Searching")
@@ -11,14 +11,21 @@ block content
       each platform in platforms
         h1 #{platform.name}
         div.flex-container
-          each game in games
+          each game in selected_games
+            if game.platformName === platform.name
+              div.game-panel(name=game.name)
+                input(type='checkbox' name=game.id value=game.id checked)
+                label(for=game.id) #{game.name}
+                div.crop
+                  img.game-panel-img(src=game.coverImage, alt=game.name)
+          each game in unselected_games
             if game.platformName === platform.name
               div.game-panel(name=game.name)
                 input(type='checkbox' name=game.id value=game.id)
                 label(for=game.id) #{game.name}
                 div.crop
                   img.game-panel-img(src=game.coverImage, alt=game.name)
-      input(type='submit', value='Speichern' disabled)
+      input(type='submit', value='Speichern')
 
-  script(src="/javascripts/add-games.js")
+  script(src="/javascripts/manage-games.js")
   script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 

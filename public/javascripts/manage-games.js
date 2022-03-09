@@ -3,41 +3,50 @@ const submit_btn = document.querySelector('input[type=submit]');
 const search = document.getElementById("searching");
 
 
-/* ####### Checkbox Bindigns ####### */
-checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
-        // Enable submit btn if at least one Checkbox is checked
-        const checked = document.querySelectorAll('input[type=checkbox]:checked');
-        if (checked.length != 0) {
-            submit_btn.disabled = false;
-        }
-        else {
-            submit_btn.disabled = true;
-        }
-    })
-});
-
 /* ####### Textbox Bindings ####### */
 search.addEventListener("input", filter_games);
 
 
 /* ####### Functions ####### */
 
+/**
+ * Do the Post request to the server
+ * @param {object} form 
+ * @returns {Boolean} False to not reload the page
+ */
 function save_games (form) {
-    const checked_games = document.querySelectorAll('input[type=checkbox]:checked');
-    games = {games: []};
-    checked_games.forEach(game => {
-        games.games.push({game_id: game.value});
+    const checked_games_obj = document.querySelectorAll('input[type=checkbox]:checked');
+    const not_checked_games_obj = document.querySelectorAll('input[type=checkbox]:not(:checked)');
+
+    const checked_games = [];
+    const not_checked_games = [];
+
+    checked_games_obj.forEach(game => {
+        checked_games.push(game.value);
     });
+    not_checked_games_obj.forEach(game => {
+        not_checked_games.push(game.value);
+    });
+
+    const games = {
+        add_game: checked_games,
+        remove_games: not_checked_games
+    }
+
     $.ajax({
         method: "POST",
-        url: "/gaming/add",
+        url: "/gaming/manage",
         contentType: "application/json; charset=UTF-8",
         data: JSON.stringify(games),
         success: (data, textStatus, jqXHR ) => {
-            console.log(`Data reviced: ${JSON.stringify(data)}`);
-            alert("Spiele erfolgreich hinzugefügt!");
-            window.location.replace("/gaming/");
+            if (data.status != "error") {
+                console.log(`Data reviced: ${JSON.stringify(data)}`);
+                alert("Spiele erfolgreich hinzugefügt!");
+                window.location.replace("/gaming/");
+            }
+            else {
+                console.error(`${textStatus}: ${data.msg}`);
+            }
         },
         error: (jqXHR, textStatus, errorThrown ) => {
             console.error(`${textStatus}: ${jqXHR.responseText} => ${errorThrown}`);
@@ -47,6 +56,9 @@ function save_games (form) {
     return false;
 }
 
+/**
+ * Only show the matched game titles insert in the "search" text
+ */
 function filter_games(){
     all_games = document.querySelectorAll(`.game-panel`);
     all_games.forEach(game => {
