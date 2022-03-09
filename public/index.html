@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>YNGA</title>
+    <link rel='shortcut icon' type='image/x-icon' href='/images/favicon.ico'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='/stylesheets/basics.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='/stylesheets/index-basics.css'>
@@ -19,6 +22,17 @@
             <a href="#about-us">Über uns</a>
         </nav>
     </header>
+    <header id="navbar-hamburger">
+        <div class="topnav">
+            <a id="hamburger-menu-btn" href="javascript:void(0);" class="icon" type="button" onclick="toggleHamburgerMenu()">☰</a>
+            <div id="hamburger-links">
+                <a href="#getting-started" id="link-to-getting-startet">Getting started</a>
+                <a href="/users/sign-in" id="link-to-login">Login</a>
+                <a href="#about-us" id="link-to-about-us">Über uns</a>
+            </div>
+        </div>
+    </header>
+    <button onclick="backToTop()" id="btt-btn" title="Back to top">▲</button>
     <main>
         <section id="heading" class="gradient border-radius">
             <img id="logo" src="/images/UNeverGameAloneLogo.png">
@@ -44,5 +58,6 @@
             <address>Florian Herkommer, Florian Glaser, David Felder</address>
         </footer>
     </main>
-
+    <script src="/javascripts/hamburger-menu.js"></script>
+    <script src="/javascripts/back-to-top-button.js"></script>
 </body>

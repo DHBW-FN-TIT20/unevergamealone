@@ -1,15 +1,25 @@
 extends shared/layout
 
 block content
-  main.form-container
+  header#navbar-fixed
+    nav
+      a(href="/") Startseite
+  header#navbar-hamburger
+    div.topnav
+      a#hamburger-menu-btn.icon-home(href="/",  type="button") ⌂
+  main.form-container.gradient.border-radius
     div.form-field
       img(src="/images/icons8-user-64.png", alt="user")
       h1 Neuer Benutzer
       form(action="/users/sign-up", method="post")
-        input(type="text", name="username" value='' placeholder="Benutzername")
-        input(type="email", name="email" value='' placeholder="E-Mail")
-        input(type="password" name="password" value='' placeholder="Passwort")
-        input(type="password" name="password_repeat" value='' placeholder="Passwort wiederholen")
+        input(type="text", name="username" value='' placeholder="Benutzername" required)
+        input(type="email", name="email" value='' placeholder="E-Mail" required)
+        input(type="password" name="password" value='' placeholder="Passwort" required)
+        input(type="password" name="password_repeat" value='' placeholder="Passwort wiederholen" required)
+        label(for="os")  Betriebssystem Linux wählen
+        input(type="radio" id="os" name="os" value='Linux')
+        label(for="os")  Betriebssystem Windows wählen
+        input(type="radio" id="os" name="os" value='Windows')
         each platform in platforms
           span.form-checkbox
             label(for=platform.id)  #{platform.name}
