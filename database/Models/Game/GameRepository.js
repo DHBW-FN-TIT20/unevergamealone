@@ -12,7 +12,7 @@ class GameRepository {
     }
 
     createGameUserMappingTable() {
-        const sql = "CREATE TABLE IF NOT EXISTS gameUserMapping(game_id integer, username text, FOREIGN KEY(game_id) REFERENCES games(id), FOREIGN KEY(username) REFERENCES users(username))";
+        const sql = "CREATE TABLE IF NOT EXISTS gameUserMapping(game_id integer, username text, FOREIGN KEY(game_id) REFERENCES games(id) ON DELETE CASCADE, FOREIGN KEY(username) REFERENCES users(username) ON DELETE CASCADE, PRIMARY KEY(game_id, username))";
         return this.db.run(sql);
     }
 
@@ -38,6 +38,18 @@ class GameRepository {
      */
     addGameToUser(gameId, username) {
         const sql = "INSERT INTO gameUserMapping(game_id, username) VALUES (?,?)";
+        return this.db.run(sql, [gameId, username]);
+    }
+
+    /**
+     * @param {int} gameId 
+     * @param {string} username 
+     */
+    removeGameFromUser(gameId, username) {
+        const sql = "DELETE " +
+            "FROM gameUserMapping " +
+            "WHERE gameUserMapping.game_id = ? " +
+            "AND gameUserMapping.username = ?";
         return this.db.run(sql, [gameId, username]);
     }
 
@@ -109,6 +121,17 @@ class GameRepository {
             games.push(new Game(sql_game.id, sql_game.platformName, sql_game.name, sql_game.coverImage, [sql_game.playerName]));
         });
         return games;
+    }
+
+    /**
+     * Delete a game from the DB
+     * @param {int} gameId 
+     */
+    deleteGame(gameId) {
+        const sql = "DELETE " +
+            "FROM games " +
+            "WHERE games.id = ?";
+        return this.db.run(sql, [gameId]);
     }
 }
 

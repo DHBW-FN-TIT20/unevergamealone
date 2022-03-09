@@ -45,7 +45,8 @@
 }
 
 #btt-btn:hover {
-    background-color: #555;
+    background-color: #818181;
+    color: #273d40;
 }
 
 #heading {
