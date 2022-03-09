@@ -49,7 +49,7 @@ router.get('/show/:games', userValidater.isLoggedIn, (req, res, next) => {
 });
 
 //Get Request to add New Game to the User
-router.get('/add', userValidater.isLoggedIn, (req, res, next) => {
+router.get('/manage', userValidater.isLoggedIn, (req, res, next) => {
     let games = app.gameRepo.selectAll();
     const platforms = app.platformRepo.selectAll();
     let already_selected_games = app.gameRepo.selectAllGamesFromUser(req.userData.username);
@@ -67,24 +67,56 @@ router.get('/add', userValidater.isLoggedIn, (req, res, next) => {
         return true;
     });
 
-    return res.render('add-games', { games: filtered_games, platforms: platforms });
+    // Sort Games Alphabetic
+    already_selected_games.sort((a, b) => {
+        if (a.name > b.name) {
+            return 1;
+        }
+        return 0;
+    })
+
+    filtered_games.sort((a, b) => {
+        if (a.name > b.name) {
+            return 1;
+        }
+        return 0;
+    })
+
+    return res.render('manage-games', { selected_games: already_selected_games, unselected_games: filtered_games, platforms: platforms });
 });
 
 //Post Request to add New Game to the User
-router.post('/add', userValidater.isLoggedIn, (req, res, next) => {
+router.post('/manage', userValidater.isLoggedIn, (req, res, next) => {
     const username = req.userData.username;
-    const games = req.body.games;
+    const add_games = req.body.add_game;
+    const remove_games = req.body.remove_games;
     let response;
     try {
-        games.forEach(game => {
-            app.gameRepo.addGameToUser(game.game_id, username)
+        add_games.forEach(game => {
+            try {
+                app.gameRepo.addGameToUser(game, username)
+            } catch (error) {
+                // Ignore duplicate entry errors
+                if (error.code != "SQLITE_CONSTRAINT_PRIMARYKEY") {
+                    throw error;
+                }
+            }
         });
+
+        remove_games.forEach(game => {
+            app.gameRepo.removeGameFromUser(game, username)
+        });
+
         response = res.json({
             status: "success",
-            games: games,
+            games: {
+                added_games: add_games,
+                removed_games: remove_games
+            },
             username: username
         });
     } catch (error) {
+        console.error(error);
         response = res.json({
             status: "error",
             msg: JSON.stringify(error)
@@ -125,6 +157,31 @@ router.post('/new', upload.single('cover'), userValidater.isLoggedIn, (req, res,
             msg: JSON.stringify(error)
         })
     } finally {
+        return response;
+    }
+});
+
+
+router.post('/delete', userValidater.isLoggedIn, (req, res, next) => {
+    const game_id = req.body.game_id;
+
+    let response;
+
+    try {
+        app.gameRepo.deleteGame(game_id);
+
+        response = res.status(201).json({
+            status: "success",
+            game: game_id
+        });
+    } catch (error) {
+        console.error(error);
+        response = res.status(400).json({
+            status: "error",
+            msg: JSON.stringify(error)
+        })
+    }
+    finally {
         return response;
     }
 });
