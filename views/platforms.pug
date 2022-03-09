@@ -1,0 +1,22 @@
+extends shared/layout
+block content
+    header
+        a(href="/")
+            img(src="/images/UNeverGameAloneLogo.png", alt="Logo")
+    main.aspect-ratio-box
+        if os == 'Windows'
+            img.background(src="/images/background_windows.png", alt="Background Windows")
+        if os == 'Linux'
+            img.background(src="/images/background_ubuntu.jpg", alt="Background Ubuntu")
+        div.grid-container
+            div.flex-container-platforms
+                each platform in platforms
+                    div.icon
+                        a(href="/gaming/show/"+platform.name)
+                            img(src="/images/platforms/"+platform.name+".png", alt=platform.name, srcset="")
+                            p=platform.name
+                div.icon
+                    a(href="/gaming/manage")
+                        img(src="/images/platforms/manage.png", alt="Manage games", srcset="")
+                        p Spiele verwalten
+    script(src="/javascripts/platforms.js") 

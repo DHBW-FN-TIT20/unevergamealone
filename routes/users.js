@@ -18,6 +18,7 @@ router.post('/sign-up', userValidater.validateRegister, (req, res, next) => {
     let hashedPw = bcrypt.hashSync(req.body.password, salt);
     let username = req.body.username;
     let email = req.body.email;
+    let os = req.body.os;
     let platforms = app.platformRepo.selectAll();
 
     //get all checked platforms with username
@@ -29,7 +30,7 @@ router.post('/sign-up', userValidater.validateRegister, (req, res, next) => {
         }
     }
     //add userdata to db
-    app.userRepo.insert(new User(username, hashedPw, email));
+    app.userRepo.insert(new User(username, hashedPw, email, os));
     for (const userPlatform of userPlatforms) {
         app.userPlatformRepo.insert(userPlatform);
     }
