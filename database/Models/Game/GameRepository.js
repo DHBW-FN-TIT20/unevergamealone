@@ -12,7 +12,7 @@ class GameRepository {
     }
 
     createGameUserMappingTable() {
-        const sql = "CREATE TABLE IF NOT EXISTS gameUserMapping(game_id integer, username text, FOREIGN KEY(game_id) REFERENCES games(id), FOREIGN KEY(username) REFERENCES users(username))";
+        const sql = "CREATE TABLE IF NOT EXISTS gameUserMapping(game_id integer, username text, FOREIGN KEY(game_id) REFERENCES games(id), FOREIGN KEY(username) REFERENCES users(username), PRIMARY KEY(game_id, username))";
         return this.db.run(sql);
     }
 
@@ -38,6 +38,18 @@ class GameRepository {
      */
     addGameToUser(gameId, username) {
         const sql = "INSERT INTO gameUserMapping(game_id, username) VALUES (?,?)";
+        return this.db.run(sql, [gameId, username]);
+    }
+    
+    /**
+     * @param {int} gameId 
+     * @param {string} username 
+     */
+    removeGameFromUser(gameId, username) {
+        const sql = "DELETE " +
+            "FROM gameUserMapping "+
+            "WHERE gameUserMapping.game_id = ? " +
+            "AND gameUserMapping.username = ?";
         return this.db.run(sql, [gameId, username]);
     }
 
