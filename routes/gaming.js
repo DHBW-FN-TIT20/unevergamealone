@@ -186,6 +186,31 @@ router.post('/delete', userValidater.isLoggedIn, (req, res, next) => {
     }
 });
 
+
+router.post('/delete', userValidater.isLoggedIn, (req, res, next) => {
+    const game_id = req.body.game_id;
+
+    let response;
+
+    try {
+        app.gameRepo.deleteGame(game_id);
+
+        response = res.status(201).json({
+            status: "success",
+            game: game_id
+        });
+    } catch (error) {
+        console.error(error);
+        response = res.status(400).json({
+            status: "error",
+            msg: JSON.stringify(error)
+        })
+    }
+    finally {
+        return response;
+    }
+});
+
 // Get Request to get a specific Game
 router.get('/game/:gamename', userValidater.isLoggedIn, (req, res, next) => {
     let game_name = req.params.gamename;
