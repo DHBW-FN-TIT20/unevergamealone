@@ -7,7 +7,7 @@ class UserPlatformRepository {
     }
 
     createTable() {
-        const sql = "CREATE TABLE IF NOT EXISTS userPlatformMapping(username text, usernameOfPlatform text, platformId integer)";
+        const sql = "CREATE TABLE IF NOT EXISTS userPlatformMapping(username text, usernameOfPlatform text, platformId integer, FOREIGN KEY(username) REFERENCES users(username) ON DELETE CASCADE, FOREIGN KEY(platformId) REFERENCES platforms(id) ON DELETE CASCADE, PRIMARY KEY(username, platformId))";
         return this.db.run(sql);
     }
 
