@@ -96,7 +96,7 @@ router.post('/manage', userValidater.isLoggedIn, (req, res, next) => {
                 app.gameRepo.addGameToUser(game, username)
             } catch (error) {
                 // Ignore duplicate entry errors
-                if (error.code != "SQLITE_CONSTRAINT_PRIMARYKEY"){
+                if (error.code != "SQLITE_CONSTRAINT_PRIMARYKEY") {
                     throw error;
                 }
             }
@@ -152,6 +152,31 @@ router.post('/new', upload.single('cover'), userValidater.isLoggedIn, (req, res,
             game: game_name
         });
     } catch (error) {
+        response = res.status(400).json({
+            status: "error",
+            msg: JSON.stringify(error)
+        })
+    }
+    finally {
+        return response;
+    }
+});
+
+
+router.post('/delete', userValidater.isLoggedIn, (req, res, next) => {
+    const game_id = req.body.game_id;
+
+    let response;
+
+    try {
+        app.gameRepo.deleteGame(game_id);
+
+        response = res.status(201).json({
+            status: "success",
+            game: game_id
+        });
+    } catch (error) {
+        console.error(error);
         response = res.status(400).json({
             status: "error",
             msg: JSON.stringify(error)
