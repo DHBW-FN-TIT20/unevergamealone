@@ -11,14 +11,14 @@ const path = require('path');
 const GameCreate = require('../database/Models/Game/GameCreate');
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
+    destination: function(req, file, cb) {
         const upload_path = path.join(__dirname, '..', 'public', `images`, `upload`);
         if (!fs.existsSync(upload_path)) {
             fs.mkdirSync(upload_path);
         }
         cb(null, upload_path);
     },
-    filename: function (req, file, cb) {
+    filename: function(req, file, cb) {
         const filename = `${file.originalname}_${uuidv4()}.${file.mimetype.split("/")[1]}`;
         cb(null, filename)
     }
@@ -27,13 +27,14 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.get('/', userValidater.isLoggedIn, (req, res, next) => {
-    console.log(req.userData);
-    res.sendFile("platforms.html", { root: __dirname + "/../public/gaming" });
+    let platforms = app.platformRepo.selectAll();
+    let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
+    return res.render("platforms", { os: os, platforms: platforms });
 });
 
 router.get('/show/:games', userValidater.isLoggedIn, (req, res, next) => {
     switch (req.params.games) {
-        case "origin":
+        case "Origin":
             let username = req.userData.username;
             let games = app.gameRepo.selectAllGamesWithPlatformByUser("Origin", username);
             let gamesWithUsers = [];
@@ -96,7 +97,7 @@ router.post('/manage', userValidater.isLoggedIn, (req, res, next) => {
                 app.gameRepo.addGameToUser(game, username)
             } catch (error) {
                 // Ignore duplicate entry errors
-                if (error.code != "SQLITE_CONSTRAINT_PRIMARYKEY"){
+                if (error.code != "SQLITE_CONSTRAINT_PRIMARYKEY") {
                     throw error;
                 }
             }
@@ -120,8 +121,7 @@ router.post('/manage', userValidater.isLoggedIn, (req, res, next) => {
             status: "error",
             msg: JSON.stringify(error)
         })
-    }
-    finally {
+    } finally {
         return response;
     }
 });
@@ -152,6 +152,30 @@ router.post('/new', upload.single('cover'), userValidater.isLoggedIn, (req, res,
             game: game_name
         });
     } catch (error) {
+        response = res.status(400).json({
+            status: "error",
+            msg: JSON.stringify(error)
+        })
+    } finally {
+        return response;
+    }
+});
+
+
+router.post('/delete', userValidater.isLoggedIn, (req, res, next) => {
+    const game_id = req.body.game_id;
+
+    let response;
+
+    try {
+        app.gameRepo.deleteGame(game_id);
+
+        response = res.status(201).json({
+            status: "success",
+            game: game_id
+        });
+    } catch (error) {
+        console.error(error);
         response = res.status(400).json({
             status: "error",
             msg: JSON.stringify(error)

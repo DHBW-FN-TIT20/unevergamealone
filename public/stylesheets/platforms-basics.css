@@ -1,0 +1,13 @@
+.icon:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.icon p {
+    font-size: 0.75vw;
+    color: black;
+    vertical-align: top;
+}
+
+.icon a {
+    text-decoration: none;
+}
