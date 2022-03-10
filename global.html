@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: GameCreate</title>
+    <title>JSDoc: Global</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: GameCreate</h1>
+    <h1 class="page-title">Global</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>GameCreate<span class="signature">(name, coverImage)</span><span class="type-signature"></span></h2>
+        <h2></h2>
         
     
 </header>
@@ -38,15 +38,86 @@
     
         
 
+        
+
+
+<dl class="details">
+
     
 
     
-    <h4 class="name" id="GameCreate"><span class="type-signature"></span>new GameCreate<span class="signature">(name, coverImage)</span><span class="type-signature"></span></h4>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="isLoggedIn"><span class="type-signature"></span>isLoggedIn<span class="signature">(req, res, next)</span><span class="type-signature"></span></h4>
     
 
     
 
 
+
+<div class="description">
+    Check if the User is Logged in an save it to req.userData
+
+Redirect to the sign-in if the Token is invalid
+or if you call the sign-in or sign-up you get redirected
+to the /gaming
+</div>
 
 
 
@@ -81,13 +152,13 @@
 
         <tr>
             
-                <td class="name"><code>name</code></td>
+                <td class="name"><code>req</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">Request</span>
 
 
             
@@ -104,13 +175,13 @@
 
         <tr>
             
-                <td class="name"><code>coverImage</code></td>
+                <td class="name"><code>res</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">Response</span>
 
 
             
@@ -120,7 +191,30 @@
 
             
 
-            <td class="description last">Path of the filesystem</td>
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">callback</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
         </tr>
 
     
@@ -161,7 +255,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="database_Models_Game_GameCreate.js.html">database/Models/Game/GameCreate.js</a>, <a href="database_Models_Game_GameCreate.js.html#line7">line 7</a>
+        <a href="handlers_users.js.html">handlers/users.js</a>, <a href="handlers_users.js.html#line37">line 37</a>
     </li></ul></dd>
     
 
@@ -191,23 +285,7 @@
 
 
 
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+        
     
 
     
