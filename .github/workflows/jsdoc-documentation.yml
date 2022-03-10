@@ -23,7 +23,7 @@ jobs:
 
     - name: Create Docs
       run: |
-        jsdoc.js -c jsdoc_conf.json
+        node_modules/jsdoc/jsdoc.js -c jsdoc_conf.json
 
     - name: Deploy 🚀
       uses: peaceiris/actions-gh-pages@v3
