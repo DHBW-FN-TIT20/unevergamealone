@@ -2,3 +2,7 @@ node_modules
 uploads
 database/unevergamealone.sqlite
 public/images/upload
+
+# Ignore documentation
+out
+docs
