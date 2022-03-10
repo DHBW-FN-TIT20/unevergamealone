@@ -1,0 +1,32 @@
+name: "Create docs"
+
+on:
+  push:
+    branches:
+      - main
+      - docs/jsdoc
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: |
+        npm install --save-dev 
+
+    - name: Create Docs
+      run: |
+        jsdoc.js -c jsdoc_conf.json
+
+    - name: Deploy 🚀
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
