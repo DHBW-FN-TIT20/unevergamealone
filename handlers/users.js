@@ -24,7 +24,18 @@ const validateRegister = (req, res, next) => {
     next();
 }
 
+/**
+ * Check if the User is Logged in an save it to req.userData
+ * 
+ * Redirect to the sign-in if the Token is invalid
+ * or if you call the sign-in or sign-up you get redirected
+ * to the /gaming
+ * @param {Request} req 
+ * @param {Response} res 
+ * @param {callback} next 
+ */
 let isLoggedIn = (req, res, next) => {
+    const sign_in_or_sign_up = req.path.includes("sign-in") || req.path.includes("sign-up");
     try {
         let token = req.cookies['jwt'];
         if (token.startsWith('Bearer ')) {
@@ -37,11 +48,15 @@ let isLoggedIn = (req, res, next) => {
             'SECRETKEY'
         );
         req.userData = decoded;
+        if (sign_in_or_sign_up) {
+            return res.redirect('/gaming');
+        }
         next();
     } catch (err) {
-        return res.status(401).send({
-            msg: 'Your session is not valid!'
-        });
+        if (sign_in_or_sign_up) {
+            next();
+        }
+        return res.status(401).redirect('/users/sign-in');
     }
 }
 

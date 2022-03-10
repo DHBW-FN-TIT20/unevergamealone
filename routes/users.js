@@ -37,12 +37,12 @@ router.post('/sign-up', userValidater.validateRegister, (req, res, next) => {
     return res.redirect("/users/sign-in");
 });
 
-router.get('/sign-up', function(req, res, next) {
+router.get('/sign-up', userValidater.isLoggedIn, function (req, res, next) {
     let platforms = app.platformRepo.selectAll();
     res.render('sign-up', { platforms: platforms });
 });
 
-router.get('/sign-in', function(req, res, next) {
+router.get('/sign-in', userValidater.isLoggedIn, function (req, res, next) {
     res.render('sign-in', { title: 'Einloggen' });
 });
 
@@ -56,11 +56,11 @@ router.post('/sign-in', (req, res, next) => {
     }
     if (bcrypt.compareSync(password, user.password)) {
         const token = jwt.sign({
-                username: user.username
-            },
+            username: user.username
+        },
             'SECRETKEY', {
-                expiresIn: '24h'
-            }
+            expiresIn: '24h'
+        }
         );
         res.cookie("jwt", token, { httpOnly: true });
         return res.redirect(302, '/gaming/');
