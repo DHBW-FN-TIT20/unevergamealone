@@ -21,6 +21,7 @@ const UserRepository = require('./database/Models/User/UserRepository');
 const PlatformRepository = require('./database/Models/Platform/PlatformRepository');
 const UserPlatformRepository = require('./database/Models/UserPlatform/UserPlatformRepository');
 const GameRepository = require('./database/Models/Game/GameRepository')
+const TokenRepository = require('./database/Models/JWT/TokenRepository')
 
 /**
  * Index router
@@ -73,6 +74,7 @@ if (!fs.existsSync("./database/unevergamealone.sqlite")) {
     const platformRepo = new PlatformRepository(db);
     const userPlatformRepo = new UserPlatformRepository(db);
     const gameRepo = new GameRepository(db);
+    const tokenRepo = new TokenRepository(db);
     userRepo.createTable();
     userRepo.initialSetup();
     platformRepo.createTable();
@@ -82,6 +84,7 @@ if (!fs.existsSync("./database/unevergamealone.sqlite")) {
     gameRepo.createGameTable();
     gameRepo.createGameUserMappingTable();
     gameRepo.initialSetup();
+    tokenRepo.createTable();
 }
 
 const db = new AppDB("./database/unevergamealone.sqlite", { fileMustExist: true });
@@ -89,6 +92,7 @@ const userRepo = new UserRepository(db);
 const platformRepo = new PlatformRepository(db);
 const userPlatformRepo = new UserPlatformRepository(db);
 const gameRepo = new GameRepository(db);
+const tokenRepo = new TokenRepository(db);
 
 
 
@@ -113,3 +117,4 @@ exports.userRepo = userRepo;
 exports.platformRepo = platformRepo;
 exports.userPlatformRepo = userPlatformRepo;
 exports.gameRepo = gameRepo;
+exports.tokenRepo = tokenRepo;

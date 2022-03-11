@@ -1,4 +1,7 @@
 const jwt = require("jsonwebtoken");
+const app = require('../app')
+const Token = require('../database/Models/JWT/Token');
+
 
 const validateRegister = (req, res, next) => {
     // username min length 4
@@ -47,8 +50,11 @@ let isLoggedIn = (req, res, next) => {
             token,
             'SECRETKEY'
         );
+
+        const invalid = app.tokenRepo.selectToken(new Token(token, decoded.exp));
+
         req.userData = decoded;
-        if (sign_in_or_sign_up) {
+        if (sign_in_or_sign_up && invalid === undefined) {
             return res.redirect('/gaming');
         }
         next();
