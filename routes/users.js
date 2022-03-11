@@ -11,6 +11,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../database/Models/User/User');
 const UserPlatform = require('../database/Models/UserPlatform/UserPlatform');
 const userValidater = require('../handlers/users.js');
+const Token = require('../database/Models/JWT/Token');
 
 //User sign-up
 router.post('/sign-up', userValidater.validateRegister, (req, res, next) => {
@@ -66,5 +67,16 @@ router.post('/sign-in', (req, res, next) => {
         return res.redirect(302, '/gaming/');
     }
 });
+
+// User Logout
+router.post("/logout", userValidater.isLoggedIn, (req, res, next) => {
+    const user_token = req.cookies['jwt'];
+    const exp = req.userData.exp;
+    const token = new Token(user_token, exp);
+
+    app.tokenRepo.insert(token);
+
+    return res.redirect(302, '/');
+})
 
 module.exports = router;
