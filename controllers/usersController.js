@@ -1,15 +1,30 @@
+/**
+ * @module usersController
+ */
 const app = require('../app')
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 const jwt = require('jsonwebtoken');
 const User = require('../database/Models/User/User');
 const UserPlatform = require('../database/Models/UserPlatform/UserPlatform');
-const userValidater = require('../handlers/users.js');
+const userValidater = require('../handlers/middleware.js');
 
 module.exports = {
-    getLogin: function(req, res, next) {
+    /**
+     * Renders views/sign-in.pug
+     * @param {*} req the request
+     * @param {*} res the response
+     * @param {*} next next function
+     */
+    getSignIn: function(req, res, next) {
         res.render('sign-in', { title: 'Einloggen' });
     },
+    /**
+     * Gets all platforms and renders views/sign-up.pug
+     * @param {*} req the request
+     * @param {*} res the response
+     * @param {*} next next function
+     */
     getSignUp: function(req, res, next) {
         let platforms = app.platformRepo.selectAll();
         res.render('sign-up', { platforms: platforms });

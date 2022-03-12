@@ -1,4 +1,4 @@
-function myFunction() {
+function toggleHamburgerMenu() {
     var x = document.getElementById("hamburger-links");
     if (x.style.display === "block") {
         x.style.display = "none";

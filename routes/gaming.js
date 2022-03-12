@@ -4,7 +4,7 @@ const app = require('../app')
 const { v4: uuidv4 } = require('uuid');
 const fs = require("fs");
 const multer = require('multer')
-const userValidater = require('../handlers/users.js');
+const userValidater = require('../handlers/middleware.js');
 const Game = require('../database/Models/Game/Game');
 const { response } = require('../app');
 const path = require('path');
@@ -29,10 +29,11 @@ const upload = multer({ storage: storage });
 router.get('/', userValidater.isLoggedIn, (req, res, next) => {
     let platforms = app.platformRepo.selectAll();
     let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
-    return res.render("platforms", { os: os, platforms: platforms });
+    return res.render('platforms', { title: 'Plattformen', os: os, platforms: platforms });
 });
 
 router.get('/show/:games', userValidater.isLoggedIn, (req, res, next) => {
+    let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
     switch (req.params.games) {
         case "Origin":
             let username = req.userData.username;
@@ -42,7 +43,7 @@ router.get('/show/:games', userValidater.isLoggedIn, (req, res, next) => {
                 let usersOfGame = app.gameRepo.selectUsersOfGame(game.id);
                 gamesWithUsers.push(new Game(game.id, game.platformName, game.game, game.coverImage, usersOfGame))
             }
-            return res.render('games', { title: 'Origin', games: gamesWithUsers });
+            return res.render('games', { title: 'Origin', os: os, games: gamesWithUsers });
         default:
             res.redirect("/gaming");
     }

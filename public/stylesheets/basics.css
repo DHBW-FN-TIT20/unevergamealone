@@ -87,26 +87,24 @@ input:focus {
     display: none;
 }
 
-.game-panel-img {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-
 .gradient {
     background: rgb(67, 159, 91);
     background: linear-gradient(90deg, rgba(67, 159, 91, 1) 20%, rgba(160, 202, 171, 1) 80%, rgba(39, 61, 64, 1) 100%);
     margin: 0px;
 }
 
+.background-blue {
+    background-color: aqua;
+}
+
 .background-windows {
     background: url("/images/windows.jpg");
-    background-repeat: no-repeat;
     background-size: 100%;
+    background-repeat: repeat;
 }
 
 .background-ubuntu {
     background: url("/images/ubuntu.jpg");
-    background-repeat: no-repeat;
     background-size: 100%;
+    background-repeat: repeat;
 }

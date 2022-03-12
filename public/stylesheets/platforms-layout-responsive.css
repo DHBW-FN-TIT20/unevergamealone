@@ -1,9 +1,6 @@
 /*Screen width > 600px*/
 
 @media screen and (min-width: 600px) {
-    header {
-        text-align: center;
-    }
     .aspect-ratio-box {
         height: 0;
         width: 100%;
@@ -18,15 +15,7 @@
         grid-row-end: 2;
     }
     .grid-container {
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
         display: grid;
-        position: absolute;
-        z-index: 1;
-        grid-template-columns: 21% 58% 21%;
-        grid-template-rows: 6% 72% 22%;
     }
     .background {
         object-fit: contain;
@@ -37,28 +26,73 @@
         top: 0;
         left: 0;
     }
-    .icon {
-        display: block;
-        height: 100px;
-        width: auto;
-        font-size: 2vw;
-        text-decoration: none;
-        text-align: center;
-    }
     .flex-container-platforms {
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        grid-column-start: 2;
-        grid-column-end: 2;
-        grid-row-start: 2;
-        grid-row-end: 2;
-        padding: 10%;
+        padding: 5%;
+        padding-top: 15%;
+    }
+    .btn-sidenav {
+        left: 97px;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .grid-container {
+        grid-template-columns: 21% 58% 21%;
+    }
+    .icon p {
+        font-size: 1em;
+    }
+    .icon img {
+        height: 50px;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1000px) {
+    .grid-container {
+        grid-template-columns: 14% 72% 14%;
+    }
+    .icon p {
+        font-size: 0.8em;
+    }
+    .icon img {
+        height: 40px;
     }
 }
 
 
 /*Screen width < 600px*/
 
-@media screen and (max-width: 600px) {}
+@media screen and (max-width: 600px) {
+    #platforms-body {
+        background-color: #F7F3F6;
+    }
+    .aspect-ratio-box {
+        height: auto;
+        width: 100%;
+        position: relative;
+    }
+    .background {
+        display: none;
+    }
+    .icon {
+        background-color: #FFFFFF;
+        padding-top: 5px;
+        margin-bottom: 15px;
+        border: black 1px solid;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, .25);
+    }
+    .icon p {
+        font-size: 2em;
+    }
+    .icon img {
+        height: 40px;
+    }
+    .flex-container-platforms {
+        display: block;
+        padding: 5%;
+    }
+    .btn-sidenav {
+        left: 20px;
+    }
+}

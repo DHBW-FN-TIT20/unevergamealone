@@ -1,65 +1,29 @@
 @media screen and (min-width: 600px) {
-    .flex-container {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        height: 100%;
-        grid-column-start: 1;
-        grid-column-end: 1;
-        grid-row-start: 2;
-        grid-row-end: 2;
-        background-color: #edf1f2;
-        gap: 1%;
-        padding: 1%;
-    }
     .grid-container-games {
         height: 100%;
         width: 100%;
         display: grid;
-        grid-template-columns: 3% 94% 3%;
-        grid-template-rows: 3% 94% 3%;
-    }
-    .application-container {
-        display: grid;
-        grid-template-columns: 100%;
-        grid-template-rows: 4% 96%;
-        grid-column-start: 2;
-        grid-column-end: 3;
-        grid-row-start: 2;
-        grid-row-end: 3;
-    }
-    .title-bar {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        background-color: black;
-        grid-column-start: 1;
-        grid-column-end: 1;
-        grid-row-start: 1;
-        grid-row-end: 1;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-    .game-panel {
-        flex-basis: auto;
-        padding: 0.5%;
-        height: 260px;
-    }
-    .game-panel img {
-        display: block;
-        height: 200px;
+        grid-template-columns: 10px auto 10px;
+        grid-template-rows: 10px auto 10px;
+        margin: 0;
     }
 }
 
 @media screen and (max-width: 600px) {
-    #logo {
-        width: 100px;
-        height: 100px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
+    .grid-container-games {
+        height: 100%;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 10px auto 10px;
+        grid-template-rows: 10px auto 10px;
+        margin: 0;
     }
-    .background {
-        content: url("/images/isolated-phone-in-grey-background.jpg");
+    .game-panel {
+        width: 155px;
+        align-self: center;
+    }
+    .game-container {
+        height: 100%;
+        background-color: #edf1f2;
     }
 }
