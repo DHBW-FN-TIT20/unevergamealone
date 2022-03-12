@@ -16,7 +16,7 @@ module.exports = {
      * @param {*} res the response
      * @param {*} next next function
      */
-    getSignIn: function(req, res, next) {
+    getSignIn: function (req, res, next) {
         res.render('sign-in', { title: 'Einloggen' });
     },
     /**
@@ -25,11 +25,11 @@ module.exports = {
      * @param {*} res the response
      * @param {*} next next function
      */
-    getSignUp: function(req, res, next) {
+    getSignUp: function (req, res, next) {
         let platforms = app.platformRepo.selectAll();
         res.render('sign-up', { platforms: platforms });
     },
-    signUp: function(req, res, next) {
+    signUp: function (req, res, next) {
         let response;
         let salt = bcrypt.genSaltSync(10);
         let hashedPw = bcrypt.hashSync(req.body.password, salt);
@@ -54,20 +54,28 @@ module.exports = {
             }
 
             response = res.status(201).json({
-                status: "success",
                 game: username
             });
         } catch (error) {
             console.error(error);
-            response = res.status(400).json({
-                status: "error",
-                msg: JSON.stringify(error)
+
+            msg = "";
+            status_code = 500;
+
+            if (error.code === "SQLITE_CONSTRAINT_PRIMARYKEY") {
+                msg = `Der User ${username} existiert bereits`;
+                status_code = 409;
+            }
+
+            response = res.status(status_code).json({
+                msg: msg
             })
+
         } finally {
             return response;
         }
     },
-    signIn: function(req, res, next) {
+    signIn: function (req, res, next) {
         const username = req.body.username;
         const password = req.body.password;
         let user = app.userRepo.selectByUsername(username);
@@ -76,11 +84,11 @@ module.exports = {
         }
         if (bcrypt.compareSync(password, user.password)) {
             const token = jwt.sign({
-                    username: user.username
-                },
+                username: user.username
+            },
                 'SECRETKEY', {
-                    expiresIn: '24h'
-                }
+                expiresIn: '24h'
+            }
             );
             res.cookie("jwt", token, { httpOnly: true });
             return res.redirect(302, '/gaming/');

@@ -14,30 +14,33 @@ checkboxes.forEach(checkbox => {
 function sign_up(form) {
     const formData = new FormData(form);
     let resultMessage = validateRegister(formData);
-    if (resultMessage == "success") {
 
-        $.ajax('/users/sign-up', {
-            method: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            enctype: 'multipart/form-data',
-            success: (data, textStatus, jqXHR) => {
-                window.location.replace("/users/sign-in");
-            },
-            error: (jqXHR, textStatus, errorThrown) => {
-                console.error('Upload error');
-                console.error(`${textStatus}: ${jqXHR.responseText} => ${errorThrown}`);
-                alert(`Etwas ist schief gelaufen :(\n${jqXHR.responseText}`);
-            },
-        });
-
-    } else {
-        document.getElementById("info-msg").innerHTML = resultMessage;
-        document.getElementById("info-msg-header").innerHTML = "Fehler bei der Erstellung eines Benutzers.";
-        let modal = new bootstrap.Modal(document.getElementById('info-modal'));
-        modal.show();
+    if (resultMessage !== "success") {
+        show_modal("Fehler bei der Erstellung eines Benutzers.", resultMessage);
+        return false;
     }
+
+    let data  = {};
+    for(var pair of formData.entries()) {
+        data[pair[0]] = pair[1];
+    }
+
+    $.ajax('/users/sign-up', {
+        method: 'POST',
+        data: data,
+        success: (data, textStatus, jqXHR) => {
+            show_modal("Success", "User erfolgreich erstellt");
+            modal_el.addEventListener("hide.bs.modal", (event) => {
+                window.location.replace("/users/sign-in");  
+            })
+        },
+        error: (jqXHR, textStatus, errorThrown) => {
+            console.error('User creation error');
+            console.error(`${textStatus}: ${jqXHR.responseText} => ${errorThrown}`);
+            show_modal("Error", jqXHR.responseJSON.msg);
+        },
+    });
+
     return false;
 }
 

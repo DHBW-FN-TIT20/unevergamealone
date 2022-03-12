@@ -16,10 +16,10 @@ block content
         input(type="email", name="email" value='' placeholder="E-Mail" required)
         input(type="password" name="password" value='' placeholder="Passwort" required)
         input(type="password" name="password_repeat" value='' placeholder="Passwort wiederholen" required)
-        label(for="os")  Betriebssystem Ubuntu wählen
-        input(type="radio" id="os" name="os" value='Linux')
-        label(for="os")  Betriebssystem Windows wählen
-        input(type="radio" id="os" name="os" value='Windows' checked)
+        label(for="os_linux")  Betriebssystem Ubuntu wählen
+        input(type="radio" id="os_linux" name="os" value='Linux')
+        label(for="os_windows")  Betriebssystem Windows wählen
+        input(type="radio" id="os_windows" name="os" value='Windows' checked)
         each platform in platforms
           div.form-check
             label.form-check-label(for=platform.id)  #{platform.name}
@@ -29,6 +29,5 @@ block content
 
     include info-modal.pug
 
-  script(src="/javascripts/userInteractions.js")
   script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
-  script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous")
+  script(src="/javascripts/userInteractions.js")
