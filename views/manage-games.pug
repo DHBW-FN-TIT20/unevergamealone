@@ -1,32 +1,53 @@
 extends shared/layout
 
 block content
-  h1 Spiel entfernen oder hinzufügen
-  main
-    label(for="search") Searching:  
-    input(type="text", name="search", id="searching" placeholder="Searching")
-    a(href="/gaming/new")
-      p Spiel nicht gefunden?
-    form(onsubmit="return save_games(this)")
-      each platform in platforms
-        h1 #{platform.name}
-        div.flex-container
-          each game in selected_games
-            if game.platformName === platform.name
-              div.game-panel(name=game.name)
-                input(type='checkbox' name=game.id value=game.id checked)
-                label(for=game.id) #{game.name}
-                input(type=type="button", name="delete"+game.id, value="Delete Game", data-gameId=game.id, onclick="delete_game(this)")
-                div.crop
-                  img.game-panel-img(src=game.coverImage, alt=game.name)
-          each game in unselected_games
-            if game.platformName === platform.name
-              div.game-panel(name=game.name)
-                input(type='checkbox' name=game.id value=game.id)
-                label(for=game.id) #{game.name}
-                div.crop
-                  img.game-panel-img(src=game.coverImage, alt=game.name)
-      input(type='submit', value='Speichern')
+
+  mixin application 
+    div.application-container
+        div.title-bar
+          span
+            img(src="/images/platforms/manage.png", alt="Manage_Logo", width="20px")
+            span=title          
+          a(href="/gaming") X
+        div.game-container
+          nav.navigation-bar                
+            span
+              input(type="text", name="search", id="searching" placeholder="Spiel suchen")
+              a(href="/gaming/new")
+                p Spiel nicht gefunden?
+            input#submit-manage-game(type='submit', value='Speichern')
+          form(onsubmit="return save_games(this)")
+            each platform in platforms
+              h3 #{platform.name}
+              div.manage-games-flex-container
+                each game in selected_games
+                  if game.platformName === platform.name
+                    div.manage-game-panel(name=game.name)                       
+                      input(type='checkbox' name=game.id value=game.id checked)
+                      label(for=game.id) #{game.name}             
+                      img.game-panel-img(src=game.coverImage, alt=game.name)
+                      input(type="button", name="delete"+game.id, value="Spiel löschen", data-gameId=game.id, onclick="delete_game(this)")      
+
+                each game in unselected_games
+                  if game.platformName === platform.name
+                    div.manage-game-panel(name=game.name)                        
+                      input(type='checkbox' name=game.id value=game.id)
+                      label(for=game.id) #{game.name}
+                      img.game-panel-img(src=game.coverImage, alt=game.name)
+                      input(type="button", name="delete"+game.id, value="Spiel löschen", data-gameId=game.id, onclick="delete_game(this)") 
+  if os == 'Windows'
+    main.grid-container-games.background-windows
+      +application
+  else if os == "Linux"
+    main.grid-container-games.background-ubuntu
+      +application
+  else
+    main.grid-container-games
+      +application
+      
+
+            
 
   script(src="/javascripts/manage-games.js")
   script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")  
+  script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous")

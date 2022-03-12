@@ -30,6 +30,7 @@ module.exports = {
         res.render('sign-up', { platforms: platforms });
     },
     signUp: function(req, res, next) {
+        let response;
         let salt = bcrypt.genSaltSync(10);
         let hashedPw = bcrypt.hashSync(req.body.password, salt);
         let username = req.body.username;
@@ -37,20 +38,34 @@ module.exports = {
         let os = req.body.os;
         let platforms = app.platformRepo.selectAll();
 
-        //get all checked platforms with username
-        let userPlatforms = [];
-        for (let i = 0; i <= platforms.length; i++) {
-            if (req.body[i] == 'on') {
-                let userPlatform = new UserPlatform(username, req.body[i + "_uName"], i);
-                userPlatforms.push(userPlatform);
+        try {
+            //get all checked platforms with username
+            let userPlatforms = [];
+            for (let i = 0; i <= platforms.length; i++) {
+                if (req.body[i] == 'on') {
+                    let userPlatform = new UserPlatform(username, req.body[i + "_uName"], i);
+                    userPlatforms.push(userPlatform);
+                }
             }
+            //add userdata to db
+            app.userRepo.insert(new User(username, hashedPw, email, os));
+            for (const userPlatform of userPlatforms) {
+                app.userPlatformRepo.insert(userPlatform);
+            }
+
+            response = res.status(201).json({
+                status: "success",
+                game: username
+            });
+        } catch (error) {
+            console.error(error);
+            response = res.status(400).json({
+                status: "error",
+                msg: JSON.stringify(error)
+            })
+        } finally {
+            return response;
         }
-        //add userdata to db
-        app.userRepo.insert(new User(username, hashedPw, email, os));
-        for (const userPlatform of userPlatforms) {
-            app.userPlatformRepo.insert(userPlatform);
-        }
-        return res.redirect("/users/sign-in");
     },
     signIn: function(req, res, next) {
         const username = req.body.username;

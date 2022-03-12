@@ -1,26 +1,33 @@
 extends shared/layout
 
 block content
-    link(rel='stylesheet', href='/stylesheets/cropper.css')
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css')
-    h1 New Game
-    main
-        form(onsubmit="return create_game(this)")
-            label(for="game_name")
-                p Name des Spiels
-            input#game-name(type="text", name="game_name", placeholder="Cyberpunk", required)
-            p.invisible#game-exists Spiel existiert bereits!
-            hr 
-            p Plattform:
-            each platform in platforms
-                label(for=platform.id) #{platform.name}
-                input(type='radio' id=platform.id name=`platform` value=platform.id)
-            hr
-            p Cover:
-            input(type="file", name="cover", onchange="changeCover()")
-            div
-                img#cropper-image(src="/images/default-game-image.png", alt="Cover from Spiel")
-            input(type='submit', value='Speichern', disabled)
+    main.grid-container-games.background-windows
+        div.application-container
+            div.title-bar
+                span
+                    img(src="/images/platforms/manage.png", alt="Manage_Logo", width="20px")
+                    span=title
+                a(href="/gaming") X
+            div.game-container
+                nav.navigation-bar
+                    a(href="/gaming/manage") Zurück
+                    a(href="/gaming") Menu
+                form.new-game-form(onsubmit="return create_game(this)")
+                    input#game-name(type="text", name="game_name", placeholder="Name des Spiels", required)
+                    p.invisible#game-exists Spiel existiert bereits!
+                    hr 
+                    p Plattform:
+                    each platform in platforms
+                        div.form-check                   
+                            input.form-check-input(type='radio' id=platform.id name=`platform` value=platform.id)
+                            label.form-check-label(for=platform.id) #{platform.name}
+                    hr                   
+                    div.cropper-box
+                        p Cover-Bild:
+                        input(type="file", name="cover", onchange="changeCover()")
+                        img#cropper-image(src="/images/default-game-image.png", alt="Cover des Spiels")
+                        
+                    input(type='submit', value='Speichern', disabled)
 
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
     script(src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js") 

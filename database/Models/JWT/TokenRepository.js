@@ -20,7 +20,7 @@ class TokenRepository {
     /**
      * Insert a new invalid Token to the DB
      * @param {Token} token 
-     * @returns 
+     * @returns {object} an info object describing any changes made
      */
     insert(token) {
         this.cleanup();

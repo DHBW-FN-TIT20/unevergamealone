@@ -10,18 +10,22 @@ const validateRegister = (req, res, next) => {
             msg: 'Bitte geben Sie einen Benutzernamen mit mindestens 4 Zeichen ein.'
         })
     }
-    // password min 6 chars
-    if (!req.body.password || req.body.password.length < 6) {
+
+    //Passwort muss zwischen 6 und 20 Zeichen lang sein
+    //Muss eins folgender Sonderzeichen enthalten !#,+-?_
+    //Muss eine Zahl enthalten
+    if (req.body.password.length < 8) {
         return res.status(400).send({
-            msg: 'Please enter a password with min. 6 chars'
-        });
+            msg: 'Das Passwort muss mindestens 8 Zeichen lang sein.'
+        })
     }
+
     // password (repeat) does not match
     if (!req.body.password_repeat ||
         req.body.password != req.body.password_repeat
     ) {
         return res.status(400).send({
-            msg: 'Both passwords must match'
+            msg: 'Die Passwörter stimmen nicht überein.'
         });
     }
     next();

@@ -38,7 +38,7 @@ router.get('/manage', userValidater.isLoggedIn, gamingController.showManageGames
 router.post('/manage', userValidater.isLoggedIn, gamingController.addGameToUser);
 
 //Get Request to add New Game to the DB
-router.get('/new', userValidater.isLoggedIn, gamingController.showGames);
+router.get('/new', userValidater.isLoggedIn, gamingController.showNewGames);
 
 
 router.post('/new', upload.single('cover'), userValidater.isLoggedIn, gamingController.insertNewGame);

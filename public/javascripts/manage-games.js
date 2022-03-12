@@ -42,8 +42,7 @@ function save_games(form) {
                 console.log(`Data reviced: ${JSON.stringify(data)}`);
                 alert("Spiele erfolgreich hinzugefügt!");
                 window.location.replace("/gaming/");
-            }
-            else {
+            } else {
                 console.error(`${textStatus}: ${data.msg}`);
             }
         },
@@ -73,8 +72,7 @@ function delete_game(btn) {
                 console.log(`Data reviced: ${JSON.stringify(data)}`);
                 alert("Spiele erfolgreich gelöscht!");
                 location.reload();
-            }
-            else {
+            } else {
                 console.error(`${textStatus}: ${data.msg}`);
                 alert("Da ist etwas schief gelaufen :(");
             }
@@ -91,12 +89,11 @@ function delete_game(btn) {
  * Only show the matched game titles insert in the "search" text
  */
 function filter_games() {
-    all_games = document.querySelectorAll(`.game-panel`);
+    all_games = document.querySelectorAll(`.manage-game-panel`);
     all_games.forEach(game => {
         if (game.getAttribute("name").includes(search.value)) {
             game.classList.remove('invisible');
-        }
-        else {
+        } else {
             game.classList.add('invisible');
         }
     });

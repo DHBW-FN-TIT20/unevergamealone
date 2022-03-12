@@ -1,0 +1,49 @@
+@media screen and (min-width: 600px) {
+    .manage-game-panel {
+        width: 200px;
+    }
+    .manage-games-flex-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        gap: 1%;
+    }
+    form {
+        margin: 2%;
+    }
+    .navigation-bar {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        margin: 1%;
+        gap: 4%;
+        height: auto;
+    }
+    .navigation-bar input[type=text] {
+        width: 100%;
+    }
+    .new-game-form {
+        display: flex;
+        flex-direction: column;
+        margin-left: 20%;
+        margin-right: 20%;
+        height: 97%;
+    }
+    .new-game-form input[type=submit] {
+        display: block;
+        margin-top: 18%;
+    }
+    #game-name {
+        width: 50%;
+        margin-bottom: 0%;
+    }
+    .cropper-box {
+        height: 30%;
+    }
+    #submit-manage-game {
+        width: auto;
+        height: fit-content;
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+}

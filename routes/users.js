@@ -25,7 +25,7 @@ router.get('/sign-in', userController.getSignIn);
 router.post('/sign-in', userController.signIn);
 
 // User Logout
-router.post("/logout", userValidater.isLoggedIn, (req, res, next) => {
+router.get("/logout", userValidater.isLoggedIn, (req, res, next) => {
     const user_token = req.cookies['jwt'];
     const exp = req.userData.exp;
     const token = new Token(user_token, exp);

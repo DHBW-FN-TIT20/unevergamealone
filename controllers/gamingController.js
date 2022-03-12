@@ -9,22 +9,6 @@ const { response } = require('../app');
 const path = require('path');
 const GameCreate = require('../database/Models/Game/GameCreate');
 
-const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        const upload_path = path.join(__dirname, '..', 'public', `images`, `upload`);
-        if (!fs.existsSync(upload_path)) {
-            fs.mkdirSync(upload_path);
-        }
-        cb(null, upload_path);
-    },
-    filename: function(req, file, cb) {
-        const filename = `${file.originalname}_${uuidv4()}.${file.mimetype.split("/")[1]}`;
-        cb(null, filename)
-    }
-})
-
-const upload = multer({ storage: storage });
-
 module.exports = {
     showPlatforms: function(req, res, next) {
         let platforms = app.platformRepo.selectAll();
@@ -33,16 +17,24 @@ module.exports = {
     },
     showGames: function(req, res, next) {
         let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
+        let username = req.userData.username;
+        let games = [];
+        let gamesWithUsers = [];
         switch (req.params.games) {
             case "Origin":
-                let username = req.userData.username;
-                let games = app.gameRepo.selectAllGamesWithPlatformByUser("Origin", username);
-                let gamesWithUsers = [];
+                games = app.gameRepo.selectAllGamesWithPlatformByUser("Origin", username);
                 for (const game of games) {
                     let usersOfGame = app.gameRepo.selectUsersOfGame(game.id);
                     gamesWithUsers.push(new Game(game.id, game.platformName, game.game, game.coverImage, usersOfGame))
                 }
                 return res.render('games', { title: 'Origin', os: os, games: gamesWithUsers });
+            case "Steam":
+                games = app.gameRepo.selectAllGamesWithPlatformByUser("Steam", username);
+                for (const game of games) {
+                    let usersOfGame = app.gameRepo.selectUsersOfGame(game.id);
+                    gamesWithUsers.push(new Game(game.id, game.platformName, game.game, game.coverImage, usersOfGame))
+                }
+                return res.render('games', { title: 'Steam', os: os, games: gamesWithUsers });
             default:
                 res.redirect("/gaming");
         }
@@ -79,8 +71,8 @@ module.exports = {
             }
             return 0;
         })
-
-        return res.render('manage-games', { selected_games: already_selected_games, unselected_games: filtered_games, platforms: platforms });
+        let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
+        return res.render('manage-games', { selected_games: already_selected_games, unselected_games: filtered_games, platforms: platforms, os: os, title: "Spiele verwalten" });
     },
     addGameToUser: function(req, res, next) {
         const username = req.userData.username;
@@ -123,7 +115,8 @@ module.exports = {
     },
     showNewGames: function(req, res, next) {
         const platforms = app.platformRepo.selectAll();
-        return res.render('new-games', { platforms: platforms });
+        let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
+        return res.render('new-games', { platforms: platforms, os: os, title: "Neues Spiel hinzufügen" });
     },
     insertNewGame: function(req, res, next) {
         const username = req.userData.username;
