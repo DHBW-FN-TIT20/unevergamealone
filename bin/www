@@ -7,6 +7,15 @@ var app = require('../app');
 var debug = require('debug')('unevergamealone:server');
 var http = require('http');
 
+
+/**
+ * Load the ENV from .env if its not the production server.
+ */
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
+
 /**
  * Get port from environment and store in Express.
  */
