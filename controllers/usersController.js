@@ -80,7 +80,9 @@ module.exports = {
         const password = req.body.password;
         let user = app.userRepo.selectByUsername(username);
         if (!user) {
-            return res.send("Username oder Passwort sind falsch.");
+            return res.status(401).json({
+                msg: "Username oder Passwort ist falsch."
+            });
         }
         if (bcrypt.compareSync(password, user.password)) {
             const token = jwt.sign({
@@ -92,6 +94,11 @@ module.exports = {
             );
             res.cookie("jwt", token, { httpOnly: true });
             return res.redirect(302, '/gaming/');
+        }
+        else {
+            return res.status(401).json({
+                msg: "Username oder Passwort ist falsch."
+            });
         }
     }
 };

@@ -11,8 +11,12 @@ block content
     div.form-field
       img(src="/images/icons8-user-64.png", alt="user")
       h1 Anderer Benutzer
-      form(action="", method="post") 
+      form(onsubmit="return sign_in(this)") 
         input(type="text", name="username" value='' placeholder="Benutzername")
         span.password-submit
           input#sign-in(type="password" name="password" value='' placeholder="Passwort")
           input(type="submit" value="")
+
+  include info-modal.pug
+  script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
+  script(src="/javascripts/sign-in.js")
