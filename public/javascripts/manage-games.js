@@ -75,6 +75,11 @@ function get_list_from_games(games) {
 }
 
 function delete_game(btn) {
+
+    if (confirm("Wirklich das Spiel global loeschen?!") != true) {
+        return false;
+    }
+
     const game_id = btn.getAttribute("data-gameId");
 
     const data = {
@@ -87,20 +92,20 @@ function delete_game(btn) {
         contentType: "application/json; charset=UTF-8",
         data: JSON.stringify(data),
         success: (data, textStatus, jqXHR) => {
-            if (data.status != "error") {
-                console.log(`Data reviced: ${JSON.stringify(data)}`);
-                alert("Spiele erfolgreich gelöscht!");
+            console.log(`Data reviced: ${JSON.stringify(data)}`);
+
+            show_modal("Geloescht!", `Spiel ${data.name} erfolgreich geloescht`);
+            modal_el.addEventListener("hide.bs.modal", (event) => {
                 location.reload();
-            } else {
-                console.error(`${textStatus}: ${data.msg}`);
-                alert("Da ist etwas schief gelaufen :(");
-            }
+            })
         },
         error: (jqXHR, textStatus, errorThrown) => {
             console.error(`${textStatus}: ${jqXHR.responseText} => ${errorThrown}`);
-            alert("Etwas ist schief gelaufen :(\nversuche es spaeter nochmal :)");
+            show_modal("Error", "Etwas ist schief gelaufen :(<br>Versuche es spaeter nochmal :)");
         }
     });
+
+    return false;
 }
 
 

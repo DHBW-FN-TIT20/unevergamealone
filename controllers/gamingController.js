@@ -154,27 +154,29 @@ module.exports = {
     },
 
     deleteGame: function (req, res, next) {
-        const game_id = req.body.game_id;
-
         let response;
+        const game_id = req.body.game_id;
+        const game = app.gameRepo.selectByID(game_id);
 
         try {
-            app.gameRepo.deleteGame(game_id);
-
-            response = res.status(201).json({
-                status: "success",
-                game: game_id
-            });
+            const result = app.gameRepo.deleteGame(game_id);
+            if (result.changes) {
+                response = res.status(201).json(game);
+            }
+            else {
+                response = res.status(400).json({
+                    msg: `Spiel mit der ID ${game_id} nicht gefunden!`
+                });
+            }
         } catch (error) {
             console.error(error);
-            response = res.status(400).json({
-                status: "error",
-                msg: JSON.stringify(error)
-            })
+            response = res.status(500).json(error)
+
         } finally {
             return response;
         }
     },
+
     getGameByName: function (req, res, next) {
         let game_name = req.params.gamename;
         try {
