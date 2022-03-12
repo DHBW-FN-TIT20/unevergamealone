@@ -1,7 +1,7 @@
 const checkboxes = document.querySelectorAll('.form-check input[type=checkbox]');
 
 checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', function() {
+    checkbox.addEventListener('change', function () {
         if (this.checked) {
             let inputUsername = document.getElementById(this.id + "_uName");
             inputUsername.className = "visible";
@@ -15,6 +15,7 @@ function sign_up(form) {
     const formData = new FormData(form);
     let resultMessage = validateRegister(formData);
     if (resultMessage == "success") {
+
         $.ajax('/users/sign-up', {
             method: 'POST',
             data: formData,
@@ -30,6 +31,7 @@ function sign_up(form) {
                 alert(`Etwas ist schief gelaufen :(\n${jqXHR.responseText}`);
             },
         });
+
     } else {
         document.getElementById("info-msg").innerHTML = resultMessage;
         document.getElementById("info-msg-header").innerHTML = "Fehler bei der Erstellung eines Benutzers.";
