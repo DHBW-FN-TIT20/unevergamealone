@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: AppDB</title>
+    <title>JSDoc: Module: usersController</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: AppDB</h1>
+    <h1 class="page-title">Module: usersController</h1>
 
     
 
@@ -28,9 +28,6 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>AppDB<span class="signature">(dbFilePath)</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">Class representing the database connection.</div>
         
     
 </header>
@@ -40,138 +37,7 @@
     
         
 
-    
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="AppDB"><span class="type-signature"></span>new AppDB<span class="signature">(dbFilePath)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
         
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>dbFilePath</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">path to the database file</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="database_db.js.html">database/db.js</a>, <a href="database_db.js.html#line5">line 5</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
     </div>
 
@@ -198,12 +64,16 @@
     
 
     
-    <h4 class="name" id="get"><span class="type-signature"></span>get<span class="signature">(sql, params)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id=".getSignIn"><span class="type-signature">(static) </span>getSignIn<span class="signature">(req, res, next)</span><span class="type-signature"></span></h4>
     
 
     
 
 
+
+<div class="description">
+    Renders views/sign-in.pug
+</div>
 
 
 
@@ -238,13 +108,13 @@
 
         <tr>
             
-                <td class="name"><code>sql</code></td>
+                <td class="name"><code>req</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">*</span>
 
 
             
@@ -254,20 +124,20 @@
 
             
 
-            <td class="description last">the sql statement</td>
+            <td class="description last">the request</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>params</code></td>
+                <td class="name"><code>res</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">array</span>
+<span class="param-type">*</span>
 
 
             
@@ -277,7 +147,30 @@
 
             
 
-            <td class="description last">the parameters used in the sql statement</td>
+            <td class="description last">the response</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">next function</td>
         </tr>
 
     
@@ -318,7 +211,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="database_db.js.html">database/db.js</a>, <a href="database_db.js.html#line19">line 19</a>
+        <a href="controllers_usersController.js.html">controllers/usersController.js</a>, <a href="controllers_usersController.js.html#line19">line 19</a>
     </li></ul></dd>
     
 
@@ -343,28 +236,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    an object that represents the first row retrieved by the query
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">object</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -376,12 +247,16 @@
     
 
     
-    <h4 class="name" id="run"><span class="type-signature"></span>run<span class="signature">(sql, params)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id=".getSignUp"><span class="type-signature">(static) </span>getSignUp<span class="signature">(req, res, next)</span><span class="type-signature"></span></h4>
     
 
     
 
 
+
+<div class="description">
+    Gets all platforms and renders views/sign-up.pug
+</div>
 
 
 
@@ -416,13 +291,13 @@
 
         <tr>
             
-                <td class="name"><code>sql</code></td>
+                <td class="name"><code>req</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">*</span>
 
 
             
@@ -432,20 +307,20 @@
 
             
 
-            <td class="description last">the sql statement</td>
+            <td class="description last">the request</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>params</code></td>
+                <td class="name"><code>res</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">array</span>
+<span class="param-type">*</span>
 
 
             
@@ -455,7 +330,30 @@
 
             
 
-            <td class="description last">the parameters used in the sql statement</td>
+            <td class="description last">the response</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">next function</td>
         </tr>
 
     
@@ -496,7 +394,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="database_db.js.html">database/db.js</a>, <a href="database_db.js.html#line33">line 33</a>
+        <a href="controllers_usersController.js.html">controllers/usersController.js</a>, <a href="controllers_usersController.js.html#line28">line 28</a>
     </li></ul></dd>
     
 
@@ -521,28 +419,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    an info object describing any changes made
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">object</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
