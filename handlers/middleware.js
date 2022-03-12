@@ -52,7 +52,7 @@ let isLoggedIn = (req, res, next) => {
         // const token = res.getHeader("jwt");
         const decoded = jwt.verify(
             token,
-            'SECRETKEY'
+            process.env.JWT_TOKEN
         );
 
         const invalid = app.tokenRepo.selectToken(new Token(token, decoded.exp));
