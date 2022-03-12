@@ -23,13 +23,14 @@ function save_games(form) {
     checked_games_obj.forEach(game => {
         checked_games.push(game.value);
     });
+
     not_checked_games_obj.forEach(game => {
         not_checked_games.push(game.value);
     });
 
     const games = {
         add_game: checked_games,
-        remove_games: not_checked_games
+        removed_games: not_checked_games
     }
 
     $.ajax({
@@ -38,22 +39,40 @@ function save_games(form) {
         contentType: "application/json; charset=UTF-8",
         data: JSON.stringify(games),
         success: (data, textStatus, jqXHR) => {
-            if (data.status != "error") {
-                console.log(`Data reviced: ${JSON.stringify(data)}`);
-                alert("Spiele erfolgreich hinzugefügt!");
-                window.location.replace("/gaming/");
-            } else {
-                console.error(`${textStatus}: ${data.msg}`);
-            }
+            console.log(`Data reviced: ${JSON.stringify(data)}`);
+
+            added_games_html = get_list_from_games(data.games.added_games);
+            removed_games_html = get_list_from_games(data.games.removed_games);
+
+            show_modal("Gespeichert!", `Folgende Spiele hinzugefügt:<br>${added_games_html} <br> Folgende Spiele entfernt:<br>${removed_games_html}`);
+            modal_el.addEventListener("hide.bs.modal", (event) => {
+                window.location.replace("/gaming");
+            })
         },
         error: (jqXHR, textStatus, errorThrown) => {
             console.error(`${textStatus}: ${jqXHR.responseText} => ${errorThrown}`);
-            alert("Etwas ist schief gelaufen :(\nversuche es spaeter nochmal :)");
+            show_modal("Error", "Etwas ist schief gelaufen :(<br>Versuche es spaeter nochmal :)");
         }
     });
     return false;
 }
 
+/**
+ * 
+ * @param {Array.<object>} games Games need to habe .name property
+ * @returns string html string for <ul>
+ */
+function get_list_from_games(games) {
+    list = "<ul>";
+
+    games.forEach(game => {
+        list += `<li>${game.name}</li>`;
+    });
+
+    list += "</ul>";
+
+    return list;
+}
 
 function delete_game(btn) {
     const game_id = btn.getAttribute("data-gameId");

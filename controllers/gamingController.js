@@ -10,12 +10,12 @@ const path = require('path');
 const GameCreate = require('../database/Models/Game/GameCreate');
 
 module.exports = {
-    showPlatforms: function(req, res, next) {
+    showPlatforms: function (req, res, next) {
         let platforms = app.platformRepo.selectAll();
         let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
         return res.render('platforms', { title: 'Plattformen', os: os, platforms: platforms });
     },
-    showGames: function(req, res, next) {
+    showGames: function (req, res, next) {
         let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
         let username = req.userData.username;
         let games = [];
@@ -39,7 +39,7 @@ module.exports = {
                 res.redirect("/gaming");
         }
     },
-    showManageGames: function(req, res, next) {
+    showManageGames: function (req, res, next) {
         let games = app.gameRepo.selectAll();
         const platforms = app.platformRepo.selectAll();
         let already_selected_games = app.gameRepo.selectAllGamesFromUser(req.userData.username);
@@ -74,15 +74,19 @@ module.exports = {
         let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
         return res.render('manage-games', { selected_games: already_selected_games, unselected_games: filtered_games, platforms: platforms, os: os, title: "Spiele verwalten" });
     },
-    addGameToUser: function(req, res, next) {
+    addGameToUser: function (req, res, next) {
+        let response;
+        let added_games_res = [];
+        let removed_games_res = [];
+
         const username = req.userData.username;
         const add_games = req.body.add_game;
-        const remove_games = req.body.remove_games;
-        let response;
+        const removed_games = req.body.removed_games;
         try {
-            add_games.forEach(game => {
+            add_games.forEach(gameID => {
                 try {
-                    app.gameRepo.addGameToUser(game, username)
+                    app.gameRepo.addGameToUser(gameID, username)
+                    added_games_res.push(app.gameRepo.selectByID(gameID));
                 } catch (error) {
                     // Ignore duplicate entry errors
                     if (error.code != "SQLITE_CONSTRAINT_PRIMARYKEY") {
@@ -91,34 +95,35 @@ module.exports = {
                 }
             });
 
-            remove_games.forEach(game => {
-                app.gameRepo.removeGameFromUser(game, username)
+            removed_games.forEach(gameID => {
+                const result = app.gameRepo.removeGameFromUser(gameID, username);
+                if (result.changes) {
+                    removed_games_res.push(app.gameRepo.selectByID(gameID));
+                }
             });
 
-            response = res.json({
-                status: "success",
+            response = res.status(201).json({
                 games: {
-                    added_games: add_games,
-                    removed_games: remove_games
+                    added_games: added_games_res,
+                    removed_games: removed_games_res
                 },
                 username: username
             });
+
         } catch (error) {
             console.error(error);
-            response = res.json({
-                status: "error",
-                msg: JSON.stringify(error)
-            })
+            response = res.status(500).json(error);
+
         } finally {
             return response;
         }
     },
-    showNewGames: function(req, res, next) {
+    showNewGames: function (req, res, next) {
         const platforms = app.platformRepo.selectAll();
         let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
         return res.render('new-games', { platforms: platforms, os: os, title: "Neues Spiel hinzufügen" });
     },
-    insertNewGame: function(req, res, next) {
+    insertNewGame: function (req, res, next) {
         const username = req.userData.username;
         const game_name = req.body.game_name;
         const platform = req.body.platform;
@@ -145,7 +150,7 @@ module.exports = {
             return response;
         }
     },
-    deleteGame: function(req, res, next) {
+    deleteGame: function (req, res, next) {
         const game_id = req.body.game_id;
 
         let response;
@@ -167,7 +172,7 @@ module.exports = {
             return response;
         }
     },
-    getGameByName: function(req, res, next) {
+    getGameByName: function (req, res, next) {
         let game_name = req.params.gamename;
         try {
             let game = app.gameRepo.selectByName(game_name);

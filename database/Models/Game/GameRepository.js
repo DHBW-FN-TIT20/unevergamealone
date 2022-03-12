@@ -90,6 +90,18 @@ class GameRepository {
         return game;
     }
 
+    /**
+     * Get a Game by his id
+     * @param {string} id 
+     * @returns Game
+     */
+    selectByID(id) {
+        const sql = "SELECT games.id, games.name, games.coverImage, platforms.name AS platformName FROM games JOIN platforms ON platform_id=platforms.id WHERE games.id=?";
+        const sql_game = this.db.get(sql, [id]);
+        const game = new Game(sql_game.id, sql_game.platformName, sql_game.name, sql_game.coverImage);
+        return game;
+    }
+
     selectUsersOfGame(gameId) {
         // const sql = "SELECT userPlatformMapping.username, userPlatformMapping.usernameOfPlatform AS usernameOfPlatform FROM userPlatformMapping JOIN games ON games.platform_id=userPlatformMapping.platformId JOIN gameUsermapping ON gameUserMapping.username = userPlatformMapping.username WHERE game_id=?";
         // return this.db.all(sql, [gameId]);
