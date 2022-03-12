@@ -5,5 +5,8 @@
 module.exports = {
     showIndex: function(req, res, next) {
         res.sendFile("index.html");
+    },
+    showImpressum: function(req, res, next) {
+        res.sendFile("impressum.html");
     }
 };

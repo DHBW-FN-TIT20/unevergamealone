@@ -4,8 +4,8 @@ const image = document.getElementById('cropper-image');
 const gameName_txt = document.getElementById("game-name");
 const gameExists_txt = document.getElementById("game-exists");
 const cropper = new Cropper(image, {
-    viewMode: 0,
-    aspectRatio: 5 / 7
+    viewMode: 1,
+    aspectRatio: 5 / 7,
 });
 
 
@@ -18,8 +18,7 @@ function check_values() {
     const valid = check_game_name();
     if (valid) {
         submit_btn.disabled = false;
-    }
-    else {
+    } else {
         submit_btn.disabled = true;
     }
 }
@@ -49,7 +48,7 @@ function changeCover() {
     const file = document.querySelector('input[type=file]').files[0];
     const reader = new FileReader();
 
-    reader.addEventListener("load", function () {
+    reader.addEventListener("load", function() {
         // convert image file to base64 string
         cropper.replace(reader.result);
     }, false);

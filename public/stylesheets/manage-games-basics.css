@@ -1,5 +1,10 @@
 .manage-games-flex-container {
     background-color: #edf1f2;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: 1%;
 }
 
 .manage-game-panel-img {
@@ -23,5 +28,56 @@
     flex: 0 0 155px;
     padding: 0.5%;
     height: 260px;
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+.manage-game-panel p {
+    margin: 0;
+    text-align: center;
+}
+
+form {
+    margin: 1%;
+}
+
+.navigation-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    margin: 1%;
+    gap: 4%;
+    height: auto;
+}
+
+.navigation-bar input[type=text] {
+    width: 100%;
+}
+
+.new-game-form {
+    display: flex;
+    flex-direction: column;
+    height: 97%;
+}
+
+.new-game-form input[type=submit] {
+    display: block;
+    margin-top: 4%;
+}
+
+#game-name {
+    width: 50%;
+    margin-bottom: 0%;
+}
+
+.cropper-box {
+    height: 30%;
+}
+
+#submit-manage-game {
+    width: auto;
+    height: fit-content;
+    padding-left: 1%;
+    padding-right: 1%;
     margin-bottom: 10px;
 }

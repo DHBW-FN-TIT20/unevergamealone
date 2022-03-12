@@ -12,12 +12,13 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     height: 100%;
     width: 100%;
+    /* min-height: 800px; */
     background-color: whitesmoke;
 }
 
 main {
     margin: 1%;
-    min-height: 800px;
+    min-height: 100%;
     min-width: 300px;
     position: absolute;
     top: 0;
@@ -118,7 +119,6 @@ input:focus {
 .gradient {
     background: rgb(67, 159, 91);
     background: linear-gradient(90deg, rgba(67, 159, 91, 1) 20%, rgba(160, 202, 171, 1) 80%, rgba(39, 61, 64, 1) 100%);
-    margin: 0px;
 }
 
 .background-blue {

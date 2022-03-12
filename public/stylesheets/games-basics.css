@@ -25,6 +25,15 @@
     vertical-align: middle;
 }
 
+.grid-container-games {
+    height: fit-content;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 10px auto 10px;
+    grid-template-rows: 10px auto 10px;
+    margin: 0;
+}
+
 .game-panel {
     display: flex;
     flex-direction: column;
@@ -54,6 +63,16 @@
     background-color: #edf1f2;
 }
 
+.game-container-new-game {
+    height: fit-content;
+    min-height: 100%;
+    background-color: #edf1f2;
+}
+
+#img-upload {
+    width: 100%;
+}
+
 .flex-container {
     display: flex;
     flex-direction: row;
@@ -80,5 +99,4 @@
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
-    padding-bottom: 10px;
 }

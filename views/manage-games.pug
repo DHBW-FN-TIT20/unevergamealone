@@ -15,25 +15,26 @@ block content
               input(type="text", name="search", id="searching" placeholder="Spiel suchen")
               a(href="/gaming/new")
                 p Spiel nicht gefunden?
-            input#submit-manage-game(type='submit', value='Speichern')
           form(onsubmit="return save_games(this)")
+            input#submit-manage-game(type='submit', value='Speichern')
             each platform in platforms
+              hr
               h3 #{platform.name}
               div.manage-games-flex-container
                 each game in selected_games
                   if game.platformName === platform.name
                     div.manage-game-panel(name=game.name)                       
-                      input(type='checkbox' name=game.id value=game.id checked)
-                      label(for=game.id) #{game.name}             
-                      img.game-panel-img(src=game.coverImage, alt=game.name)
+                      input(type='checkbox' id="checkbox"+game.id name=game.id value=game.id checked)
+                      p(for=game.id, data-gameId=game.id, onclick="toggle_game(this)") #{game.name}             
+                      img.game-panel-img(src=game.coverImage, alt=game.name, data-gameId=game.id, onclick="toggle_game(this)")
                       input(type="button", name="delete"+game.id, value="Spiel löschen", data-gameId=game.id, onclick="delete_game(this)")      
 
                 each game in unselected_games
                   if game.platformName === platform.name
                     div.manage-game-panel(name=game.name)                        
-                      input(type='checkbox' name=game.id value=game.id)
-                      label(for=game.id) #{game.name}
-                      img.game-panel-img(src=game.coverImage, alt=game.name)
+                      input(type='checkbox' id="checkbox"+game.id name=game.id value=game.id)
+                      p(for=game.id, data-gameId=game.id, onclick="toggle_game(this)") #{game.name}
+                      img.game-panel-img(src=game.coverImage, alt=game.name, data-gameId=game.id, onclick="toggle_game(this)")
                       input(type="button", name="delete"+game.id, value="Spiel löschen", data-gameId=game.id, onclick="delete_game(this)") 
   if os == 'Windows'
     main.grid-container-games.background-windows

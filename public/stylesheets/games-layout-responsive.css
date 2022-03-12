@@ -1,23 +1,4 @@
-@media screen and (min-width: 600px) {
-    .grid-container-games {
-        height: 100%;
-        width: 100%;
-        display: grid;
-        grid-template-columns: 10px auto 10px;
-        grid-template-rows: 10px auto 10px;
-        margin: 0;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .grid-container-games {
-        height: 100%;
-        width: 100%;
-        display: grid;
-        grid-template-columns: 10px auto 10px;
-        grid-template-rows: 10px auto 10px;
-        margin: 0;
-    }
+/* @media screen and (max-width: 600px) {
     .game-panel {
         width: 155px;
         align-self: center;
@@ -26,4 +7,4 @@
         height: 100%;
         background-color: #edf1f2;
     }
-}
+} */

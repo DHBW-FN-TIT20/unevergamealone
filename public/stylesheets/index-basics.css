@@ -1,7 +1,6 @@
 .gradient {
     background: rgb(67, 159, 91);
     background: linear-gradient(90deg, rgba(67, 159, 91, 1) 0%, rgba(141, 194, 155, 1) 80%, rgba(39, 61, 64, 1) 100%);
-    margin: 0px;
 }
 
 .btn {
@@ -53,6 +52,10 @@
 #btt-btn:hover {
     background-color: #F7F3F6;
     color: #273d40;
+}
+
+#index-main {
+    min-height: fit-content;
 }
 
 #heading {
@@ -123,7 +126,7 @@
 }
 
 #about-us {
-    height: 100%;
+    height: 50%;
     width: 100%;
     margin-top: 2%;
     margin-bottom: 1%;

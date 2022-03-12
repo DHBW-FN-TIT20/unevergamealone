@@ -3,3 +3,26 @@
     height: 36px;
     border: #36495b solid 1px;
 }
+
+.form-container {
+    display: grid;
+    grid-template-rows: 1fr 2fr 0.5fr;
+}
+
+.form-field {
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 2;
+    padding: 5%;
+}
+
+.form-field img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-field h1 {
+    text-align: center;
+}

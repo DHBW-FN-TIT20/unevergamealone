@@ -2,33 +2,8 @@
 
 @media screen and (min-width: 600px) {
     .form-container {
-        height: 96%;
-        width: 98%;
-        margin: 1%;
-        display: grid;
         grid-template-columns: auto 400px auto;
-        grid-template-rows: 1fr 2fr 0.5fr;
-    }
-    .form-field {
-        grid-column-start: 2;
-        grid-column-end: 2;
-        grid-row-start: 2;
-        grid-row-end: 2;
-        padding: 5%;
-    }
-    .form-field img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .form-field h1 {
-        text-align: center;
-    }
-}
-
-@media screen and (min-width: 600px) and (max-width: 800px) {
-    #heading {
-        display: flex;
+        min-height: 700px;
     }
 }
 
@@ -36,35 +11,12 @@
 /*Screen width < 600px*/
 
 @media screen and (max-width: 600px) {
-    main {
+    .form-container {
+        grid-template-columns: auto 300px auto;
         min-height: 620px;
     }
-    #heading {
-        display: flex;
-    }
-    .form-container {
-        height: 98%;
-        width: 98%;
-        margin: 1%;
-        display: grid;
-        grid-template-columns: auto 300px auto;
-        grid-template-rows: 1fr 2fr 0.5fr;
-    }
     .form-field {
-        grid-column-start: 2;
-        grid-column-end: 2;
-        grid-row-start: 2;
-        grid-row-end: 2;
-        padding: 5%;
         max-width: 400px;
-    }
-    .form-field img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .form-field h1 {
-        text-align: center;
     }
     .topnav a.icon-home {
         background: #273d40;

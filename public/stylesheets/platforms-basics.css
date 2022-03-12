@@ -3,7 +3,9 @@ header {
 }
 
 .header-image {
-    margin-top: 20px;
+    margin: 20px;
+    margin-left: 75px;
+    margin-right: 75px;
     width: 150px;
 }
 

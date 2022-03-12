@@ -58,6 +58,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Configure routes
 app.use('/', indexRouter);
+app.use("/impressum", indexRouter);
 app.use('/users', usersRouter);
 app.use('/users/sign-up', usersRouter);
 app.use('/users/sign-in', usersRouter);

@@ -104,6 +104,13 @@ function delete_game(btn) {
 }
 
 
+function toggle_game(btn) {
+    const game_id = btn.getAttribute("data-gameId");
+    const checkbox = document.getElementById("checkbox" + game_id);
+    checkbox.checked = !checkbox.checked;
+}
+
+
 /**
  * Only show the matched game titles insert in the "search" text
  */
@@ -111,9 +118,9 @@ function filter_games() {
     all_games = document.querySelectorAll(`.manage-game-panel`);
     all_games.forEach(game => {
         if (game.getAttribute("name").includes(search.value)) {
-            game.classList.remove('invisible');
+            game.style.display = "flex";
         } else {
-            game.classList.add('invisible');
+            game.style.display = "none";
         }
     });
 }
