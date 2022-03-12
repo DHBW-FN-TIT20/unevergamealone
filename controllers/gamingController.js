@@ -15,6 +15,7 @@ module.exports = {
         let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
         return res.render('platforms', { title: 'Plattformen', os: os, platforms: platforms });
     },
+
     showGames: function (req, res, next) {
         let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
         let username = req.userData.username;
@@ -39,6 +40,7 @@ module.exports = {
                 res.redirect("/gaming");
         }
     },
+
     showManageGames: function (req, res, next) {
         let games = app.gameRepo.selectAll();
         const platforms = app.platformRepo.selectAll();
@@ -74,6 +76,7 @@ module.exports = {
         let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
         return res.render('manage-games', { selected_games: already_selected_games, unselected_games: filtered_games, platforms: platforms, os: os, title: "Spiele verwalten" });
     },
+
     addGameToUser: function (req, res, next) {
         let response;
         let added_games_res = [];
@@ -118,38 +121,38 @@ module.exports = {
             return response;
         }
     },
+
     showNewGames: function (req, res, next) {
         const platforms = app.platformRepo.selectAll();
         let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
         return res.render('new-games', { platforms: platforms, os: os, title: "Neues Spiel hinzufügen" });
     },
+
     insertNewGame: function (req, res, next) {
+        let response;
+
         const username = req.userData.username;
         const game_name = req.body.game_name;
         const platform = req.body.platform;
         const coverImage = `/images/upload/${req.file.filename}`;
-        let response;
 
         try {
             const new_game = new GameCreate(game_name, coverImage);
             app.gameRepo.insertNewGame(new_game, platform);
 
-            const new_game_id = app.gameRepo.selectByName(game_name).id;
-            app.gameRepo.addGameToUser(new_game_id, username);
+            const added_game = app.gameRepo.selectByName(game_name);
+            app.gameRepo.addGameToUser(added_game.id, username);
 
-            response = res.status(201).json({
-                status: "success",
-                game: game_name
-            });
+            response = res.status(201).json(added_game);
         } catch (error) {
-            response = res.status(400).json({
-                status: "error",
-                msg: JSON.stringify(error)
-            })
+            console.error(error);
+            response = res.status(500).json(error);
+
         } finally {
             return response;
         }
     },
+
     deleteGame: function (req, res, next) {
         const game_id = req.body.game_id;
 

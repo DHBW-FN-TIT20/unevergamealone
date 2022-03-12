@@ -19,7 +19,7 @@ block content
                     p Plattform:
                     each platform in platforms
                         div.form-check                   
-                            input.form-check-input(type='radio' id=platform.id name=`platform` value=platform.id)
+                            input.form-check-input(type='radio' id=platform.id name=`platform` value=platform.id required)
                             label.form-check-label(for=platform.id) #{platform.name}
                     hr                   
                     div.cropper-box
@@ -28,6 +28,8 @@ block content
                         img#cropper-image(src="/images/default-game-image.png", alt="Cover des Spiels")
                         
                     input(type='submit', value='Speichern', disabled)
+
+    include info-modal.pug
 
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
     script(src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js") 

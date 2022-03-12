@@ -30,7 +30,7 @@ function check_values() {
  */
 function check_game_name() {
     valid = true;
-    $.ajax(`/gaming/game/${gameName_txt.value}`, {
+    $.ajax(`/gaming/game/${gameName_txt.value.trim()}`, {
         method: "GET",
         async: false,
         success: (data, textStatus, jqXHR) => {
@@ -61,7 +61,7 @@ function changeCover() {
 
 
 function create_game(form) {
-    const gameName = gameName_txt.value;
+    const gameName = gameName_txt.value.trim();
 
     // Upload cropped image to server if the browser supports `HTMLCanvasElement.toBlob`.
     // The default value for the second parameter of `toBlob` is 'image/png', change it if necessary.
@@ -79,14 +79,15 @@ function create_game(form) {
             contentType: false,
             enctype: 'multipart/form-data',
             success: (data, textStatus, jqXHR) => {
-                console.log('Upload success');
-                alert('Spiel erfolgreich hinzugefügt!');
-                window.location.replace("/gaming/");
+                show_modal("Gespeichert!", `${data.name} erfolgreich hinzugefügt<br>`);
+                modal_el.addEventListener("hide.bs.modal", (event) => {
+                    window.location.replace("/gaming");
+                })
             },
             error: (jqXHR, textStatus, errorThrown) => {
                 console.error('Upload error');
                 console.error(`${textStatus}: ${jqXHR.responseText} => ${errorThrown}`);
-                alert(`Etwas ist schief gelaufen :(\n${jqXHR.responseText}`);
+                show_modal("Error", "Etwas ist schief gelaufen :(<br>Versuche es spaeter nochmal :)");
             },
         });
     });
