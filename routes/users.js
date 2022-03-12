@@ -16,7 +16,7 @@ const Token = require('../database/Models/JWT/Token');
 
 
 //User sign-up
-router.post('/sign-up', userValidater.validateRegister, userController.signUp);
+router.post('/sign-up', /*userValidater.validateRegister,*/ userController.signUp);
 
 router.get('/sign-up', userValidater.isLoggedIn, userController.getSignUp);
 
