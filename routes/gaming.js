@@ -5,15 +5,11 @@
 
 let express = require('express');
 let router = express.Router();
-const app = require('../app')
 const { v4: uuidv4 } = require('uuid');
 const fs = require("fs");
 const multer = require('multer')
 const userValidater = require('../handlers/middleware.js');
-const Game = require('../database/Models/Game/Game');
-const { response } = require('../app');
 const path = require('path');
-const GameCreate = require('../database/Models/Game/GameCreate');
 const gamingController = require('../controllers/gamingController');
 
 /**
