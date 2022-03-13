@@ -2,27 +2,7 @@ header {
     text-align: center;
 }
 
-.header-image {
-    margin: 20px;
-    margin-left: 75px;
-    margin-right: 75px;
-    width: 150px;
-}
-
-.grid-container {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 1;
-    grid-template-rows: 6% 72% 22%;
-}
-
 .icon {
-    display: block;
-    height: 100px;
-    width: auto;
     text-decoration: none;
     text-align: center;
 }
@@ -31,47 +11,18 @@ header {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.icon p {
-    vertical-align: top;
-}
-
 .icon a {
     text-decoration: none;
 }
 
-.aspect-ratio-box {
-    margin: 0;
-}
-
-.flex-container-platforms {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    grid-column-start: 2;
-    grid-column-end: 2;
-    grid-row-start: 2;
-    grid-row-end: 2;
-}
-
 .sidenav {
-    height: 100%;
-    width: 0px;
-    position: fixed;
-    z-index: 9999;
-    top: 0;
-    left: 0;
     background-color: #273d40;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 70px;
 }
 
 .sidenav a {
-    padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 20px;
     color: #F7F3F6;
-    display: block;
     transition: 0.3s;
 }
 
@@ -81,19 +32,13 @@ header {
 }
 
 .btn-sidenav {
-    z-index: 10000;
-    position: fixed;
-    top: 10px;
     line-height: 40px;
     font-size: 1em;
-    width: 56px;
-    height: 56px;
     border: 1px solid #273d40;
     outline: none;
     background: #273d40;
     color: #F7F3F6;
     cursor: pointer;
-    padding: 8px 8px;
     border-radius: 15px;
     text-align: center;
 }

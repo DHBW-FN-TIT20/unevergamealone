@@ -1,6 +1,130 @@
+.btn-std {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 16px 31px;
+}
+
+#btt-btn {
+    z-index: 10000;
+    display: none;
+    position: fixed;
+    bottom: 2%;
+    right: 3%;
+    width: 56px;
+    height: 56px;
+    padding: 8px 8px;
+}
+
+#index-main {
+    min-height: 0;
+}
+
+#heading {
+    height: 100%;
+    width: 100%;
+    margin-bottom: 2%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#sub-slogan {
+    margin-top: 5px;
+}
+
+#navbar-fixed {
+    box-sizing: content-box;
+}
+
+#navbar-hamburger {
+    box-sizing: content-box;
+}
+
+#logo {
+    height: 200px;
+    margin: 50px;
+}
+
+#getting-started {
+    height: 180%;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 400px 400px 400px 400px;
+}
+
+#about-us {
+    height: 50%;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+}
+
+#register {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+#register-img {
+    grid-column: 2;
+    grid-row: 1;
+    height: 100%;
+}
+
+#platform {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+#platform-img {
+    grid-column: 1;
+    grid-row: 2;
+    height: 100%;
+}
+
+#add-game {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+#add-game-img {
+    grid-column: 2;
+    grid-row: 3;
+    height: 100%;
+}
+
+#show-games {
+    grid-column: 2;
+    grid-row: 4;
+}
+
+#show-games-img {
+    grid-column: 1;
+    grid-row: 4;
+    height: 100%;
+}
+
+.flex-item {
+    flex-basis: 50%;
+    margin: 5%;
+}
+
+.links-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10%;
+}
+
+
 /*Screen width > 600px*/
 
 @media screen and (min-width: 600px) {
+    footer {
+        display: flex;
+        flex-direction: row;
+    }
     #navbar-fixed {
         z-index: 10000;
         position: fixed;
@@ -26,11 +150,10 @@
     #navbar-hamburger {
         display: none;
     }
-    footer {
-        display: flex;
-        flex-direction: row;
-    }
 }
+
+
+/*Screen width > 800px*/
 
 @media screen and (min-width: 800px) {
     #heading {
@@ -38,6 +161,9 @@
         min-height: 450px;
     }
 }
+
+
+/*Screen width > 600px and < 800px*/
 
 @media screen and (min-width: 600px) and (max-width: 800px) {
     #heading {
@@ -69,41 +195,10 @@
 /*Screen width < 600px*/
 
 @media screen and (max-width: 600px) {
-    #heading {
-        display: block;
-        text-align: center;
-        min-height: 550px;
-    }
-    #navbar-fixed {
-        display: none;
-    }
-    #navbar-hamburger {
-        display: block;
-    }
-    #logo {
-        width: 200px;
-        height: auto;
-        margin: 0px;
-        margin-top: 20vh;
-        margin-bottom: 3%;
-        margin-left: calc(50% - 100px);
-        margin-right: calc(50% - 100px);
-    }
     .topnav {
         overflow: hidden;
         background-color: #273d40;
         position: relative;
-    }
-    .topnav #hamburger-links {
-        display: none;
-        background: #273d40;
-        z-index: 10000;
-        border-radius: 15px 0px 15px 15px;
-        position: fixed;
-        top: calc(2% + 56px);
-        right: 3%;
-        width: auto;
-        height: auto;
     }
     .topnav a {
         color: #F7F3F6;
@@ -133,6 +228,17 @@
         color: #273d40;
         border-radius: 15px;
     }
+    .topnav #hamburger-links {
+        display: none;
+        background: #273d40;
+        z-index: 10000;
+        border-radius: 15px 0px 15px 15px;
+        position: fixed;
+        top: calc(2% + 56px);
+        right: 3%;
+        width: auto;
+        height: auto;
+    }
     .topnav #hamburger-links #link-to-getting-startet:hover {
         background-color: #F7F3F6;
         color: #273d40;
@@ -151,5 +257,25 @@
     .active {
         background-color: rgb(67, 159, 91);
         color: white;
+    }
+    #heading {
+        display: block;
+        text-align: center;
+        min-height: 550px;
+    }
+    #navbar-fixed {
+        display: none;
+    }
+    #navbar-hamburger {
+        display: block;
+    }
+    #logo {
+        width: 200px;
+        height: auto;
+        margin: 0px;
+        margin-top: 20vh;
+        margin-bottom: 3%;
+        margin-left: calc(50% - 100px);
+        margin-right: calc(50% - 100px);
     }
 }
