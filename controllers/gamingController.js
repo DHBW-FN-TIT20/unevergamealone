@@ -1,14 +1,33 @@
+/**
+ * Controller for all gaming functions
+ * @module gamingController
+ */
+
 const app = require('../app')
 const Game = require('../database/Models/Game/Game');
 const GameCreate = require('../database/Models/Game/GameCreate');
 
 module.exports = {
+    /**
+     * GET-Render the platforms
+     * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+     * @param {Response} res The res object represents the HTTP response that an Express app sends when it gets an HTTP request.
+     * @param {*} next Control to the next handler
+     * @returns str rendered HTML string
+     */
     showPlatforms: function (req, res, next) {
         let platforms = app.platformRepo.selectAll();
         let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
         return res.render('platforms', { title: 'Plattformen', os: os, platforms: platforms });
     },
-
+    
+    /**
+     * GET-Render the Games for the user
+     * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+     * @param {Response} res The res object represents the HTTP response that an Express app sends when it gets an HTTP request.
+     * @param {*} next Control to the next handler
+     * @returns (str|redirect) rendered HTML string or redirect to /gaming
+     */
     showGames: function (req, res, next) {
         let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
         let username = req.userData.username;
@@ -34,6 +53,13 @@ module.exports = {
         }
     },
 
+    /**
+     * GET-Render for managing the games
+     * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+     * @param {Response} res The res object represents the HTTP response that an Express app sends when it gets an HTTP request.
+     * @param {*} next Control to the next handler
+     * @returns str rendered HTML string
+     */
     showManageGames: function (req, res, next) {
         let games = app.gameRepo.selectAll();
         const platforms = app.platformRepo.selectAll();
@@ -70,6 +96,13 @@ module.exports = {
         return res.render('manage-games', { selected_games: already_selected_games, unselected_games: filtered_games, platforms: platforms, os: os, title: "Spiele verwalten" });
     },
 
+    /**
+     * POST-Request add games to the user
+     * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+     * @param {Response} res The res object represents the HTTP response that an Express app sends when it gets an HTTP request.
+     * @param {*} next Control to the next handler
+     * @returns str JSON with more infos
+     */
     addGameToUser: function (req, res, next) {
         let response;
         let added_games_res = [];
@@ -115,12 +148,26 @@ module.exports = {
         }
     },
 
+    /**
+     * GET-Render to add a new game to the db
+     * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+     * @param {Response} res The res object represents the HTTP response that an Express app sends when it gets an HTTP request.
+     * @param {*} next Control to the next handler
+     * @returns str rendered HTML string
+     */
     showNewGames: function (req, res, next) {
         const platforms = app.platformRepo.selectAll();
         let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
         return res.render('new-games', { platforms: platforms, os: os, title: "Neues Spiel hinzufügen" });
     },
 
+    /**
+     * POST-Request to create a new game
+     * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+     * @param {Response} res The res object represents the HTTP response that an Express app sends when it gets an HTTP request.
+     * @param {*} next Control to the next handler
+     * @returns str JSON with more infos
+     */
     insertNewGame: function (req, res, next) {
         let response;
 
@@ -146,6 +193,13 @@ module.exports = {
         }
     },
 
+    /**
+     * POST-Request add games to the user
+     * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+     * @param {Response} res The res object represents the HTTP response that an Express app sends when it gets an HTTP request.
+     * @param {*} next Control to the next handler
+     * @returns str JSON with more infos
+     */
     deleteGame: function (req, res, next) {
         let response;
         const game_id = req.body.game_id;
@@ -170,6 +224,13 @@ module.exports = {
         }
     },
 
+    /**
+     * GET-Request get infos for a Game
+     * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+     * @param {Response} res The res object represents the HTTP response that an Express app sends when it gets an HTTP request.
+     * @param {*} next Control to the next handler
+     * @returns str object as JSON
+     */
     getGameByName: function (req, res, next) {
         let game_name = req.params.gamename;
         try {

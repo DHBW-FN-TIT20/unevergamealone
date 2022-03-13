@@ -1,6 +1,6 @@
 /**
+ * Router and controller for user operations.
  * @module users
- * @description Router and controller for user operations.
  */
 let express = require('express');
 let router = express.Router();
@@ -9,17 +9,9 @@ const app = require('../app')
 const userValidater = require('../handlers/middleware.js');
 const Token = require('../database/Models/JWT/Token');
 
-
-//User sign-up
-router.post('/sign-up', /*userValidater.validateRegister,*/ userController.signUp);
-
-router.get('/sign-up', userValidater.isLoggedIn, userController.getSignUp);
-
-router.get('/sign-in', userValidater.isLoggedIn, userController.getSignIn);
-
-router.post('/sign-in', userController.signIn);
-
-// User Logout
+/**
+ * GET of /users/logout
+ */
 router.get("/logout", userValidater.isLoggedIn, (req, res, next) => {
     const user_token = req.cookies['jwt'];
     const exp = req.userData.exp;
@@ -29,5 +21,25 @@ router.get("/logout", userValidater.isLoggedIn, (req, res, next) => {
 
     return res.redirect(302, '/');
 })
+
+/**
+ * GET of /users/sign-up
+ */
+router.get('/sign-up', userValidater.isLoggedIn, userController.getSignUp);
+
+/**
+ * GET of /users/sign-in
+ */
+router.get('/sign-in', userValidater.isLoggedIn, userController.getSignIn);
+
+/**
+ * POST of /users/sign-up
+ */
+router.post('/sign-up', /*userValidater.validateRegister,*/ userController.signUp);
+
+/**
+ * POST of /users/sign-in
+ */
+router.post('/sign-in', userController.signIn);
 
 module.exports = router;

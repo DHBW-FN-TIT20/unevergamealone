@@ -1,21 +1,39 @@
 const Game = require('./Game.js');
 const GameCreate = require('./GameCreate.js');
 
+/**
+ * Contain functions to interact with the Game in the DBs
+ */
 class GameRepository {
+    /**
+     * @constructor
+     * @param {Database} db sqlite connection
+     */
     constructor(db) {
         this.db = db;
     }
 
+    /**
+     * Create the Table games if not exist
+     * @returns string sql response of the command
+     */
     createGameTable() {
         const sql = "CREATE TABLE IF NOT EXISTS games(id integer PRIMARY KEY AUTOINCREMENT, platform_id integer, name text UNIQUE, coverImage text, FOREIGN KEY(platform_id) REFERENCES platforms(id))";
         return this.db.run(sql);
     }
 
+    /**
+     * Create the Table gameUserMapping if not exist
+     * @returns string sql response of the command
+     */
     createGameUserMappingTable() {
         const sql = "CREATE TABLE IF NOT EXISTS gameUserMapping(game_id integer, username text, FOREIGN KEY(game_id) REFERENCES games(id) ON DELETE CASCADE, FOREIGN KEY(username) REFERENCES users(username) ON DELETE CASCADE, PRIMARY KEY(game_id, username))";
         return this.db.run(sql);
     }
 
+    /**
+     * Add Battlefield 2042 and Battlefield V to the DB and add the Games to the demo-User
+     */
     initialSetup() {
         this.insertNewGame(new GameCreate("Battlefield 2042", "/images/upload/bf2042.jpg"), 2);
         this.addGameToUser(this.selectByName("Battlefield 2042").id, "demo");
@@ -24,8 +42,10 @@ class GameRepository {
     }
 
     /**
+     * Add a new Game to the DB
      * @param {GameCreate} game Game to Add
      * @param {int} platformID Id 
+     * @returns string sql response of the command
      */
     insertNewGame(game, platformId) {
         const sql = "INSERT INTO games(platform_id, name, coverImage) VALUES (? ,?, ?)";
@@ -33,8 +53,10 @@ class GameRepository {
     }
 
     /**
+     * Add a Game to a User
      * @param {int} gameId
      * @param {string} username
+     * @returns string sql response of the command
      */
     addGameToUser(gameId, username) {
         const sql = "INSERT INTO gameUserMapping(game_id, username) VALUES (?,?)";
@@ -42,8 +64,10 @@ class GameRepository {
     }
 
     /**
+     * Delete a Game that was added to a User
      * @param {int} gameId 
      * @param {string} username 
+     * @returns string sql response of the command
      */
     removeGameFromUser(gameId, username) {
         const sql = "DELETE " +
@@ -55,7 +79,7 @@ class GameRepository {
 
     /**
      * Return all saved Games
-     * @returns Array.<Game>
+     * @returns {Game[]}
      */
     selectAll() {
         const sql = "SELECT games.id, games.name, games.coverImage, platforms.name AS platformName FROM games JOIN platforms ON platform_id=platforms.id";
@@ -68,10 +92,10 @@ class GameRepository {
     }
 
     /**
-     * 
-     * @param {String} platformName 
-     * @param {String} username 
-     * @returns Array
+     * Get all Games from a User for a specific platform
+     * @param {string} platformName 
+     * @param {string} username 
+     * @returns string sql response of the command
      */
     selectAllGamesWithPlatformByUser(platformName, username) {
         const sql = "SELECT games.id, games.name AS game, games.coverImage, platforms.name AS platformName, gameUserMapping.username FROM games JOIN platforms ON platform_id=platforms.id JOIN gameUserMapping ON gameUserMapping.game_id=games.id WHERE gameUserMapping.username=? AND platforms.name=?";
@@ -102,10 +126,12 @@ class GameRepository {
         return game;
     }
 
+    /**
+     * Get all Usernames that have this game
+     * @param {string} gameId 
+     * @returns {string[]}
+     */
     selectUsersOfGame(gameId) {
-        // const sql = "SELECT userPlatformMapping.username, userPlatformMapping.usernameOfPlatform AS usernameOfPlatform FROM userPlatformMapping JOIN games ON games.platform_id=userPlatformMapping.platformId JOIN gameUsermapping ON gameUserMapping.username = userPlatformMapping.username WHERE game_id=?";
-        // return this.db.all(sql, [gameId]);
-
         const platformId = this.db.get("SELECT platform_id FROM games WHERE id = ?", [gameId]);
         const playersOwning = this.db.all("SELECT username FROM gameUserMapping WHERE game_id = ?", [gameId]);
         const playernames = [];
@@ -117,8 +143,8 @@ class GameRepository {
 
     /**
      * Get all Games from a User
-     * @param {String} username 
-     * @returns Array.<Game>
+     * @param {string} username 
+     * @returns {Game[]}
      */
     selectAllGamesFromUser(username) {
         const sql = "SELECT games.id, platforms.name AS platformName, games.name, games.coverImage, users.username AS playerName " +
