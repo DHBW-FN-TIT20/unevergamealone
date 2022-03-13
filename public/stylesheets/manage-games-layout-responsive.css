@@ -1,0 +1,39 @@
+@media screen and (min-width: 600px) {
+    .new-game-form {
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+    .navigation-bar {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        gap: 20px;
+    }
+    #navigation-bar-new-game {
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+    #searching {
+        width: calc(100% - 185px);
+        margin-bottom: 0;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .new-game-form {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    .navigation-bar {
+        display: block;
+        gap: 5px;
+    }
+    #navigation-bar-new-game {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    #searching {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}

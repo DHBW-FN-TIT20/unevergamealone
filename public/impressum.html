@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>UNGA</title>
+    <link rel='shortcut icon' type='image/x-icon' href='/images/favicon.ico'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/stylesheets/basics.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/stylesheets/index-basics.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/stylesheets/index-layout-responsive.css'>
+</head>
+
+<body>
+    <header id="navbar-fixed">
+        <nav>
+            <a href="/">Startseite</a>
+            <a href="/users/sign-in">Login</a>
+        </nav>
+    </header>
+    <header id="navbar-hamburger">
+        <div class="topnav">
+            <a id="hamburger-menu-btn" href="javascript:void(0);" class="icon" type="button" onclick="toggleHamburgerMenu()">☰</a>
+            <div id="hamburger-links">
+                <a href="/" id="link-to-start">Startseite</a>
+                <a href="/users/sign-in" id="link-to-login">Login</a>
+            </div>
+        </div>
+    </header>
+    <button onclick="backToTop()" id="btt-btn" title="Back to top">▲</button>
+    <main id="index-main">
+        <section id="heading" class="gradient border-radius">
+            <img id="logo" src="/images/UNeverGameAloneLogo.png">
+            <div>
+                <h1 id="slogan">You Never<br>Game Alone</h1>
+                <h3 id="sub-slogan">Jetzt Mitspieler finden!</h3>
+                <a class="btn-std" type="button" href="/users/sign-up">Hier registrieren</a>
+            </div>
+        </section>
+    </main>
+    <script src="/javascripts/hamburger-menu.js"></script>
+    <script src="/javascripts/back-to-top-button.js"></script>
+</body>

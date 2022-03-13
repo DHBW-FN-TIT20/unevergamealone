@@ -1,0 +1,37 @@
+extends shared/layout
+
+block content
+  header#navbar-fixed
+    nav
+      a(href="/") Startseite
+  header#navbar-hamburger
+    div.topnav
+      a.icon-home(href="/",  type="button") ⌂
+  main.form-container.gradient.border-radius
+    div.form-field
+      img(src="/images/icons8-user-64.png", alt="user")
+      h1 Neuer Benutzer
+      form(onsubmit="return sign_up(this)")
+        input(type="text", name="username" value='' placeholder="Benutzername" required)
+        input(type="email", name="email" value='' placeholder="E-Mail" required)
+        input(type="password" name="password" value='' placeholder="Passwort" required)
+        input(type="password" name="password_repeat" value='' placeholder="Passwort wiederholen" required)
+        div.reg-form-check
+          div.form-check
+            input.form-check-input(type="radio" id="os_linux" name="os" value='Linux')
+            label.form-check-label(for="os_linux")  Betriebssystem Ubuntu wählen
+          div.form-check
+            input.form-check-input(type="radio" id="os_windows" name="os" value='Windows' checked)
+            label.form-check-label(for="os_windows")  Betriebssystem Windows wählen
+        div.reg-form-check
+          each platform in platforms
+            div.form-check
+              label.form-check-label(for=platform.id)  #{platform.name}
+              input.form-check-input(type="checkbox" name=platform.id id=platform.id)
+              input.invisible(type="text" name=platform.id+"_uName" id=platform.id+"_uName" placeholder="Benutzername")
+        input.btn-std#register-btn(type="submit" value="Registrieren")
+
+    include info-modal.pug
+
+  script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
+  script(src="/javascripts/userInteractions.js")

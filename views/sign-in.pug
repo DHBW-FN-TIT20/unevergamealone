@@ -1,0 +1,22 @@
+extends shared/layout
+
+block content
+  header#navbar-fixed
+    nav
+      a(href="/") Startseite
+  header#navbar-hamburger
+    div.topnav
+      a.icon-home(href="/",  type="button") ⌂
+  main.form-container.gradient.border-radius
+    div.form-field
+      img(src="/images/icons8-user-64.png", alt="user")
+      h1 Anderer Benutzer
+      form(onsubmit="return sign_in(this)") 
+        input(type="text", name="username" value='' placeholder="Benutzername")
+        span.password-submit
+          input#sign-in(type="password" name="password" value='' placeholder="Passwort")
+          input(type="submit" value="")
+
+  include info-modal.pug
+  script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js") 
+  script(src="/javascripts/sign-in.js")

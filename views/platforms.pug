@@ -1,0 +1,31 @@
+extends shared/layout
+block content
+    body#platforms-body
+        header
+            a(href="/")
+                img.header-image(src="/images/UNeverGameAloneLogo.png", alt="Logo")
+
+        div#sidenav.sidenav
+            a(href="/") Home
+            a(href="/#getting-started") Getting started
+            a(href="/#about-us") Über uns
+            a(href="/users/logout") Ausloggen
+
+        button#btn-sidenav.btn-sidenav(onclick="openSidenav()") ☰
+
+        main.aspect-ratio-box
+            if os == 'Windows'
+                img.background(src="/images/background_windows.png", alt="Background Windows")
+            if os == 'Linux'
+                img.background(src="/images/background_ubuntu.png", alt="Background Ubuntu")
+            div.grid-container
+                div.flex-container-platforms
+                    each platform in platforms
+                        a.icon(href="/gaming/show/"+platform.name)
+                            img(src="/images/platforms/"+platform.name+".png", alt=platform.name, srcset="")
+                            p=platform.name
+                    a.icon(href="/gaming/manage")
+                        img(src="/images/platforms/manage.png", alt="Manage games", srcset="")
+                        p Spiele verwalten
+        script(src="/javascripts/platforms.js")
+        script(src="/javascripts/sidenav.js") 

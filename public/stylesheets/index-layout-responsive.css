@@ -1,0 +1,155 @@
+/*Screen width > 600px*/
+
+@media screen and (min-width: 600px) {
+    #navbar-fixed {
+        z-index: 10000;
+        position: fixed;
+        top: 5%;
+        width: 400px;
+        height: 40px;
+        left: calc((100% - 400px) / 2);
+        right: calc((100% - 400px) / 2);
+    }
+    #navbar-fixed nav {
+        height: 100%;
+        width: 100%;
+        vertical-align: middle;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+    #navbar-fixed nav a {
+        color: white;
+        text-decoration: none;
+    }
+    #navbar-hamburger {
+        display: none;
+    }
+    footer {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    #heading {
+        display: flex;
+        min-height: 450px;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 800px) {
+    #heading {
+        display: block;
+        text-align: center;
+        min-height: 550px;
+    }
+    #logo {
+        width: 200px;
+        height: auto;
+        margin: 0px;
+        margin-top: 20vh;
+        margin-bottom: 3%;
+        margin-left: calc(50% - 100px);
+        margin-right: calc(50% - 100px);
+    }
+    #user-icon {
+        width: 200px;
+        height: auto;
+        margin: 0px;
+        margin-top: 28%;
+        margin-bottom: 3%;
+        margin-left: calc(50% - 100px);
+        margin-right: calc(50% - 100px);
+    }
+}
+
+
+/*Screen width < 600px*/
+
+@media screen and (max-width: 600px) {
+    #heading {
+        display: block;
+        text-align: center;
+        min-height: 550px;
+    }
+    #navbar-fixed {
+        display: none;
+    }
+    #navbar-hamburger {
+        display: block;
+    }
+    #logo {
+        width: 200px;
+        height: auto;
+        margin: 0px;
+        margin-top: 20vh;
+        margin-bottom: 3%;
+        margin-left: calc(50% - 100px);
+        margin-right: calc(50% - 100px);
+    }
+    .topnav {
+        overflow: hidden;
+        background-color: #273d40;
+        position: relative;
+    }
+    .topnav #hamburger-links {
+        display: none;
+        background: #273d40;
+        z-index: 10000;
+        border-radius: 15px 0px 15px 15px;
+        position: fixed;
+        top: calc(2% + 56px);
+        right: 3%;
+        width: auto;
+        height: auto;
+    }
+    .topnav a {
+        color: #F7F3F6;
+        padding: 8px 20px;
+        text-decoration: none;
+        text-align: center;
+        line-height: 40px;
+        font-size: 1em;
+        display: block;
+        border-radius: 15px;
+    }
+    .topnav a.icon {
+        background: #273d40;
+        display: block;
+        padding: 8px 8px;
+        line-height: 40px;
+        font-size: 1em;
+        z-index: 10000;
+        position: fixed;
+        top: 2%;
+        width: 40px;
+        height: 40px;
+        right: 3%;
+    }
+    .topnav .icon:hover {
+        background-color: #F7F3F6;
+        color: #273d40;
+        border-radius: 15px;
+    }
+    .topnav #hamburger-links #link-to-getting-startet:hover {
+        background-color: #F7F3F6;
+        color: #273d40;
+        border-radius: 15px 0px 0px 0px;
+    }
+    .topnav #hamburger-links #link-to-login:hover {
+        background-color: #F7F3F6;
+        color: #273d40;
+        border-radius: 0px;
+    }
+    .topnav #hamburger-links #link-to-about-us:hover {
+        background-color: #F7F3F6;
+        color: #273d40;
+        border-radius: 0px 0px 15px 15px;
+    }
+    .active {
+        background-color: rgb(67, 159, 91);
+        color: white;
+    }
+}

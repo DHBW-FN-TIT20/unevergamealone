@@ -1,0 +1,39 @@
+/*Screen width > 600px*/
+
+@media screen and (min-width: 600px) {
+    .form-container {
+        grid-template-columns: auto 400px auto;
+        min-height: 850px;
+    }
+}
+
+
+/*Screen width < 600px*/
+
+@media screen and (max-width: 600px) {
+    .form-container {
+        grid-template-columns: auto 300px auto;
+        min-height: 800px;
+    }
+    .form-field {
+        max-width: 400px;
+    }
+    .topnav a.icon-home {
+        background: #273d40;
+        display: block;
+        padding: 8px 8px;
+        z-index: 10000;
+        position: fixed;
+        top: 2%;
+        right: 3%;
+        width: 56px;
+        height: 56px;
+        font-size: 2em;
+        line-height: 30px;
+    }
+    .topnav .icon-home:hover {
+        background-color: #F7F3F6;
+        color: #273d40;
+        border-radius: 15px;
+    }
+}

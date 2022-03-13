@@ -1,0 +1,38 @@
+{
+    "plugins": [],
+    "recurseDepth": 10,
+    "source": {
+        "include": [
+            "bin",
+            "controllers",
+            "database",
+            "handlers",
+            "routes",
+            "views"
+        ],
+        "exclude": [
+            "node_modules",
+            ".vscode",
+            "public",
+            "docs"
+        ],
+        "includePattern": ".+\\.js(doc|x)?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "sourceType": "module",
+    "opts": {
+        "encoding": "utf8",
+        "destination": "./docs/",
+        "recurse": true,
+        "readme": "./README.md"
+    },
+    "templates": {
+        "default": {
+            "staticFiles": {
+                "paths": [
+                    "."
+                ]
+            }
+        }
+    }
+}

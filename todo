@@ -1,0 +1,6 @@
+[ ] Platformen userbasiert anzeigen
+[X] Bei Userregistrieren Betriebssystem auswählen lassen
+[X] Landingpage als ganz normale Website gestalten und erst nach Login in die Computerebene wechseln
+[ ] User Register nicht über handler sondern über HTML5-Tags realisieren
+[ ] .env-Variablen nutzen
+[ ] robots.txt und sitemap.xml machen

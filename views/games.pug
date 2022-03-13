@@ -1,0 +1,40 @@
+extends shared/layout
+
+block content
+  mixin application
+    div.application-container
+      div.title-bar
+        span
+          img(src="/images/platforms/"+title+".png", alt="Origin_Logo", width="20px")
+          span=title
+        a(href="/gaming") X
+      div.game-container
+        div.flex-container
+          each game in games
+            button.game-panel(data-bs-toggle="modal" data-bs-target="#modal_"+game.id)
+              p=game.name
+              img.game-panel-img(src=game.coverImage, alt=game.name)       
+
+            div.modal.fade(id="modal_"+game.id tabindex="-1" aria-labelledby="gameModal" aria-hidden="true")
+              div.modal-dialog
+                div.modal-content
+                  div.modal-header
+                    h5.modal.title game.name
+                    h6 Deine Mitspieler
+                    button.btn-close(data-bs-dismiss="modal" aria-label="Schließen")
+                  div.modal-body
+                    each player in game.playerNames
+                      p=player.usernameOfPlatform
+                  div.modal-footer
+
+  if os == 'Windows'
+    main.grid-container-games.background-windows
+      +application
+  else if os == 'Linux'
+    main.grid-container-games.background-ubuntu
+      +application
+  else
+    main.grid-container-games
+      +application
+      
+  script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous")

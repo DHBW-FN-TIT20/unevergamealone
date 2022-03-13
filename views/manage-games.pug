@@ -1,0 +1,53 @@
+extends shared/layout
+
+block content
+
+  mixin application 
+    div.application-container
+        div.title-bar
+          span
+            img(src="/images/platforms/manage.png", alt="Manage_Logo", width="20px")
+            span=title          
+          a(href="/gaming") X
+        div.game-container
+          nav.navigation-bar     
+            input(type="text", name="search", id="searching" placeholder="Spiel suchen")
+            a.manage-game-btn#game-not-found(href="/gaming/new") Spiel nicht gefunden?
+          form(onsubmit="return save_games(this)")
+            hr
+            input#submit-manage-game(type='submit', value='Speichern')
+            each platform in platforms
+              hr
+              h3 #{platform.name}
+              div.manage-games-flex-container
+                each game in selected_games
+                  if game.platformName === platform.name
+                    div.manage-game-panel(name=game.name)                       
+                      input(type='checkbox' id="checkbox"+game.id name=game.id value=game.id checked)
+                      p(for=game.id, data-gameId=game.id, onclick="toggle_game(this)") #{game.name}             
+                      img.game-panel-img(src=game.coverImage, alt=game.name, data-gameId=game.id, onclick="toggle_game(this)")
+                      input(type="button", name="delete"+game.id, value="Spiel löschen", data-gameId=game.id, onclick="delete_game(this)")      
+
+                each game in unselected_games
+                  if game.platformName === platform.name
+                    div.manage-game-panel(name=game.name)                        
+                      input(type='checkbox' id="checkbox"+game.id name=game.id value=game.id)
+                      p(for=game.id, data-gameId=game.id, onclick="toggle_game(this)") #{game.name}
+                      img.game-panel-img(src=game.coverImage, alt=game.name, data-gameId=game.id, onclick="toggle_game(this)")
+                      input(type="button", name="delete"+game.id, value="Spiel löschen", data-gameId=game.id, onclick="delete_game(this)") 
+  if os == 'Windows'
+    main.grid-container-games.background-windows
+      +application
+  else if os == 'Linux'
+    main.grid-container-games.background-ubuntu
+      +application
+  else
+    main.grid-container-games
+      +application
+      
+
+  include info-modal.pug
+
+  script(src="/javascripts/manage-games.js")
+  script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")  
+  script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous")

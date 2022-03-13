@@ -1,0 +1,33 @@
+@media screen and (min-width: 600px) {
+    .background {
+        content: url("/images/background_windows.png");
+    }
+    #logo {
+        height: 10em;
+        width: auto;
+        display: block;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .game-panel {
+        flex-basis: 10%;
+        padding: 0.5%;
+        border: black 1px solid;
+        height: 200px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #logo {
+        width: 100px;
+        height: 100px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .background {
+        content: url("/images/isolated-phone-in-grey-background.jpg");
+    }
+}

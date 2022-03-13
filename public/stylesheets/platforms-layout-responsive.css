@@ -1,0 +1,111 @@
+/*Screen width > 600px*/
+
+@media screen and (min-width: 600px) {
+    .aspect-ratio-box {
+        height: 0;
+        min-height: 0;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: calc(3202/5694 * 60%);
+        position: relative;
+        z-index: 0;
+        grid-column-start: 2;
+        grid-column-end: 2;
+        grid-row-start: 2;
+        grid-row-end: 2;
+    }
+    .grid-container {
+        display: grid;
+    }
+    .icon p {
+        color: white;
+    }
+    .background {
+        object-fit: contain;
+        position: absolute;
+        /* max-height: 100%; */
+        z-index: -10000;
+        top: 0;
+    }
+    .flex-container-platforms {
+        display: flex;
+        padding: 5%;
+        padding-top: 15%;
+    }
+    .btn-sidenav {
+        left: 97px;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .grid-container {
+        grid-template-columns: 21% auto 21%;
+    }
+    .icon p {
+        font-size: 1em;
+    }
+    .icon img {
+        height: 50px;
+    }
+    .background {
+        width: 80%;
+        left: 10%;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1000px) {
+    .grid-container {
+        grid-template-columns: 14% auto 14%;
+    }
+    .icon p {
+        font-size: 0.8em;
+    }
+    .icon img {
+        height: 40px;
+    }
+    .background {
+        width: 100%;
+        left: 0;
+    }
+}
+
+
+/*Screen width < 600px*/
+
+@media screen and (max-width: 600px) {
+    #platforms-body {
+        background-color: #F7F3F6;
+    }
+    .aspect-ratio-box {
+        height: auto;
+        width: 100%;
+        position: relative;
+        min-height: 0;
+    }
+    .background {
+        display: none;
+    }
+    .icon {
+        background-color: #FFFFFF;
+        padding-top: 5px;
+        margin-bottom: 15px;
+        border: black 1px solid;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, .25);
+    }
+    .icon p {
+        font-size: 2em;
+        color: black;
+    }
+    .icon img {
+        height: 40px;
+    }
+    .flex-container-platforms {
+        display: block;
+        padding: 5%;
+        padding-top: 0;
+    }
+    .btn-sidenav {
+        left: 20px;
+    }
+}
