@@ -10,9 +10,10 @@ module.exports = {
      * @param {*} next Control to the next handler
      * @returns str static index.html
      */
-    showIndex: function(req, res, next) {
+    showIndex: function (req, res, next) {
         res.sendFile("index.html");
     },
+
     /**
      * GET-Static static impressum.html
      * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
@@ -20,8 +21,29 @@ module.exports = {
      * @param {*} next Control to the next handler
      * @returns str static impressum.html
      */
-    showImpressum: function(req, res, next) {
-        // TODO: change from absolute path to relative path and fix 'TypeError: path must be absolute or specify root to res.sendFile'
+    showImpressum: function (req, res, next) {
         res.sendFile("impressum.html", { root: __dirname + "/../public/" });
+    },
+
+    /**
+     * GET-Static sitemap.xml
+     * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+     * @param {Response} res The res object represents the HTTP response that an Express app sends when it gets an HTTP request.
+     * @param {*} next Control to the next handler
+     * @returns str static sitemap.xml
+     */
+    showSitemap: function (req, res, next) {
+        res.sendFile("sitemap.xml", { root: __dirname + "/../public/" });
+    },
+
+    /**
+     * GET-Static static robots.txt
+     * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+     * @param {Response} res The res object represents the HTTP response that an Express app sends when it gets an HTTP request.
+     * @param {*} next Control to the next handler
+     * @returns str static robots.txt
+     */
+    showRobots: function (req, res, next) {
+        res.sendFile("robots.txt", { root: __dirname + "/../public/" });
     }
 };
