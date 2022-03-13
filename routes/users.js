@@ -6,11 +6,6 @@ let express = require('express');
 let router = express.Router();
 let userController = require("../controllers/usersController")
 const app = require('../app')
-const bcrypt = require('bcryptjs');
-const uuid = require('uuid');
-const jwt = require('jsonwebtoken');
-const User = require('../database/Models/User/User');
-const UserPlatform = require('../database/Models/UserPlatform/UserPlatform');
 const userValidater = require('../handlers/middleware.js');
 const Token = require('../database/Models/JWT/Token');
 
