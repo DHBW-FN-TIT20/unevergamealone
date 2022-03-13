@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: database/Models/User/User.js</title>
+    <title>JSDoc: Source: database/Models/Platform/PlatformRepository.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: database/Models/User/User.js</h1>
+    <h1 class="page-title">Source: database/Models/Platform/PlatformRepository.js</h1>
 
     
 
@@ -26,27 +26,70 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Class representing a user
+            <pre class="prettyprint source linenums"><code>const Platform = require('./Platform.js');
+
+/**
+ * DB Connection to the platforms Table
  */
-class User {
+class PlatformRepository {
     /**
      * @constructor
-     * @param {string} username name of the user
-     * @param {string} password password of the user hashed
-     * @param {string} email mail of the user
-     * @param {string} os operating system of the user
+     * @param {Database} db sqlite connection
      */
-    constructor(username, password, email, os) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.os = os;
-        this.registered = Date.now();
+    constructor(db) {
+        this.db = db;
+    }
+
+    /**
+     * Create the Table platforms if not exist
+     * @returns string sql response of the command
+     */
+    createTable() {
+        const sql = "CREATE TABLE IF NOT EXISTS platforms(id integer PRIMARY KEY, name text)";
+        return this.db.run(sql);
+    }
+    /**
+     * Add Steam, Origin, EpicGames, UbisoftConnect and BattleNET to the DB
+     */
+    initialSetup() {
+        this.insert(new Platform(1, "Steam"));
+        this.insert(new Platform(2, "Origin"));
+        this.insert(new Platform(3, "EpicGames"));
+        this.insert(new Platform(4, "UbisoftConnect"));
+        this.insert(new Platform(5, "BattleNET"));
+    }
+
+    /**
+     * Add a new platform to the DB
+     * @param {Platform} platform platform to add
+     * @returns string sql response of the command
+     */
+    insert(platform) {
+        const sql = "INSERT INTO platforms(id, name) VALUES (?, ?)";
+        return this.db.run(sql, [platform.id, platform.name]);
+    }
+
+    /**
+     * Get a platform by name
+     * @param {string} name name of the platform
+     * @returns Platform
+     */
+    selectByName(name) {
+        const sql = "SELECT * FROM platforms WHERE name = ?";
+        return this.db.get(sql, [name]);
+    }
+
+    /**
+     * Get all Platforms in the Database
+     * @returns {Platform[]} sql response of the command
+     */
+    selectAll() {
+        const sql = "SELECT * FROM platforms";
+        return this.db.all(sql);
     }
 }
 
-module.exports = User;</code></pre>
+module.exports = PlatformRepository;</code></pre>
         </article>
     </section>
 

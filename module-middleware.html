@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: AppDB</title>
+    <title>JSDoc: Module: middleware</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: AppDB</h1>
+    <h1 class="page-title">Module: middleware</h1>
 
     
 
@@ -28,9 +28,8 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>AppDB<span class="signature">(dbFilePath)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Class representing the database connection.</div>
+            
         
     
 </header>
@@ -39,74 +38,20 @@
     <div class="container-overview">
     
         
-
-    
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="AppDB"><span class="type-signature"></span>new AppDB<span class="signature">(dbFilePath)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
+            <div class="description">Middleware</div>
         
 
         
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>dbFilePath</code></td>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
 
 
-            
-            </td>
 
-            
 
-            
 
-            <td class="description last">path to the database file</td>
-        </tr>
 
-    
-    </tbody>
-</table>
+
+
 
 
 
@@ -142,7 +87,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="database_db.js.html">database/db.js</a>, <a href="database_db.js.html#line5">line 5</a>
+        <a href="handlers_middleware.js.html">handlers/middleware.js</a>, <a href="handlers_middleware.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -172,6 +117,7 @@
 
 
 
+        
     
     </div>
 
@@ -198,7 +144,7 @@
     
 
     
-    <h4 class="name" id="all"><span class="type-signature"></span>all<span class="signature">(sql, params)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id="~isLoggedIn"><span class="type-signature">(inner) </span>isLoggedIn<span class="signature">(req, res, next)</span><span class="type-signature"></span></h4>
     
 
     
@@ -206,7 +152,11 @@
 
 
 <div class="description">
-    Get all results
+    Check if the User is Logged in an save it to req.userData
+
+Redirect to the sign-in if the Token is invalid
+or if you call the sign-in or sign-up you get redirected
+to the /gaming
 </div>
 
 
@@ -242,13 +192,13 @@
 
         <tr>
             
-                <td class="name"><code>sql</code></td>
+                <td class="name"><code>req</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">Request</span>
 
 
             
@@ -258,20 +208,20 @@
 
             
 
-            <td class="description last">the sql statement</td>
+            <td class="description last">The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>params</code></td>
+                <td class="name"><code>res</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;string></span>
+<span class="param-type">Response</span>
 
 
             
@@ -281,7 +231,30 @@
 
             
 
-            <td class="description last">the parameters used in the sql statement</td>
+            <td class="description last">The res object represents the HTTP response that an Express app sends when it gets an HTTP request.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Control to the next handler</td>
         </tr>
 
     
@@ -322,7 +295,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="database_db.js.html">database/db.js</a>, <a href="database_db.js.html#line31">line 31</a>
+        <a href="handlers_middleware.js.html">handlers/middleware.js</a>, <a href="handlers_middleware.js.html#line55">line 55</a>
     </li></ul></dd>
     
 
@@ -351,22 +324,10 @@
 
         
 <div class="param-desc">
-    an object that represents all row retrieved by the query
+    str JSON with more infos
 </div>
 
 
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">object</span>
-
-
-    </dd>
-</dl>
 
     
 
@@ -380,7 +341,7 @@
     
 
     
-    <h4 class="name" id="get"><span class="type-signature"></span>get<span class="signature">(sql, params)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id="~validateRegister"><span class="type-signature">(inner) </span>validateRegister<span class="signature">(req, res, next)</span><span class="type-signature"></span></h4>
     
 
     
@@ -388,7 +349,7 @@
 
 
 <div class="description">
-    Get the first result
+    Check if the values from the registration are valid
 </div>
 
 
@@ -424,13 +385,13 @@
 
         <tr>
             
-                <td class="name"><code>sql</code></td>
+                <td class="name"><code>req</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">Request</span>
 
 
             
@@ -440,20 +401,20 @@
 
             
 
-            <td class="description last">the sql statement</td>
+            <td class="description last">The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>params</code></td>
+                <td class="name"><code>res</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;string></span>
+<span class="param-type">Response</span>
 
 
             
@@ -463,7 +424,30 @@
 
             
 
-            <td class="description last">the parameters used in the sql statement</td>
+            <td class="description last">The res object represents the HTTP response that an Express app sends when it gets an HTTP request.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Control to the next handler</td>
         </tr>
 
     
@@ -504,7 +488,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="database_db.js.html">database/db.js</a>, <a href="database_db.js.html#line20">line 20</a>
+        <a href="handlers_middleware.js.html">handlers/middleware.js</a>, <a href="handlers_middleware.js.html#line16">line 16</a>
     </li></ul></dd>
     
 
@@ -533,204 +517,10 @@
 
         
 <div class="param-desc">
-    an object that represents the first row retrieved by the query
+    str JSON with more infos
 </div>
 
 
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">object</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="run"><span class="type-signature"></span>run<span class="signature">(sql, params)</span><span class="type-signature"> &rarr; {object}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Run the statement
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>sql</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the sql statement</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>params</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">array</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the parameters used in the sql statement</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="database_db.js.html">database/db.js</a>, <a href="database_db.js.html#line42">line 42</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    an info object describing any changes made
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">object</span>
-
-
-    </dd>
-</dl>
 
     
 

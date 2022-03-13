@@ -29,21 +29,39 @@
             <pre class="prettyprint source linenums"><code>const Game = require('./Game.js');
 const GameCreate = require('./GameCreate.js');
 
+/**
+ * Contain functions to interact with the Game in the DBs
+ */
 class GameRepository {
+    /**
+     * @constructor
+     * @param {Database} db sqlite connection
+     */
     constructor(db) {
         this.db = db;
     }
 
+    /**
+     * Create the Table games if not exist
+     * @returns string sql response of the command
+     */
     createGameTable() {
         const sql = "CREATE TABLE IF NOT EXISTS games(id integer PRIMARY KEY AUTOINCREMENT, platform_id integer, name text UNIQUE, coverImage text, FOREIGN KEY(platform_id) REFERENCES platforms(id))";
         return this.db.run(sql);
     }
 
+    /**
+     * Create the Table gameUserMapping if not exist
+     * @returns string sql response of the command
+     */
     createGameUserMappingTable() {
         const sql = "CREATE TABLE IF NOT EXISTS gameUserMapping(game_id integer, username text, FOREIGN KEY(game_id) REFERENCES games(id) ON DELETE CASCADE, FOREIGN KEY(username) REFERENCES users(username) ON DELETE CASCADE, PRIMARY KEY(game_id, username))";
         return this.db.run(sql);
     }
 
+    /**
+     * Add Battlefield 2042 and Battlefield V to the DB and add the Games to the demo-User
+     */
     initialSetup() {
         this.insertNewGame(new GameCreate("Battlefield 2042", "/images/upload/bf2042.jpg"), 2);
         this.addGameToUser(this.selectByName("Battlefield 2042").id, "demo");
@@ -52,8 +70,10 @@ class GameRepository {
     }
 
     /**
+     * Add a new Game to the DB
      * @param {GameCreate} game Game to Add
      * @param {int} platformID Id 
+     * @returns string sql response of the command
      */
     insertNewGame(game, platformId) {
         const sql = "INSERT INTO games(platform_id, name, coverImage) VALUES (? ,?, ?)";
@@ -61,8 +81,10 @@ class GameRepository {
     }
 
     /**
+     * Add a Game to a User
      * @param {int} gameId
      * @param {string} username
+     * @returns string sql response of the command
      */
     addGameToUser(gameId, username) {
         const sql = "INSERT INTO gameUserMapping(game_id, username) VALUES (?,?)";
@@ -70,8 +92,10 @@ class GameRepository {
     }
 
     /**
+     * Delete a Game that was added to a User
      * @param {int} gameId 
      * @param {string} username 
+     * @returns string sql response of the command
      */
     removeGameFromUser(gameId, username) {
         const sql = "DELETE " +
@@ -83,7 +107,7 @@ class GameRepository {
 
     /**
      * Return all saved Games
-     * @returns Array.&lt;Game>
+     * @returns {Game[]}
      */
     selectAll() {
         const sql = "SELECT games.id, games.name, games.coverImage, platforms.name AS platformName FROM games JOIN platforms ON platform_id=platforms.id";
@@ -96,10 +120,10 @@ class GameRepository {
     }
 
     /**
-     * 
-     * @param {String} platformName 
-     * @param {String} username 
-     * @returns Array
+     * Get all Games from a User for a specific platform
+     * @param {string} platformName 
+     * @param {string} username 
+     * @returns string sql response of the command
      */
     selectAllGamesWithPlatformByUser(platformName, username) {
         const sql = "SELECT games.id, games.name AS game, games.coverImage, platforms.name AS platformName, gameUserMapping.username FROM games JOIN platforms ON platform_id=platforms.id JOIN gameUserMapping ON gameUserMapping.game_id=games.id WHERE gameUserMapping.username=? AND platforms.name=?";
@@ -130,10 +154,12 @@ class GameRepository {
         return game;
     }
 
+    /**
+     * Get all Usernames that have this game
+     * @param {string} gameId 
+     * @returns {string[]}
+     */
     selectUsersOfGame(gameId) {
-        // const sql = "SELECT userPlatformMapping.username, userPlatformMapping.usernameOfPlatform AS usernameOfPlatform FROM userPlatformMapping JOIN games ON games.platform_id=userPlatformMapping.platformId JOIN gameUsermapping ON gameUserMapping.username = userPlatformMapping.username WHERE game_id=?";
-        // return this.db.all(sql, [gameId]);
-
         const platformId = this.db.get("SELECT platform_id FROM games WHERE id = ?", [gameId]);
         const playersOwning = this.db.all("SELECT username FROM gameUserMapping WHERE game_id = ?", [gameId]);
         const playernames = [];
@@ -145,8 +171,8 @@ class GameRepository {
 
     /**
      * Get all Games from a User
-     * @param {String} username 
-     * @returns Array.&lt;Game>
+     * @param {string} username 
+     * @returns {Game[]}
      */
     selectAllGamesFromUser(username) {
         const sql = "SELECT games.id, platforms.name AS platformName, games.name, games.coverImage, users.username AS playerName " +
@@ -185,13 +211,13 @@ module.exports = GameRepository;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-This%2520module%2520exports%2520controller%2520functionality%2520for%2520the%2520index%2520file%2520of%2520the%2520webserver.html">This module exports controller functionality for the index file of the webserver</a></li><li><a href="module-users.html">users</a></li><li><a href="module-usersController.html">usersController</a></li></ul><h3>Classes</h3><ul><li><a href="AppDB.html">AppDB</a></li><li><a href="GameCreate.html">GameCreate</a></li><li><a href="Token.html">Token</a></li><li><a href="TokenRepository.html">TokenRepository</a></li><li><a href="User.html">User</a></li></ul><h3>Global</h3><ul><li><a href="global.html#isLoggedIn">isLoggedIn</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-gaming.html">gaming</a></li><li><a href="module-gamingController.html">gamingController</a></li><li><a href="module-index.html">index</a></li><li><a href="module-indexController.html">indexController</a></li><li><a href="module-middleware.html">middleware</a></li><li><a href="module-users.html">users</a></li><li><a href="module-usersController.html">usersController</a></li></ul><h3>Classes</h3><ul><li><a href="AppDB.html">AppDB</a></li><li><a href="Game.html">Game</a></li><li><a href="GameCreate.html">GameCreate</a></li><li><a href="GameRepository.html">GameRepository</a></li><li><a href="Platform.html">Platform</a></li><li><a href="PlatformRepository.html">PlatformRepository</a></li><li><a href="Token.html">Token</a></li><li><a href="TokenRepository.html">TokenRepository</a></li><li><a href="User.html">User</a></li><li><a href="UserPlatform.html">UserPlatform</a></li><li><a href="UserPlatformRepository.html">UserPlatformRepository</a></li><li><a href="UserRepository.html">UserRepository</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Sun Mar 13 2022 14:11:34 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Sun Mar 13 2022 16:46:15 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: User</title>
+    <title>JSDoc: Class: Game</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: User</h1>
+    <h1 class="page-title">Class: Game</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>User<span class="signature">(username, password, email, os)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Game<span class="signature">(id, platformName, name, coverImage, playerNames)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Class representing a user</div>
+            <div class="class-description">Game with all Informations</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="User"><span class="type-signature"></span>new User<span class="signature">(username, password, email, os)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Game"><span class="type-signature"></span>new Game<span class="signature">(id, platformName, name, coverImage, playerNames)</span><span class="type-signature"></span></h4>
     
 
     
@@ -85,7 +85,7 @@
 
         <tr>
             
-                <td class="name"><code>username</code></td>
+                <td class="name"><code>id</code></td>
             
 
             <td class="type">
@@ -101,14 +101,14 @@
 
             
 
-            <td class="description last">name of the user</td>
+            <td class="description last">ID of the game</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>password</code></td>
+                <td class="name"><code>platformName</code></td>
             
 
             <td class="type">
@@ -124,14 +124,14 @@
 
             
 
-            <td class="description last">password of the user hashed</td>
+            <td class="description last">Name of the platform</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>email</code></td>
+                <td class="name"><code>name</code></td>
             
 
             <td class="type">
@@ -147,20 +147,20 @@
 
             
 
-            <td class="description last">mail of the user</td>
+            <td class="description last">name of the game</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>os</code></td>
+                <td class="name"><code>coverImage</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">path</span>
 
 
             
@@ -170,7 +170,30 @@
 
             
 
-            <td class="description last">operating system of the user</td>
+            <td class="description last">path to the image on the server</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>playerNames</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">all names of players that own the game</td>
         </tr>
 
     
@@ -211,7 +234,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="database_Models_User_User.js.html">database/Models/User/User.js</a>, <a href="database_Models_User_User.js.html#line4">line 4</a>
+        <a href="database_Models_Game_Game.js.html">database/Models/Game/Game.js</a>, <a href="database_Models_Game_Game.js.html#line4">line 4</a>
     </li></ul></dd>
     
 

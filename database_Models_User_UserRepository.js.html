@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: database/Models/User/User.js</title>
+    <title>JSDoc: Source: database/Models/User/UserRepository.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: database/Models/User/User.js</h1>
+    <h1 class="page-title">Source: database/Models/User/UserRepository.js</h1>
 
     
 
@@ -26,27 +26,61 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Class representing a user
+            <pre class="prettyprint source linenums"><code>const User = require('./User.js');
+const bcrypt = require('bcryptjs');
+
+/**
+ * DB Connection to the users Table
  */
-class User {
+class UserRepository {
     /**
      * @constructor
-     * @param {string} username name of the user
-     * @param {string} password password of the user hashed
-     * @param {string} email mail of the user
-     * @param {string} os operating system of the user
+     * @param {Database} db sqlite connection
      */
-    constructor(username, password, email, os) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.os = os;
-        this.registered = Date.now();
+    constructor(db) {
+        this.db = db;
+    }
+
+    /**
+     * Create the Table users if not exist
+     * @returns string sql response of the command
+     */
+    createTable() {
+        const sql = "CREATE TABLE IF NOT EXISTS users(username text PRIMARY KEY, password text, registered text, email text, operating_system text)";
+        return this.db.run(sql);
+    }
+
+    /**
+     * Add the user demo with the password "password" to the DB
+     */
+    initialSetup() {
+        let salt = bcrypt.genSaltSync(10);
+        let hashedPw = bcrypt.hashSync("password", salt);
+        this.insert(new User("demo", hashedPw, "d@d.d", "Windows"));
+    }
+
+    /**
+     * Add a new user to the DB
+     * @param {User} user user to add
+     * @returns string sql response of the command
+     */
+    insert(user) {
+        const sql = "INSERT INTO users(username, password, registered, email, operating_system) VALUES (?, ?, ?, ?, ?)";
+        return this.db.run(sql, [user.username, user.password, user.registered, user.email, user.os]);
+    }
+
+    /**
+     * Get a user by his username
+     * @param {string} username username of the user
+     * @returns string sql response of the command
+     */
+    selectByUsername(username) {
+        const sql = "SELECT * FROM users WHERE username = ?";
+        return this.db.get(sql, [username]);
     }
 }
 
-module.exports = User;</code></pre>
+module.exports = UserRepository;</code></pre>
         </article>
     </section>
 

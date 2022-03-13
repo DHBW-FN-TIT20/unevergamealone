@@ -1,12 +1,22 @@
+/**
+ * Middleware
+ * @module middleware
+ */
 const jwt = require("jsonwebtoken");
 const app = require('../app')
 const Token = require('../database/Models/JWT/Token');
 
-
+/**
+ * Check if the values from the registration are valid
+ * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+ * @param {Response} res The res object represents the HTTP response that an Express app sends when it gets an HTTP request.
+ * @param {*} next Control to the next handler
+ * @returns str JSON with more infos
+ */
 const validateRegister = (req, res, next) => {
     // username min length 4
     if (!req.body.username || req.body.username.length < 4) {
-        return res.status(400).send({
+        return res.status(400).json({
             msg: 'Bitte geben Sie einen Benutzernamen mit mindestens 4 Zeichen ein.'
         })
     }
@@ -15,7 +25,7 @@ const validateRegister = (req, res, next) => {
     //Muss eins folgender Sonderzeichen enthalten !#,+-?_
     //Muss eine Zahl enthalten
     if (req.body.password.length < 8) {
-        return res.status(400).send({
+        return res.status(400).json({
             msg: 'Das Passwort muss mindestens 8 Zeichen lang sein.'
         })
     }
@@ -24,7 +34,7 @@ const validateRegister = (req, res, next) => {
     if (!req.body.password_repeat ||
         req.body.password != req.body.password_repeat
     ) {
-        return res.status(400).send({
+        return res.status(400).json({
             msg: 'Die Passwörter stimmen nicht überein.'
         });
     }
@@ -37,9 +47,10 @@ const validateRegister = (req, res, next) => {
  * Redirect to the sign-in if the Token is invalid
  * or if you call the sign-in or sign-up you get redirected
  * to the /gaming
- * @param {Request} req 
- * @param {Response} res 
- * @param {callback} next 
+ * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+ * @param {Response} res The res object represents the HTTP response that an Express app sends when it gets an HTTP request.
+ * @param {*} next Control to the next handler
+ * @returns str JSON with more infos
  */
 let isLoggedIn = (req, res, next) => {
     const sign_in_or_sign_up = req.path.includes("sign-in") || req.path.includes("sign-up");

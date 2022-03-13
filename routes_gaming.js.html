@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: routes/users.js</title>
+    <title>JSDoc: Source: routes/gaming.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: routes/users.js</h1>
+    <h1 class="page-title">Source: routes/gaming.js</h1>
 
     
 
@@ -27,48 +27,86 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Router and controller for user operations.
- * @module users
+ * Routers of the gaming paths
+ * @module gaming
  */
+
 let express = require('express');
 let router = express.Router();
-let userController = require("../controllers/usersController")
 const app = require('../app')
+const { v4: uuidv4 } = require('uuid');
+const fs = require("fs");
+const multer = require('multer')
 const userValidater = require('../handlers/middleware.js');
-const Token = require('../database/Models/JWT/Token');
+const Game = require('../database/Models/Game/Game');
+const { response } = require('../app');
+const path = require('path');
+const GameCreate = require('../database/Models/Game/GameCreate');
+const gamingController = require('../controllers/gamingController');
 
 /**
- * GET of /users/logout
+ * Config of the Fileserver storage of multer
  */
-router.get("/logout", userValidater.isLoggedIn, (req, res, next) => {
-    const user_token = req.cookies['jwt'];
-    const exp = req.userData.exp;
-    const token = new Token(user_token, exp);
-
-    app.tokenRepo.insert(token);
-
-    return res.redirect(302, '/');
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        const upload_path = path.join(__dirname, '..', 'public', `images`, `upload`);
+        if (!fs.existsSync(upload_path)) {
+            fs.mkdirSync(upload_path);
+        }
+        cb(null, upload_path);
+    },
+    filename: function(req, file, cb) {
+        const filename = `${file.originalname}_${uuidv4()}.${file.mimetype.split("/")[1]}`;
+        cb(null, filename)
+    }
 })
 
 /**
- * GET of /users/sign-up
+ * Store the uploaded images in the Server Filesystem
  */
-router.get('/sign-up', userValidater.isLoggedIn, userController.getSignUp);
+const upload = multer({ storage: storage });
 
 /**
- * GET of /users/sign-in
+ * GET of /gaming/
  */
-router.get('/sign-in', userValidater.isLoggedIn, userController.getSignIn);
+router.get('/', userValidater.isLoggedIn, gamingController.showPlatforms);
 
 /**
- * POST of /users/sign-up
+ * GET of /gaming/show/:games
  */
-router.post('/sign-up', /*userValidater.validateRegister,*/ userController.signUp);
+router.get('/show/:games', userValidater.isLoggedIn, gamingController.showGames);
 
 /**
- * POST of /users/sign-in
+ * GET of /gaming/manage
  */
-router.post('/sign-in', userController.signIn);
+router.get('/manage', userValidater.isLoggedIn, gamingController.showManageGames);
+
+
+/**
+ * GET of /gaming/new
+ */
+router.get('/new', userValidater.isLoggedIn, gamingController.showNewGames);
+
+/**
+ * GET of /gaming/game/:gamename
+ */
+router.get('/game/:gamename', userValidater.isLoggedIn, gamingController.getGameByName);
+
+/**
+ * POST of /gaming/manage
+ */
+router.post('/manage', userValidater.isLoggedIn, gamingController.addGameToUser);
+
+/**
+ * POST of /gaming/new
+ */
+router.post('/new', upload.single('cover'), userValidater.isLoggedIn, gamingController.insertNewGame);
+
+/**
+ * POST of /gaming/delete
+ */
+router.post('/delete', userValidater.isLoggedIn, gamingController.deleteGame);
+
 
 module.exports = router;</code></pre>
         </article>
