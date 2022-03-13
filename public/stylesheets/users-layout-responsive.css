@@ -3,7 +3,7 @@
 @media screen and (min-width: 600px) {
     .form-container {
         grid-template-columns: auto 400px auto;
-        min-height: 700px;
+        min-height: 850px;
     }
 }
 
@@ -13,7 +13,7 @@
 @media screen and (max-width: 600px) {
     .form-container {
         grid-template-columns: auto 300px auto;
-        min-height: 620px;
+        min-height: 800px;
     }
     .form-field {
         max-width: 400px;
