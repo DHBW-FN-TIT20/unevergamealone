@@ -3,7 +3,7 @@
 </p>
 
 # UNGA - U Never Game Alone 
-![Website](https://img.shields.io/website?down_message=Offline&label=Demo&up_message=Online&url=https%3A%2F%2Funevergamealone.ddnss.de) ![Website](https://img.shields.io/website?down_message=Offline&label=Docs&up_message=Online&url=https%3A%2F%2Fdhbw-fn-tit20.github.io%2Funevergamealone%2F)
+[![Website](https://img.shields.io/website?down_message=Offline&label=Demo&up_message=Online&url=https%3A%2F%2Funevergamealone.ddnss.de) ](https://unevergamealone.ddnss.de) [![Website](https://img.shields.io/website?down_message=Offline&label=Docs&up_message=Online&url=https%3A%2F%2Fdhbw-fn-tit20.github.io%2Funevergamealone%2F)](https://dhbw-fn-tit20.github.io/unevergamealone/)
 
 This is a student project of the DHBW RV Campus FN. The purpose of this webapp is that gamers can find other gamers playing the same game. Gamers have to register and afterwards they can add existing games to their profille or create new games.
 
