@@ -36,7 +36,8 @@ input[type=text] {
     height: 36px;
     border: #36495b solid 1px;
     margin-bottom: 2%;
-    padding: 1%;
+    padding-left: 1%;
+    padding-right: 1%;
 }
 
 input[type=email] {
@@ -56,7 +57,7 @@ input[type=password] {
 }
 
 input[type=file] {
-    border: #36495b solid 1px;
+    border: #babebf solid 1px;
     margin-bottom: 1%;
 }
 
@@ -126,13 +127,15 @@ input:focus {
 }
 
 .background-windows {
-    background: url("/images/windows.jpg");
+    /* background: url("/images/windows.jpg");
     background-size: auto;
-    background-repeat: repeat;
+    background-repeat: repeat; */
+    background: #00A7F8;
 }
 
 .background-ubuntu {
-    background: url("/images/ubuntu.jpg");
+    /* background: url("/images/ubuntu.jpg");
     background-size: 100%;
-    background-repeat: repeat;
+    background-repeat: repeat; */
+    background: #902D2D;
 }

@@ -18,6 +18,9 @@
     .grid-container {
         display: grid;
     }
+    .icon p {
+        color: white;
+    }
     .background {
         object-fit: contain;
         position: absolute;
@@ -92,6 +95,7 @@
     }
     .icon p {
         font-size: 2em;
+        color: black;
     }
     .icon img {
         height: 40px;

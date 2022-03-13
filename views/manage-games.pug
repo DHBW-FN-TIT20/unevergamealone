@@ -10,12 +10,11 @@ block content
             span=title          
           a(href="/gaming") X
         div.game-container
-          nav.navigation-bar                
-            span
-              input(type="text", name="search", id="searching" placeholder="Spiel suchen")
-              a(href="/gaming/new")
-                p Spiel nicht gefunden?
+          nav.navigation-bar     
+            input(type="text", name="search", id="searching" placeholder="Spiel suchen")
+            a.manage-game-btn#game-not-found(href="/gaming/new") Spiel nicht gefunden?
           form(onsubmit="return save_games(this)")
+            hr
             input#submit-manage-game(type='submit', value='Speichern')
             each platform in platforms
               hr
@@ -39,7 +38,7 @@ block content
   if os == 'Windows'
     main.grid-container-games.background-windows
       +application
-  else if os == "Linux"
+  else if os == 'Linux'
     main.grid-container-games.background-ubuntu
       +application
   else

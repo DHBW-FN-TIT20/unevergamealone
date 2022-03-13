@@ -7,7 +7,6 @@
     grid-column-end: 1;
     grid-row-start: 1;
     grid-row-end: 1;
-    padding-left: 10px;
     padding-right: 10px;
     align-items: center;
 }
@@ -21,7 +20,7 @@
 .title-bar span {
     color: white;
     font-size: 1em;
-    padding-left: 2px;
+    padding-left: 10px;
     vertical-align: middle;
 }
 
@@ -67,10 +66,6 @@
     height: fit-content;
     min-height: 100%;
     background-color: #edf1f2;
-}
-
-#img-upload {
-    width: 100%;
 }
 
 .flex-container {
