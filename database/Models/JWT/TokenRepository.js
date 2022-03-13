@@ -6,12 +6,16 @@ const Token = require('./Token.js');
 class TokenRepository {
     /**
      * @constructor
-     * @param {*} db 
+     * @param {Database} db sqlite connection
      */
     constructor(db) {
         this.db = db;
     }
 
+    /**
+     * Create the Table invalidToken if not exist
+     * @returns string sql response of the command
+     */
     createTable() {
         const sql = "CREATE TABLE IF NOT EXISTS invalidToken(token text PRIMARY KEY, expiration TIMESTAMP NOT NULL DEFAULT (strftime('%s', 'now')))";
         return this.db.run(sql);

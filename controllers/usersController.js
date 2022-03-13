@@ -1,4 +1,5 @@
 /**
+ * Controller for all user functions
  * @module usersController
  */
 const app = require('../app')
@@ -10,23 +11,32 @@ const UserPlatform = require('../database/Models/UserPlatform/UserPlatform');
 module.exports = {
     /**
      * Renders views/sign-in.pug
-     * @param {*} req the request
-     * @param {*} res the response
-     * @param {*} next next function
+     * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+     * @param {Response} res The res object represents the HTTP response that an Express app sends when it gets an HTTP request.
+     * @param {*} next Control to the next handler
+     * @returns str rendered HTML string
      */
     getSignIn: function (req, res, next) {
         res.render('sign-in', { title: 'Einloggen' });
     },
     /**
      * Gets all platforms and renders views/sign-up.pug
-     * @param {*} req the request
-     * @param {*} res the response
-     * @param {*} next next function
+     * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+     * @param {Response} res The res object represents the HTTP response that an Express app sends when it gets an HTTP request.
+     * @param {*} next Control to the next handler
+     * @returns str rendered HTML string
      */
     getSignUp: function (req, res, next) {
         let platforms = app.platformRepo.selectAll();
         res.render('sign-up', { platforms: platforms });
     },
+    /**
+     * POST-Request create a new user
+     * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+     * @param {Response} res The res object represents the HTTP response that an Express app sends when it gets an HTTP request.
+     * @param {*} next Control to the next handler
+     * @returns (str|Redirect) JSON with more infos or Redirect to /gaming/ if already logged in
+     */
     signUp: function (req, res, next) {
         let response;
         let salt = bcrypt.genSaltSync(10);
@@ -73,6 +83,13 @@ module.exports = {
             return response;
         }
     },
+    /**
+     * POST-Request to sign in
+     * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+     * @param {Response} res The res object represents the HTTP response that an Express app sends when it gets an HTTP request.
+     * @param {*} next Control to the next handler
+     * @returns (str|Redirect) JSON with more infos or Redirect to /gaming/ if already logged in
+     */
     signIn: function (req, res, next) {
         const username = req.body.username;
         const password = req.body.password;
