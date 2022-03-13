@@ -8,14 +8,16 @@
 This is a student project of the DHBW RV Campus FN. The purpose of this webapp is that gamers can find other gamers playing the same game. Gamers have to register and afterwards they can add existing games to their profille or create new games.
 
 # Getting started
-- [Manually](#Manually)
-    - [Clone the repo](#clone-the-repo)
-    - [Dependencies](#dependencies)
-    - [Configuration](#configuration)
-    - [Start UNGA](#start-unga)
+- [UNGA - U Never Game Alone](#unga---u-never-game-alone)
+- [Getting started](#getting-started)
+- [Manually](#manually)
+  - [Clone the repo:](#clone-the-repo)
+  - [Dependencies:](#dependencies)
+  - [Configuration](#configuration)
+  - [Start UNGA](#start-unga)
 - [Docker](#docker)
-    - [Build the Container](#build-the-container)
-    - [Run the Container](#run-the-container)
+  - [Build the Container](#build-the-container)
+  - [Run the Container](#run-the-container)
 # Manually
 Here you can see how to run the application manually.<br />
 Be sure you have **Node.js v16.x:** and **npm** installed! See [README.md](https://github.com/nodesource/distributions/blob/master/README.md)
@@ -37,7 +39,7 @@ npm install -g npm@latest
 npm install --production
 
 # Install also developer dependencies
-npm install --dev
+npm install --include=dev
 ```
 
 If you get an error from `node-gyp` be sure to have installed a compatible version of Python, one of: v3.7, v3.8, v3.9, or v3.10. See more at [node-gyp](https://github.com/nodejs/node-gyp#configuring-python-dependency)<br/> To set the python path do:

@@ -23,7 +23,7 @@ block content
                 each game in selected_games
                   if game.platformName === platform.name
                     div.manage-game-panel(name=game.name)                       
-                      input(type='checkbox' id="checkbox"+game.id name=game.id value=game.id checked)
+                      input.owned-checkbox(type='checkbox' id="checkbox"+game.id name=game.id value=game.id checked)
                       p(for=game.id, data-gameId=game.id, onclick="toggle_game(this)") #{game.name}             
                       img.game-panel-img(src=game.coverImage, alt=game.name, data-gameId=game.id, onclick="toggle_game(this)")
                       input(type="button", name="delete"+game.id, value="Spiel löschen", data-gameId=game.id, onclick="delete_game(this)")      
@@ -31,7 +31,7 @@ block content
                 each game in unselected_games
                   if game.platformName === platform.name
                     div.manage-game-panel(name=game.name)                        
-                      input(type='checkbox' id="checkbox"+game.id name=game.id value=game.id)
+                      input.owned-checkbox(type='checkbox' id="checkbox"+game.id name=game.id value=game.id)
                       p(for=game.id, data-gameId=game.id, onclick="toggle_game(this)") #{game.name}
                       img.game-panel-img(src=game.coverImage, alt=game.name, data-gameId=game.id, onclick="toggle_game(this)")
                       input(type="button", name="delete"+game.id, value="Spiel löschen", data-gameId=game.id, onclick="delete_game(this)") 

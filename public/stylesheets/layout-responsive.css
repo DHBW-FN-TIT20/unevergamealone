@@ -1,33 +1,94 @@
-@media screen and (min-width: 600px) {
-    .background {
-        content: url("/images/background_windows.png");
-    }
-    #logo {
-        height: 10em;
-        width: auto;
-        display: block;
-        margin-top: 1em;
-        margin-bottom: 1em;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .game-panel {
-        flex-basis: 10%;
-        padding: 0.5%;
-        border: black 1px solid;
-        height: 200px;
-    }
+* {
+    margin: 0;
+    padding: 0;
 }
 
-@media screen and (max-width: 600px) {
-    #logo {
-        width: 100px;
-        height: 100px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .background {
-        content: url("/images/isolated-phone-in-grey-background.jpg");
-    }
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+}
+
+main {
+    margin: 1%;
+    min-height: 100%;
+    min-width: 300px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+input[type=text] {
+    width: 100%;
+    height: 36px;
+    margin-bottom: 2%;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+input[type=email] {
+    width: 100%;
+    height: 36px;
+    margin-bottom: 2%;
+    padding: 1%;
+}
+
+input[type=password] {
+    width: 100%;
+    height: 36px;
+    margin-bottom: 2%;
+    padding: 1%;
+}
+
+input[type=file] {
+    margin-bottom: 1%;
+}
+
+input[type=button] {
+    width: 100%;
+    height: 36px;
+    margin-bottom: 3%;
+}
+
+.password-submit {
+    display: flex;
+}
+
+.password-submit input[type=submit] {
+    display: block;
+    height: 36px;
+    width: 36px;
+}
+
+.form-checkbox {
+    display: grid;
+    grid-template-columns: 50% 20% 30%;
+}
+
+.form-checkbox label {
+    grid-column-start: 1;
+    grid-column-end: 1;
+}
+
+.form-checkbox input[type=checkbox] {
+    grid-column-start: 2;
+    grid-column-end: 2;
+}
+
+.form-checkbox input[type=text] {
+    grid-column-start: 3;
+    grid-column-end: 3;
+}
+
+.visible {
+    display: block;
+}
+
+.invisible {
+    display: none;
 }

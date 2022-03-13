@@ -1,3 +1,67 @@
+.header-image {
+    margin: 20px;
+    margin-left: 75px;
+    margin-right: 75px;
+    width: 150px;
+}
+
+.grid-container {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    grid-template-rows: 6% 72% 22%;
+}
+
+.icon {
+    display: block;
+    height: 100px;
+    width: auto;
+}
+
+.aspect-ratio-box {
+    margin: 0;
+}
+
+.flex-container-platforms {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 2;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0px;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 70px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    display: block;
+}
+
+.btn-sidenav {
+    z-index: 10000;
+    position: fixed;
+    top: 10px;
+    width: 56px;
+    height: 56px;
+    padding: 8px 8px;
+}
+
+
 /*Screen width > 600px*/
 
 @media screen and (min-width: 600px) {
@@ -24,7 +88,6 @@
     .background {
         object-fit: contain;
         position: absolute;
-        /* max-height: 100%; */
         z-index: -10000;
         top: 0;
     }
@@ -37,6 +100,9 @@
         left: 97px;
     }
 }
+
+
+/*Screen width > 1000px*/
 
 @media screen and (min-width: 1000px) {
     .grid-container {
@@ -53,6 +119,9 @@
         left: 10%;
     }
 }
+
+
+/*Screen width > 600px and < 1000px*/
 
 @media screen and (min-width: 600px) and (max-width: 1000px) {
     .grid-container {

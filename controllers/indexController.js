@@ -22,6 +22,6 @@ module.exports = {
      */
     showImpressum: function(req, res, next) {
         // TODO: change from absolute path to relative path and fix 'TypeError: path must be absolute or specify root to res.sendFile'
-        res.sendFile("/home/floqueboque/Projects/Programming/WebEngineering/unevergamealone/public/impressum.html");
+        res.sendFile("impressum.html", { root: __dirname + "/../public/" });
     }
 };

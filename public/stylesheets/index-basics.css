@@ -1,19 +1,16 @@
 .gradient {
     background: rgb(67, 159, 91);
-    background: linear-gradient(90deg, rgba(67, 159, 91, 1) 0%, rgba(141, 194, 155, 1) 80%, rgba(39, 61, 64, 1) 100%);
+    background: linear-gradient(90deg, rgb(67, 159, 91) 0%, rgb(141, 194, 155) 80%, rgb(39, 61, 64) 100%);
 }
 
 .btn-std {
     background-color: transparent;
     border-radius: 28px;
     border: 1px solid #273d40;
-    display: inline-block;
     cursor: pointer;
     color: #273d40;
     font-family: Arial;
     font-size: 17px;
-    margin-top: 30px;
-    padding: 16px 31px;
     text-decoration: none;
     text-shadow: 0px 1px 1px #d1d1d1;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, .25);
@@ -29,21 +26,13 @@
 }
 
 #btt-btn {
-    z-index: 10000;
-    display: none;
-    position: fixed;
-    bottom: 2%;
-    right: 3%;
     line-height: 40px;
     font-size: 1em;
-    width: 56px;
-    height: 56px;
     border: none;
     outline: none;
     background: #273d40;
     color: #F7F3F6;
     cursor: pointer;
-    padding: 8px 8px;
     border-radius: 15px;
     text-align: center;
     border: 1px solid #273d40;
@@ -54,19 +43,6 @@
     color: #273d40;
 }
 
-#index-main {
-    min-height: fit-content;
-}
-
-#heading {
-    height: 100%;
-    width: 100%;
-    margin-bottom: 2%;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
 #slogan {
     color: rgba(39, 61, 64, 1);
     font-size: 3em;
@@ -75,7 +51,6 @@
 #sub-slogan {
     color: rgba(39, 61, 64, 1);
     font-size: 1em;
-    margin-top: 5px;
 }
 
 #navbar-fixed {
@@ -83,51 +58,8 @@
     border: 1px solid rgba(39, 61, 64, 1);
     background-color: rgba(39, 61, 64, 1);
     border-radius: 25px;
-    box-sizing: content-box;
 }
 
-#navbar-hamburger {
-    box-sizing: content-box;
-}
-
-#logo {
-    height: 200px;
-    margin: 50px;
-}
-
-#getting-started {
-    height: 100%;
-    width: 100%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 200px 200px;
-}
-
-#register {
-    grid-column: 1;
-    grid-row: 1
-}
-
-#register-img {
-    grid-column: 2;
-    grid-row: 1;
-}
-
-#add-game {
-    grid-column: 2;
-    grid-row: 2;
-}
-
-#add-game-img {
-    grid-column: 1;
-    grid-row: 2;
-}
-
-#about-us {
-    height: 50%;
-    width: 100%;
-    margin-top: 2%;
-    margin-bottom: 1%;
+.links-container a {
+    text-decoration: none;
 }
