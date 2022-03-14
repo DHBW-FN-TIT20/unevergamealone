@@ -69,11 +69,21 @@ footer {
 #heading-impressum {
     height: 100%;
     width: 100%;
-    margin-bottom: 2%;
     display: block;
     text-align: center;
     min-height: 400px;
     padding-top: 100px;
+}
+
+#heading-error {
+    height: 100%;
+    width: 100%;
+    display: block;
+    text-align: left;
+    min-height: 500px;
+    padding: 20vh;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 #sub-slogan {
