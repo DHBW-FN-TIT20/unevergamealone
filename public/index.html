@@ -4,9 +4,12 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name="description" content="Webanwendung, die es Gamern erlaubt andere Gamer zu einem bestimmten Spiel zu finden.">
+    <meta name="keywords" content="Gamer, Gaming, Games, Never, Alone, Steam, Origin, UbisoftConnect, EpicGames, UNGA">
+    <meta name="author" content="Florian Glaser, David Felder, Florian Herkommer">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>UNGA</title>
     <link rel='shortcut icon' type='image/x-icon' href='/images/favicon.ico'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel='stylesheet' type='text/css' media='screen' href='/stylesheets/basics.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='/stylesheets/layout-responsive.css'>
@@ -26,7 +29,7 @@
     </header>
     <header id="navbar-hamburger">
         <div class="topnav">
-            <a id="hamburger-menu-btn" href="javascript:void(0);" class="icon" type="button" onclick="toggleHamburgerMenu()">☰</a>
+            <button id="hamburger-menu-btn" class="icon" onclick="toggleHamburgerMenu()">☰</button>
             <div id="hamburger-links">
                 <a href="#getting-started" id="link-to-getting-startet">Getting Started</a>
                 <a href="/users/sign-in" id="link-to-login">Login</a>
@@ -37,11 +40,11 @@
     <button onclick="backToTop()" id="btt-btn" title="Back to top">▲</button>
     <main id="index-main">
         <section id="heading" class="gradient border-radius">
-            <img id="logo" src="/images/UNeverGameAloneLogo.png">
+            <img id="logo" src="/images/UNeverGameAloneLogo.png" alt="Logo">
             <div>
                 <h1 id="slogan">You Never<br>Game Alone</h1>
                 <h3 id="sub-slogan">Jetzt Mitspieler finden!</h3>
-                <a class="btn-std" type="button" href="/users/sign-up">Hier registrieren</a>
+                <a class="btn-std" href="/users/sign-up">Hier registrieren</a>
             </div>
         </section>
         <section id="getting-started">
@@ -86,12 +89,9 @@
         </section>
         <footer id="about-us" class="border-radius gradient flex-container">
             <address class="flex-item">
-                    Autoren: <br>
-                    <br>
-                    David Felder <br>
-                    Florian Glaser <br>
-                    Florian Herkommer
-                </address>
+                Autoren: <br>
+                <br> David Felder <br> Florian Glaser <br> Florian Herkommer
+            </address>
             <div class="flex-item links-container">
                 <a class="impressum" href="/Impressum">
                     <img src="/images/fingerabdruck.png" alt="fingerabdruck" width="24" height="24" class="me-2"> Impressum

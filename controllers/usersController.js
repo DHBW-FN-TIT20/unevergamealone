@@ -16,7 +16,7 @@ module.exports = {
      * @param {*} next Control to the next handler
      * @returns str rendered HTML string
      */
-    getSignIn: function (req, res, next) {
+    getSignIn: function(req, res, next) {
         res.render('sign-in', { title: 'Einloggen' });
     },
     /**
@@ -26,9 +26,9 @@ module.exports = {
      * @param {*} next Control to the next handler
      * @returns str rendered HTML string
      */
-    getSignUp: function (req, res, next) {
+    getSignUp: function(req, res, next) {
         let platforms = app.platformRepo.selectAll();
-        res.render('sign-up', { platforms: platforms });
+        res.render('sign-up', { platforms: platforms, title: "Registrieren" });
     },
     /**
      * POST-Request create a new user
@@ -37,7 +37,7 @@ module.exports = {
      * @param {*} next Control to the next handler
      * @returns (str|Redirect) JSON with more infos or Redirect to /gaming/ if already logged in
      */
-    signUp: function (req, res, next) {
+    signUp: function(req, res, next) {
         let response;
         let salt = bcrypt.genSaltSync(10);
         let hashedPw = bcrypt.hashSync(req.body.password, salt);
@@ -90,7 +90,7 @@ module.exports = {
      * @param {*} next Control to the next handler
      * @returns (str|Redirect) JSON with more infos or Redirect to /gaming/ if already logged in
      */
-    signIn: function (req, res, next) {
+    signIn: function(req, res, next) {
         const username = req.body.username;
         const password = req.body.password;
         let user = app.userRepo.selectByUsername(username);
@@ -101,16 +101,15 @@ module.exports = {
         }
         if (bcrypt.compareSync(password, user.password)) {
             const token = jwt.sign({
-                username: user.username
-            },
+                    username: user.username
+                },
                 process.env.JWT_TOKEN, {
-                expiresIn: '24h'
-            }
+                    expiresIn: '24h'
+                }
             );
             res.cookie("jwt", token, { httpOnly: true });
             return res.redirect(302, '/gaming/');
-        }
-        else {
+        } else {
             return res.status(401).json({
                 msg: "Username oder Passwort ist falsch."
             });
