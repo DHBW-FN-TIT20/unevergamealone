@@ -1,3 +1,12 @@
+/**
+ * @module Client_Nav
+ */
+
+/**
+ * Make the links from the ham
+ * @param {object} form 
+ * @returns {Boolean} False to not reload the page
+ */
 function toggleHamburgerMenu() {
     var x = document.getElementById("hamburger-links");
     if (x.style.display === "block") {

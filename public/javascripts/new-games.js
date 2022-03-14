@@ -1,3 +1,7 @@
+/**
+ * @module Client_NewGame
+ */
+
 const form = document.querySelector("form");
 const submit_btn = document.querySelector('input[type=submit]');
 const image = document.getElementById('cropper-image');
@@ -14,6 +18,10 @@ gameName_txt.addEventListener("input", check_values);
 
 
 /* ####### Functions ####### */
+/**
+ * Binding for the input search.
+ * Disable or enable the submit btn depending on check_game_name()
+ */
 function check_values() {
     const valid = check_game_name();
     if (valid) {
@@ -44,6 +52,9 @@ function check_game_name() {
     return valid;
 }
 
+/**
+ * Changes the image in the cropper field when a new image is uploaded
+ */
 function changeCover() {
     const file = document.querySelector('input[type=file]').files[0];
     const reader = new FileReader();
@@ -58,7 +69,11 @@ function changeCover() {
     }
 }
 
-
+/**
+ * Creates a new game on the DB if possible
+ * @param form 
+ * @returns (boolean|Redirect) False if some error or Redirect to /gaming
+ */
 function create_game(form) {
     const gameName = gameName_txt.value.trim();
 

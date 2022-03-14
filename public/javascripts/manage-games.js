@@ -1,3 +1,7 @@
+/**
+ * @module Client_ManageGames
+ */
+
 const checkboxes = document.querySelectorAll('input[type=checkbox]');
 const submit_btn = document.querySelector('input[type=submit]');
 const search = document.getElementById("searching");
@@ -74,6 +78,11 @@ function get_list_from_games(games) {
     return list;
 }
 
+/**
+ * Do the delete Post request to the server 
+ * @param {Button} btn The Button that was pressed
+ * @returns {Boolean} False to not reload the page
+ */
 function delete_game(btn) {
 
     if (confirm("Wirklich das Spiel global loeschen?!") != true) {
@@ -108,7 +117,10 @@ function delete_game(btn) {
     return false;
 }
 
-
+/**
+ * Toogle the Checkbox if you click on the image of the game
+ * @param {Button} btn Button to toggle
+ */
 function toggle_game(btn) {
     const game_id = btn.getAttribute("data-gameId");
     const checkbox = document.getElementById("checkbox" + game_id);

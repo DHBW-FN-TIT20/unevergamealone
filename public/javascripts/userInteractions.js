@@ -1,5 +1,12 @@
-const checkboxes = document.querySelectorAll('.form-check input[type=checkbox]');
+/**
+ * @module Client_SignUp
+ */
 
+/** 
+ * @constant checkboxes
+ * @type {array}
+ */
+const checkboxes = document.querySelectorAll('.form-check input[type=checkbox]');
 checkboxes.forEach(checkbox => {
     checkbox.addEventListener('change', function() {
         if (this.checked) {
@@ -19,6 +26,11 @@ checkboxes.forEach(checkbox => {
     })
 });
 
+/**
+ * Post Request to sign up a user (uses validateRegister)
+ * @param {object} form element
+ * @returns {boolean}
+ */
 function sign_up(form) {
     const formData = new FormData(form);
     let resultMessage = validateRegister(formData);
@@ -52,6 +64,11 @@ function sign_up(form) {
     return false;
 }
 
+/**
+ * Validates formData
+ * @param {object} formData data that contain all form data
+ * @returns {string} msg
+ */
 function validateRegister(formData) {
     // username min length 4
     if (!formData.get("username") || formData.get("username").length < 4) {
