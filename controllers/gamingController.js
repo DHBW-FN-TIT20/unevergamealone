@@ -6,6 +6,7 @@
 const app = require('../app')
 const Game = require('../database/Models/Game/Game');
 const GameCreate = require('../database/Models/Game/GameCreate');
+const Platform = require('../database/Models/Platform/Platform');
 
 module.exports = {
     /**
@@ -16,8 +17,14 @@ module.exports = {
      * @returns str rendered HTML string
      */
     showPlatforms: function (req, res, next) {
-        let platforms = app.platformRepo.selectAll();
-        let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
+        let platforms = [];
+        const userPlatforms = app.userPlatformRepo.selectAllByUsername(req.userData.username);
+        const os = app.userRepo.selectByUsername(req.userData.username).operating_system;
+
+        userPlatforms.forEach(userPlatform => {
+            platforms.push(app.platformRepo.selectByID(userPlatform.platformId));
+        });
+
         return res.render('platforms', { title: 'Plattformen', os: os, platforms: platforms });
     },
 
