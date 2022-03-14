@@ -1,6 +1,15 @@
 extends shared/layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  header#navbar-fixed
+    nav
+      a(href="/") Startseite
+  header#navbar-hamburger
+    div.topnav
+      button.icon-home(onclick="window.location.href = '/';") ⌂
+  main#index-main
+    section#heading-error.gradient.border-radius 
+      div
+        h1= message
+        h2= error.status
+        pre #{error.stack}
