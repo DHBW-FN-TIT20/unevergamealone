@@ -7,6 +7,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../database/Models/User/User');
 const UserPlatform = require('../database/Models/UserPlatform/UserPlatform');
+const Token = require('../database/Models/JWT/Token');
 
 module.exports = {
     /**
@@ -30,6 +31,24 @@ module.exports = {
         let platforms = app.platformRepo.selectAll();
         res.render('sign-up', { platforms: platforms, title: "Registrieren" });
     },
+
+    /**
+     * POST-Request logout current user
+     * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
+     * @param {Response} res The res object represents the HTTP response that an Express app sends when it gets an HTTP request.
+     * @param {*} next Control to the next handler
+     * @returns Redirect Redirect to /index.html
+     */
+    logout: function (req, res, next) {
+        const user_token = req.cookies['jwt'];
+        const exp = req.userData.exp;
+        const token = new Token(user_token, exp);
+    
+        app.tokenRepo.insert(token);
+    
+        return res.redirect(302, '/');
+    },
+
     /**
      * POST-Request create a new user
      * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on

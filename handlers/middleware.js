@@ -69,9 +69,15 @@ let isLoggedIn = (req, res, next) => {
         const invalid = app.tokenRepo.selectToken(new Token(token, decoded.exp));
 
         req.userData = decoded;
+
         if (sign_in_or_sign_up && invalid === undefined) {
             return res.redirect('/gaming');
         }
+
+        if (invalid && !sign_in_or_sign_up) {
+            return res.redirect('/users/sign-in');
+        }
+
         next();
     } catch (err) {
         if (sign_in_or_sign_up) {
