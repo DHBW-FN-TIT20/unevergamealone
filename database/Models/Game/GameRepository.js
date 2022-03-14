@@ -136,7 +136,10 @@ class GameRepository {
         const playersOwning = this.db.all("SELECT username FROM gameUserMapping WHERE game_id = ?", [gameId]);
         const playernames = [];
         for (const player of playersOwning) {
-            playernames.push(this.db.get("SELECT usernameOfPlatform FROM userPlatformMapping WHERE username = ? AND platformId = ?", [player.username, platformId.platform_id]));
+            const username = this.db.get("SELECT usernameOfPlatform FROM userPlatformMapping WHERE username = ? AND platformId = ?", [player.username, platformId.platform_id]);
+            if ( username !== undefined ){
+                playernames.push(username);
+            }
         }
         return playernames;
     }
