@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://https://unevergamealone.ddnss.de/sitemap.xml

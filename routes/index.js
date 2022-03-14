@@ -16,4 +16,14 @@ router.get('/', indexController.showIndex);
  */
 router.get('/impressum', indexController.showImpressum);
 
+/**
+ * GET of /sitemap.xml
+ */
+router.get('/sitemap.xml', indexController.showSitemap);
+
+/**
+ * GET of /robots.txt
+ */
+router.get('/robots.txt', indexController.showRobots);
+
 module.exports = router;
