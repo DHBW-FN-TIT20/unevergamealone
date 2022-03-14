@@ -1,5 +1,4 @@
 const UserPlatform = require('./UserPlatform.js');
-const User = require('./UserPlatform.js');
 
 /**
  * DB Connection to the userPlatformMapping Table
