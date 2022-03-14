@@ -42,6 +42,16 @@ class PlatformRepository {
     }
 
     /**
+     * Get a platform by id
+     * @param {string} id id of the platform
+     * @returns Platform
+     */
+    selectByID(id) {
+        const sql = "SELECT * FROM platforms WHERE id = ?";
+        return this.db.get(sql, [id]);
+    }
+
+    /**
      * Get a platform by name
      * @param {string} name name of the platform
      * @returns Platform
