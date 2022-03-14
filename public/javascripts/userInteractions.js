@@ -1,12 +1,20 @@
 const checkboxes = document.querySelectorAll('.form-check input[type=checkbox]');
 
 checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', function () {
+    checkbox.addEventListener('change', function() {
         if (this.checked) {
             let inputUsername = document.getElementById(this.id + "_uName");
             inputUsername.className = "visible";
+            var main = document.getElementById("form-container-reg");
+            var current_height = window.getComputedStyle(main).getPropertyValue("min-height");
+            var new_height = "calc(" + current_height + " + 40px";
+            main.style.minHeight = new_height;
         } else {
             document.getElementById(this.id + "_uName").className = "invisible";
+            var main = document.getElementById("form-container-reg");
+            var current_height = window.getComputedStyle(main).getPropertyValue("min-height");
+            var new_height = "calc(" + current_height + " - 40px";
+            main.style.minHeight = new_height;
         }
     })
 });
@@ -20,8 +28,8 @@ function sign_up(form) {
         return false;
     }
 
-    let data  = {};
-    for(var pair of formData.entries()) {
+    let data = {};
+    for (var pair of formData.entries()) {
         data[pair[0]] = pair[1];
     }
 
@@ -31,7 +39,7 @@ function sign_up(form) {
         success: (data, textStatus, jqXHR) => {
             show_modal("Success", "User erfolgreich erstellt");
             modal_el.addEventListener("hide.bs.modal", (event) => {
-                window.location.replace("/users/sign-in");  
+                window.location.replace("/users/sign-in");
             })
         },
         error: (jqXHR, textStatus, errorThrown) => {

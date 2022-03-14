@@ -1,7 +1,45 @@
+footer {
+    display: flex;
+    flex-direction: row;
+}
+
 .btn-std {
     display: inline-block;
     margin-top: 30px;
     padding: 16px 31px;
+}
+
+.flex-item {
+    flex-basis: 50%;
+    margin: 5%;
+}
+
+.links-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5%;
+}
+
+.getting-started {
+    height: fit-content;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.getting-started img {
+    max-width: 100%;
+    max-height: 400px;
+}
+
+.getting-startet-left {
+    padding: 10px;
+    place-self: center;
+}
+
+.getting-startet-right {
+    padding: 10px;
+    place-self: center;
 }
 
 #btt-btn {
@@ -28,6 +66,16 @@
     justify-content: center;
 }
 
+#heading-impressum {
+    height: 100%;
+    width: 100%;
+    margin-bottom: 2%;
+    display: block;
+    text-align: center;
+    min-height: 400px;
+    padding-top: 100px;
+}
+
 #sub-slogan {
     margin-top: 5px;
 }
@@ -45,85 +93,30 @@
     margin: 50px;
 }
 
-#getting-started {
-    height: 180%;
-    width: 100%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 400px 400px 400px 400px;
-}
-
 #about-us {
-    height: 50%;
+    height: 100%;
     width: 100%;
     margin-top: 2%;
     margin-bottom: 1%;
-}
-
-#register {
-    grid-column: 1;
-    grid-row: 1;
-}
-
-#register-img {
-    grid-column: 2;
-    grid-row: 1;
-    height: 100%;
-}
-
-#platform {
-    grid-column: 2;
-    grid-row: 2;
-}
-
-#platform-img {
-    grid-column: 1;
-    grid-row: 2;
-    height: 100%;
-}
-
-#add-game {
-    grid-column: 1;
-    grid-row: 3;
-}
-
-#add-game-img {
-    grid-column: 2;
-    grid-row: 3;
-    height: 100%;
-}
-
-#show-games {
-    grid-column: 2;
-    grid-row: 4;
-}
-
-#show-games-img {
-    grid-column: 1;
-    grid-row: 4;
-    height: 100%;
-}
-
-.flex-item {
-    flex-basis: 50%;
-    margin: 5%;
-}
-
-.links-container {
-    display: flex;
-    flex-direction: column;
-    row-gap: 10%;
+    min-height: 500px;
 }
 
 
 /*Screen width > 600px*/
 
 @media screen and (min-width: 600px) {
-    footer {
-        display: flex;
-        flex-direction: row;
+    .getting-started {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: auto;
+    }
+    .getting-startet-left {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    .getting-startet-right {
+        grid-column: 2;
+        grid-row: 1;
     }
     #navbar-fixed {
         z-index: 10000;
@@ -195,6 +188,19 @@
 /*Screen width < 600px*/
 
 @media screen and (max-width: 600px) {
+    .getting-started {
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 50% 50%;
+    }
+    .getting-started img {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    .getting-started div {
+        grid-column: 1;
+        grid-row: 2;
+    }
     .topnav {
         overflow: hidden;
         background-color: #273d40;
@@ -219,8 +225,8 @@
         z-index: 10000;
         position: fixed;
         top: 2%;
-        width: 40px;
-        height: 40px;
+        width: 56px;
+        height: 56px;
         right: 3%;
     }
     .topnav .icon:hover {
