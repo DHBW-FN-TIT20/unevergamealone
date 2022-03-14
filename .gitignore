@@ -6,3 +6,4 @@ public/images/upload
 # Ignore documentation
 out
 docs
+database/unevergamealone.sqlite.backup

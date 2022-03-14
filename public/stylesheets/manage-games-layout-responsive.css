@@ -37,7 +37,7 @@ form {
     padding: 0 5px;
     margin: 4px 0;
     width: auto;
-    height: 28px;
+    height: auto;
 }
 
 .navigation-bar {
@@ -96,7 +96,6 @@ form {
 #game-not-found {
     padding-left: 15px;
     padding-right: 15px;
-    width: 200px;
     min-width: 200px;
 }
 
@@ -122,6 +121,9 @@ form {
         width: -webkit-fill-available;
         margin-bottom: 0;
     }
+    #game-not-found {
+        width: 200px;
+    }
 }
 
 
@@ -143,5 +145,8 @@ form {
     #searching {
         width: 100%;
         margin-bottom: 0.5rem;
+    }
+    #game-not-found {
+        width: auto;
     }
 }
