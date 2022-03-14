@@ -19,18 +19,18 @@
 <body>
     <header id="navbar-fixed">
         <nav>
-            <a href="#getting-started">Getting started</a>
+            <a href="#getting-started">Getting Started</a>
             <a href="/users/sign-in">Login</a>
-            <a href="#about-us">Über uns</a>
+            <a href="#about-us">Über Uns</a>
         </nav>
     </header>
     <header id="navbar-hamburger">
         <div class="topnav">
             <a id="hamburger-menu-btn" href="javascript:void(0);" class="icon" type="button" onclick="toggleHamburgerMenu()">☰</a>
             <div id="hamburger-links">
-                <a href="#getting-started" id="link-to-getting-startet">Getting started</a>
+                <a href="#getting-started" id="link-to-getting-startet">Getting Started</a>
                 <a href="/users/sign-in" id="link-to-login">Login</a>
-                <a href="#about-us" id="link-to-about-us">Über uns</a>
+                <a href="#about-us" id="link-to-about-us">Über Uns</a>
             </div>
         </div>
     </header>
@@ -45,41 +45,52 @@
             </div>
         </section>
         <section id="getting-started">
-            <div id="register">
-                <h3>Registrieren</h3>
-                <p>Um Mitspieler zu finden musst du Dir erst einen Account erstellen. Klicke hierfür auf <a href="/users/sign-up">Registrieren</a>. Dort musst Du einen Benutzernamen, E-Mail und Passwort eingeben. Wähle noch ein Betriebssystem und anschließend
-                    wähle einfach die Gaming-Plattformen, die du nutzt, und schon kann es losgehen.
-                </p>
-            </div>
-            <img id="register-img" alt="register-img" src="/images/register.PNG">
-            <img id="platform-img" alt="platform-img" src="/images/platforms.PNG">
-            <div id="platform">
-                <h3>Platformübersicht</h3>
-                <p>Nachdem Du Dich <a href="/users/sign-in">eingeloggt</a> hast, siehst Du, je nachdem welches Betriebssystem du gewählt hast, einen Laptop mit Ubuntu- oder Windows-Desktophintergrund. Ab hier bist Du wieder in der vertrauten Umgebung eines
-                    Gamers.
-                </p>
-            </div>
-            <div id="add-game">
-                <h3>Spiel hinzufügen</h3>
-                <p>Um Mitspieler finden zu können, musst Du nun ersteinmal Spiele zu deiner Bibliothek hinzufügen. Klicke hierfür auf
-                    <i>Spiele verwalten</i>. Nun öffnet sich ein Fenster, wo Du Dir alle Spiele, die angezeigt werden, deiner Bibliothek hinzufügen bzw. aus dieser entfernen kannst. Markiere hierfür nur die Checkbox.</p>
-            </div>
-            <img id="add-game-img" alt="add-game-img" src="/images/add-game.PNG">
-            <img id="show-games-img" alt="show-games-img" src="/images/show-games.PNG">
-            <div id="show-games">
-                <h3>Spiele anzeigen</h3>
-                <p>Nachdem Du Dir Spiele zu Deiner Bibliothek hinzugefügt hast, landest du wieder auf deinem <i>Desktop</i> und kannst Dir deine Bibliothek anzeigen lassen und Mitspieler finden. Klicke hierfür nur auf eine Deiner Plattformen. Viel Spaß beim
-                    Gamen!
-                </p>
-            </div>
+            <section class="getting-started">
+                <div class="getting-startet-left">
+                    <h3>Registrieren</h3>
+                    <p>Um Mitspieler zu finden, musst Du Dir erst einen Account erstellen. Klicke hierfür auf <a href="/users/sign-up">Registrieren</a>. Dort musst Du Deinen Benutzernamen, Deine E-Mail und ein Passwort eingeben. Nach der Auswahl Deines bevorzugten
+                        Betriebssystems, wähle noch die von Dir genutzten Gaming-Plattformen. Schon bist Du bereit, loszulegen!
+                    </p>
+                </div>
+                <img class="getting-startet-right" alt="register-img" src="/images/register.PNG">
+            </section>
+            <hr>
+            <section class="getting-started">
+                <img class="getting-startet-left" alt="platform-img" src="/images/platforms.PNG">
+                <div class="getting-startet-right">
+                    <h3>Plattformübersicht</h3>
+                    <p>Nachdem Du Dich <a href="/users/sign-in">eingeloggt</a> hast, siehst Du, je nachdem welches Betriebssystem du gewählt hast, einen Laptop mit Ubuntu- oder Windows-Desktophintergrund. Ab hier bist Du wieder in der vertrauten Umgebung
+                        eines Gamers.
+                    </p>
+                </div>
+            </section>
+            <hr>
+            <section class="getting-started">
+                <div class="getting-startet-left">
+                    <h3>Spiele hinzufügen</h3>
+                    <p>Um Mitspieler finden zu können, musst Du zuerst Spiele zu Deiner Bibliothek hinzufügen. Klicke hierfür auf
+                        <i>Spiele verwalten</i>. Es öffnet sich ein Fenster, welches es Dir erlaubt, deiner Bibliothek alle vorhandenen Spiele hinzuzufügen bzw. diese zu entfernen. Klicke hierfür einfach auf das Spiel und ändere so den Status der Checkbox.</p>
+                </div>
+                <img class="getting-startet-right" alt="add-game-img" src="/images/add-game.PNG">
+            </section>
+            <hr>
+            <section class="getting-started">
+                <img class="getting-startet-left" alt="show-games-img" src="/images/show-games.PNG">
+                <div class="getting-startet-right">
+                    <h3>Spiele anzeigen</h3>
+                    <p>Nachdem Du Spiele zu Deiner Bibliothek hinzugefügt hast, landest du wieder auf deinem <i>Desktop</i> und kannst Dir Deine Bibliothek anzeigen lassen und Mitspieler finden. Klicke hierfür nur auf eine Deiner Plattformen. Viel Spaß beim
+                        Gamen!
+                    </p>
+                </div>
+            </section>
         </section>
         <footer id="about-us" class="border-radius gradient flex-container">
             <address class="flex-item">
                     Autoren: <br>
                     <br>
-                    Florian Herkommer <br>
+                    David Felder <br>
                     Florian Glaser <br>
-                    David Felder
+                    Florian Herkommer
                 </address>
             <div class="flex-item links-container">
                 <a class="impressum" href="/Impressum">
@@ -95,11 +106,17 @@
                 <a href="http://www.freepik.com">
                     <img src="/images/freepik.jpg" alt="freepik" width="24" height="24" class="me-2"> Laptop designed by brgfx / Freepik
                 </a>
+                <a href="https://essensfinder.png/">
+                    <img src="/images/essensfinder.png" alt="essensfinder" width="24" height="24" class="me-2"> essensfinder.de
+                </a>
+                <a href="https://screetox.de/">
+                    <img src="/images/screetox.png" alt="screetox" width="24" height="24" class="me-2"> screetox.de
+                </a>
                 <a href="https://www.youtube.com/channel/UCs2eh6yWjH5lu_XpLkT2Ogg">
-                    <img src="/images/youtube.png" alt="youtube" width="24" height="24" class="me-2"> YouTube - Pandas für den Weltfrieden
+                    <img src="/images/youtube.png" alt="youtube" width="24" height="24" class="me-2"> Pandas für den Weltfrieden
                 </a>
                 <a href="https://www.youtube.com/channel/UC3rqHlf2T6uDvYLpZbkI54A">
-                    <img src="/images/youtube.png" alt="youtube" width="24" height="24" class="me-2"> YouTube - Floskinner
+                    <img src="/images/youtube.png" alt="youtube" width="24" height="24" class="me-2"> Floskinner
                 </a>
             </div>
         </footer>

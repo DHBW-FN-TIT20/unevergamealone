@@ -1,6 +1,5 @@
 .form-container {
     display: grid;
-    grid-template-rows: 1fr 2fr 0.5fr;
 }
 
 .reg-form-check {
@@ -42,7 +41,14 @@
 @media screen and (min-width: 600px) {
     .form-container {
         grid-template-columns: auto 400px auto;
-        min-height: 850px;
+    }
+    #form-container-login {
+        min-height: 400px;
+        grid-template-rows: 100px auto;
+    }
+    #form-container-reg {
+        min-height: 750px;
+        grid-template-rows: 100px auto;
     }
 }
 
@@ -52,7 +58,6 @@
 @media screen and (max-width: 600px) {
     .form-container {
         grid-template-columns: auto 300px auto;
-        min-height: 800px;
     }
     .form-field {
         max-width: 400px;
@@ -74,5 +79,13 @@
         background-color: #F7F3F6;
         color: #273d40;
         border-radius: 15px;
+    }
+    #form-container-login {
+        min-height: 300px;
+        grid-template-rows: 40px auto;
+    }
+    #form-container-reg {
+        min-height: 680px;
+        grid-template-rows: 40px auto;
     }
 }
