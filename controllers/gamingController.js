@@ -20,7 +20,7 @@ module.exports = {
         let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
         return res.render('platforms', { title: 'Plattformen', os: os, platforms: platforms });
     },
-    
+
     /**
      * GET-Render the Games for the user
      * @param {Request} req The req object represents the HTTP request and has properties for the request query string, parameters, body, HTTP headers, and so on
@@ -29,28 +29,37 @@ module.exports = {
      * @returns (str|redirect) rendered HTML string or redirect to /gaming
      */
     showGames: function (req, res, next) {
+        let title;
+        let games;
+        let gamesWithUsers = [];
+
         let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
         let username = req.userData.username;
-        let games = [];
-        let gamesWithUsers = [];
-        switch (req.params.games) {
-            case "Origin":
-                games = app.gameRepo.selectAllGamesWithPlatformByUser("Origin", username);
-                for (const game of games) {
-                    let usersOfGame = app.gameRepo.selectUsersOfGame(game.id);
-                    gamesWithUsers.push(new Game(game.id, game.platformName, game.game, game.coverImage, usersOfGame))
-                }
-                return res.render('games', { title: 'Origin', os: os, games: gamesWithUsers });
-            case "Steam":
-                games = app.gameRepo.selectAllGamesWithPlatformByUser("Steam", username);
-                for (const game of games) {
-                    let usersOfGame = app.gameRepo.selectUsersOfGame(game.id);
-                    gamesWithUsers.push(new Game(game.id, game.platformName, game.game, game.coverImage, usersOfGame))
-                }
-                return res.render('games', { title: 'Steam', os: os, games: gamesWithUsers });
-            default:
-                res.redirect("/gaming");
+
+        if (app.platformRepo.selectByName(req.params.games) === undefined) {
+            return res.redirect("/gaming");
         }
+
+        games = app.gameRepo.selectAllGamesWithPlatformByUser(req.params.games, username);
+        title = req.params.games;
+
+        // Sort Games Alphabetic
+        games.sort((a, b) => {
+            if (a.game > b.game) {
+                return 1;
+            }
+            if (a.game < b.game){
+                return -1;
+            }
+            return 0;
+        });
+
+        for (const game of games) {
+            let usersOfGame = app.gameRepo.selectUsersOfGame(game.id);
+            gamesWithUsers.push(new Game(game.id, game.platformName, game.game, game.coverImage, usersOfGame))
+        }
+        return res.render('games', { title: title, os: os, games: gamesWithUsers });
+
     },
 
     /**
@@ -83,15 +92,22 @@ module.exports = {
             if (a.name > b.name) {
                 return 1;
             }
+            if (a.name < b.name){
+                return -1;
+            }
             return 0;
-        })
+        });
 
         filtered_games.sort((a, b) => {
             if (a.name > b.name) {
                 return 1;
             }
+            if (a.name < b.name){
+                return -1;
+            }
             return 0;
-        })
+        });
+
         let os = app.userRepo.selectByUsername(req.userData.username).operating_system;
         return res.render('manage-games', { selected_games: already_selected_games, unselected_games: filtered_games, platforms: platforms, os: os, title: "Spiele verwalten" });
     },
