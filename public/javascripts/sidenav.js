@@ -1,5 +1,12 @@
+/**
+ * @module Client_SideNav
+ */
+
 window.onload = (event) => { document.getElementById("sidenav").style.width = "0px"; };
 
+/**
+ * Open the sidenavigation and change the icon of the button
+ */
 function openSidenav() {
     var sidenav = document.getElementById("sidenav");
     if (sidenav.style.width == "0px") {
@@ -12,6 +19,9 @@ function openSidenav() {
     }
 }
 
+/**
+ * Close the sidenavigation and change the icon of the button
+ */
 function closeSidenav() {
     document.getElementById("sidenav").style.width = "0px";
     btn = document.getElementById("btn-sidenav");
