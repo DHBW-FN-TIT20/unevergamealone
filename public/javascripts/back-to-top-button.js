@@ -1,6 +1,12 @@
+/**
+ * @module Client_Index
+ */
 var btn = document.getElementById("btt-btn");
 window.onscroll = function() { detectScroll() };
 
+/**
+ * Detect scrolling to make back-to-top button visible
+ */
 function detectScroll() {
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
         btn.style.display = "block";
@@ -9,7 +15,9 @@ function detectScroll() {
     }
 }
 
-// When the user clicks on the button, scroll to the top of the document
+/**
+ * Scroll to the top of the site
+ */
 function backToTop() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;

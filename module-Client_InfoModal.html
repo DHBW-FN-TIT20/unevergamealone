@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: database/Models/JWT/TokenRepository.js</title>
+    <title>JSDoc: Module: Client_InfoModal</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,87 +17,216 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: database/Models/JWT/TokenRepository.js</h1>
+    <h1 class="page-title">Module: Client_InfoModal</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>const Token = require('./Token.js');
+        
+    
+</header>
 
-/**
- * DB Connection to the invalidToken Table
- */
-class TokenRepository {
-    /**
-     * @constructor
-     * @param {Database} db sqlite connection
-     */
-    constructor(db) {
-        this.db = db;
-    }
+<article>
+    <div class="container-overview">
+    
+        
 
-    /**
-     * Create the Table invalidToken if not exist
-     * @returns string sql response of the command
-     */
-    createTable() {
-        const sql = "CREATE TABLE IF NOT EXISTS invalidToken(token text PRIMARY KEY, expiration TIMESTAMP NOT NULL DEFAULT (strftime('%s', 'now')))";
-        return this.db.run(sql);
-    }
+        
+    
+    </div>
 
-    /**
-     * Insert a new invalid Token to the DB
-     * @param {Token} token 
-     * @returns {object} an info object describing any changes made
-     */
-    insert(token) {
-        this.cleanup();
+    
 
-        const sql = "INSERT INTO invalidToken(token) VALUES (?)";
-        return this.db.run(sql, [token.token]);
-    }
+    
 
-    /**
-     * Search for a token in the db
-     * @param {Token} token 
-     * @returns Token
-     */
-    selectToken(token) {
-        this.cleanup();
+    
 
-        const sql = "SELECT * FROM invalidToken WHERE invalidToken.token = ?"
-        return this.db.get(sql, [token.token]);
-    }
+    
 
-    /**
-     * Get all invalid token in the DB
-     * @returns Array.&lt;Token>
-     */
-    selectAllToken() {
-        this.cleanup();
+    
 
-        const sql = "SELECT * FROM invalidToken"
-        return this.db.getAll(sql, []);
-    }
+    
 
-    /**
-     * Remove all token that are invalid by them self
-     */
-    cleanup() {
-        const currentUnixTime = Date.now();
+    
 
-        const sql = "DELETE FROM invalidToken WHERE expiration > ?";
-        this.db.run(sql, [currentUnixTime]);
-    }
-}
+    
+        <h3 class="subsection-title">Methods</h3>
 
-module.exports = TokenRepository;</code></pre>
-        </article>
-    </section>
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~show_modal"><span class="type-signature">(inner) </span>show_modal<span class="signature">(header, msg)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Show the info_modal with the given params
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>header</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">HTML-Text that will be inserted in the header</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>msg</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">HTML-Text that will be inserted in the body</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_javascripts_info-modal.js.html">public/javascripts/info-modal.js</a>, <a href="public_javascripts_info-modal.js.html#line13">line 13</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

@@ -36,7 +36,7 @@ Install the dependencies with npm:
 npm install -g npm@latest
 
 # Install only production dependencies
-npm install --production
+npm install
 
 # Install also developer dependencies
 npm install --include=dev

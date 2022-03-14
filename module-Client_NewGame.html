@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Platform</title>
+    <title>JSDoc: Module: Client_NewGame</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Platform</h1>
+    <h1 class="page-title">Module: Client_NewGame</h1>
 
     
 
@@ -28,9 +28,6 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Platform<span class="signature">(id, name)</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">Represent the platform in the DB</div>
         
     
 </header>
@@ -40,17 +37,318 @@
     
         
 
+        
     
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="Platform"><span class="type-signature"></span>new Platform<span class="signature">(id, name)</span><span class="type-signature"></span></h4>
-    
+    </div>
 
     
 
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~changeCover"><span class="type-signature">(inner) </span>changeCover<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Changes the image in the cropper field when a new image is uploaded
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_javascripts_new-games.js.html">public/javascripts/new-games.js</a>, <a href="public_javascripts_new-games.js.html#line58">line 58</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~check_game_name"><span class="type-signature">(inner) </span>check_game_name<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Check if the Game already exist
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_javascripts_new-games.js.html">public/javascripts/new-games.js</a>, <a href="public_javascripts_new-games.js.html#line38">line 38</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Boolean True if name does not exist
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~check_values"><span class="type-signature">(inner) </span>check_values<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Binding for the input search.
+Disable or enable the submit btn depending on check_game_name()
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_javascripts_new-games.js.html">public/javascripts/new-games.js</a>, <a href="public_javascripts_new-games.js.html#line25">line 25</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~create_game"><span class="type-signature">(inner) </span>create_game<span class="signature">(form)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Creates a new game on the DB if possible
+</div>
 
 
 
@@ -85,15 +383,10 @@
 
         <tr>
             
-                <td class="name"><code>id</code></td>
+                <td class="name"><code>form</code></td>
             
 
             <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
             
             </td>
 
@@ -101,30 +394,7 @@
 
             
 
-            <td class="description last">id of the platform</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>name</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">name of the platform</td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -165,7 +435,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="database_Models_Platform_Platform.js.html">database/Models/Platform/Platform.js</a>, <a href="database_Models_Platform_Platform.js.html#line4">line 4</a>
+        <a href="public_javascripts_new-games.js.html">public/javascripts/new-games.js</a>, <a href="public_javascripts_new-games.js.html#line77">line 77</a>
     </li></ul></dd>
     
 
@@ -190,28 +460,22 @@
 
 
 
+<h5>Returns:</h5>
 
-
+        
+<div class="param-desc">
+    (boolean|Redirect) False if some error or Redirect to /gaming
+</div>
 
 
 
     
-    </div>
 
-    
 
-    
 
-    
 
-    
 
-    
-
-    
-
-    
-
+        
     
 
     

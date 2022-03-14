@@ -8,12 +8,12 @@
             "database",
             "handlers",
             "routes",
-            "views"
+            "views",
+            "public/javascripts"
         ],
         "exclude": [
             "node_modules",
             ".vscode",
-            "public",
             "docs"
         ],
         "includePattern": ".+\\.js(doc|x)?$",

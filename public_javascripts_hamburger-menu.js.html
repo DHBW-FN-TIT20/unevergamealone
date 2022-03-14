@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: database/Models/JWT/TokenRepository.js</title>
+    <title>JSDoc: Source: public/javascripts/hamburger-menu.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: database/Models/JWT/TokenRepository.js</h1>
+    <h1 class="page-title">Source: public/javascripts/hamburger-menu.js</h1>
 
     
 
@@ -26,76 +26,31 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const Token = require('./Token.js');
+            <pre class="prettyprint source linenums"><code>/**
+ * @module Client_Nav
+ */
 
 /**
- * DB Connection to the invalidToken Table
+ * Make the links from the ham
+ * @param {object} form 
+ * @returns {Boolean} False to not reload the page
  */
-class TokenRepository {
-    /**
-     * @constructor
-     * @param {Database} db sqlite connection
-     */
-    constructor(db) {
-        this.db = db;
+function toggleHamburgerMenu() {
+    var x = document.getElementById("hamburger-links");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
     }
-
-    /**
-     * Create the Table invalidToken if not exist
-     * @returns string sql response of the command
-     */
-    createTable() {
-        const sql = "CREATE TABLE IF NOT EXISTS invalidToken(token text PRIMARY KEY, expiration TIMESTAMP NOT NULL DEFAULT (strftime('%s', 'now')))";
-        return this.db.run(sql);
+    var y = document.getElementById("hamburger-menu-btn");
+    if (y.innerHTML === "✖") {
+        y.innerHTML = "☰";
+        y.style.borderRadius = "15px";
+    } else {
+        y.innerHTML = "✖";
+        y.style.borderRadius = "15px 15px 0px 0px";
     }
-
-    /**
-     * Insert a new invalid Token to the DB
-     * @param {Token} token 
-     * @returns {object} an info object describing any changes made
-     */
-    insert(token) {
-        this.cleanup();
-
-        const sql = "INSERT INTO invalidToken(token) VALUES (?)";
-        return this.db.run(sql, [token.token]);
-    }
-
-    /**
-     * Search for a token in the db
-     * @param {Token} token 
-     * @returns Token
-     */
-    selectToken(token) {
-        this.cleanup();
-
-        const sql = "SELECT * FROM invalidToken WHERE invalidToken.token = ?"
-        return this.db.get(sql, [token.token]);
-    }
-
-    /**
-     * Get all invalid token in the DB
-     * @returns Array.&lt;Token>
-     */
-    selectAllToken() {
-        this.cleanup();
-
-        const sql = "SELECT * FROM invalidToken"
-        return this.db.getAll(sql, []);
-    }
-
-    /**
-     * Remove all token that are invalid by them self
-     */
-    cleanup() {
-        const currentUnixTime = Date.now();
-
-        const sql = "DELETE FROM invalidToken WHERE expiration > ?";
-        this.db.run(sql, [currentUnixTime]);
-    }
-}
-
-module.exports = TokenRepository;</code></pre>
+}</code></pre>
         </article>
     </section>
 

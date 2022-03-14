@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: User</title>
+    <title>JSDoc: Module: Client_SignUp</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: User</h1>
+    <h1 class="page-title">Module: Client_SignUp</h1>
 
     
 
@@ -28,9 +28,6 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>User<span class="signature">(username, password, email, os)</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">Class representing a user</div>
         
     
 </header>
@@ -40,17 +37,115 @@
     
         
 
+        
     
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="User"><span class="type-signature"></span>new User<span class="signature">(username, password, email, os)</span><span class="type-signature"></span></h4>
-    
+    </div>
 
     
 
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="~checkboxes"><span class="type-signature">(inner, constant) </span>checkboxes<span class="type-signature"> :array</span></h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">array</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_javascripts_userInteractions.js.html">public/javascripts/userInteractions.js</a>, <a href="public_javascripts_userInteractions.js.html#line5">line 5</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~sign_up"><span class="type-signature">(inner) </span>sign_up<span class="signature">(form)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Post Request to sign up a user (uses validateRegister)
+</div>
 
 
 
@@ -85,13 +180,13 @@
 
         <tr>
             
-                <td class="name"><code>username</code></td>
+                <td class="name"><code>form</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">object</span>
 
 
             
@@ -101,76 +196,7 @@
 
             
 
-            <td class="description last">name of the user</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>password</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">password of the user hashed</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>email</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">mail of the user</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>os</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">operating system of the user</td>
+            <td class="description last">element</td>
         </tr>
 
     
@@ -211,7 +237,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="database_Models_User_User.js.html">database/Models/User/User.js</a>, <a href="database_Models_User_User.js.html#line4">line 4</a>
+        <a href="public_javascripts_userInteractions.js.html">public/javascripts/userInteractions.js</a>, <a href="public_javascripts_userInteractions.js.html#line34">line 34</a>
     </li></ul></dd>
     
 
@@ -236,28 +262,189 @@
 
 
 
+<h5>Returns:</h5>
+
+        
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
 
 
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
+    </dd>
+</dl>
 
     
 
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~validateRegister"><span class="type-signature">(inner) </span>validateRegister<span class="signature">(formData)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Validates formData
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>formData</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">data that contain all form data</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_javascripts_userInteractions.js.html">public/javascripts/userInteractions.js</a>, <a href="public_javascripts_userInteractions.js.html#line72">line 72</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    msg
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
     
 
     
