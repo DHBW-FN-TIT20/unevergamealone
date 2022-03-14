@@ -18,6 +18,7 @@
 
 .btn-std:hover {
     box-shadow: 0px 0px 0px;
+    color: #273d40;
 }
 
 .btn-std:active {

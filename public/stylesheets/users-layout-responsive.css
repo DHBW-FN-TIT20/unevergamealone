@@ -35,6 +35,10 @@
     position: relative;
 }
 
+#login-img {
+    margin-top: 10vh;
+}
+
 
 /*Screen width > 600px*/
 
@@ -62,18 +66,26 @@
     .form-field {
         max-width: 400px;
     }
-    .topnav a.icon-home {
+    .topnav .icon-home {
+        color: #F7F3F6;
         background: #273d40;
+        border: 0;
+        text-decoration: none;
+        text-align: center;
+        line-height: 40px;
+        font-size: 1em;
+        display: block;
+        border-radius: 15px;
         display: block;
         padding: 8px 8px;
+        line-height: 30px;
+        font-size: 2em;
         z-index: 10000;
         position: fixed;
         top: 2%;
         right: 3%;
         width: 56px;
         height: 56px;
-        font-size: 2em;
-        line-height: 30px;
     }
     .topnav .icon-home:hover {
         background-color: #F7F3F6;

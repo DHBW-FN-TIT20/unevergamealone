@@ -190,8 +190,8 @@ footer {
 @media screen and (max-width: 600px) {
     .getting-started {
         display: grid;
-        grid-template-columns: auto;
-        grid-template-rows: 50% 50%;
+        grid-template-columns: 100%;
+        grid-template-rows: auto auto;
     }
     .getting-started img {
         grid-column: 1;
@@ -216,8 +216,16 @@ footer {
         display: block;
         border-radius: 15px;
     }
-    .topnav a.icon {
+    .topnav .icon {
+        color: #F7F3F6;
         background: #273d40;
+        border: 0;
+        text-decoration: none;
+        text-align: center;
+        line-height: 40px;
+        font-size: 1em;
+        display: block;
+        border-radius: 15px;
         display: block;
         padding: 8px 8px;
         line-height: 40px;
@@ -225,9 +233,9 @@ footer {
         z-index: 10000;
         position: fixed;
         top: 2%;
+        right: 3%;
         width: 56px;
         height: 56px;
-        right: 3%;
     }
     .topnav .icon:hover {
         background-color: #F7F3F6;

@@ -6,10 +6,10 @@ block content
       a(href="/") Startseite
   header#navbar-hamburger
     div.topnav
-      a.icon-home(href="/",  type="button") ⌂
+      button.icon-home(onclick="window.location.href = '/';") ⌂
   main.form-container.gradient.border-radius#form-container-login
     div.form-field
-      img(src="/images/icons8-user-64.png", alt="user")
+      img#login-img(src="/images/icons8-user-64.png", alt="user")
       h1 Anderer Benutzer
       form(onsubmit="return sign_in(this)") 
         input(type="text", name="username" value='' placeholder="Benutzername")
