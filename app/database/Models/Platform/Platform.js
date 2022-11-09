@@ -8,7 +8,7 @@ class Platform {
      * @param {string} name name of the platform
      */
     constructor(id, name) {
-        this.is = id;
+        this.id = id;
         this.name = name;
     }
 }

@@ -1,4 +1,4 @@
-const Database = require('better-sqlite3');
+const mariadb = require('mariadb');
 /**
  * Class representing the database connection.
  */
@@ -7,8 +7,15 @@ class AppDB {
      * @constructor
      * @param {string} dbFilePath path to the database file
      */
-    constructor(dbFilePath) {
-        this.db = new Database(dbFilePath, { verbose: console.log });
+    constructor() {
+        this.db = mariadb.createPool({
+            // host: process.env.DB_NAME,
+            host: "217.160.255.237",
+            database: "unga",
+            user: "root",
+            password: "db_root_password",
+            connectionLimit: 5
+        });
     }
 
     /**
@@ -18,8 +25,7 @@ class AppDB {
      * @returns {object} an object that represents the first row retrieved by the query
      */
     get(sql, params = []) {
-        const statement = this.db.prepare(sql);
-        return statement.get(params);
+        return this.run(sql, params);
     }
 
     /**
@@ -29,8 +35,7 @@ class AppDB {
      * @returns {object} an object that represents all row retrieved by the query
      */
     all(sql, params = []) {
-        const statement = this.db.prepare(sql);
-        return statement.all(params);
+        return this.run(sql, params);
     }
 
     /**
@@ -39,8 +44,18 @@ class AppDB {
      * @param {array} params the parameters used in the sql statement
      * @returns {object} an info object describing any changes made
      */
-    run(sql, params = []) {
-        return this.db.prepare(sql).run(params);
+    async run(sql, params = []) {
+        let result;
+        this.db.query(sql, params)
+            .then(rows => {
+                console.log(rows);
+                result = rows
+            })
+            .catch(err => {
+                console.log(err);
+                throw err;
+            });
+        return result;
     }
 }
 

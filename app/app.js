@@ -69,13 +69,16 @@ app.use('/gaming/add', gamingRouter);
 app.use('/gaming/new', gamingRouter);
 
 //Configure database
-if (!fs.existsSync("./database/unevergamealone.sqlite")) {
-    const db = new AppDB("./database/unevergamealone.sqlite");
-    const userRepo = new UserRepository(db);
-    const platformRepo = new PlatformRepository(db);
-    const userPlatformRepo = new UserPlatformRepository(db);
-    const gameRepo = new GameRepository(db);
-    const tokenRepo = new TokenRepository(db);
+const db = new AppDB();
+const userRepo = new UserRepository(db);
+const platformRepo = new PlatformRepository(db);
+const userPlatformRepo = new UserPlatformRepository(db);
+const gameRepo = new GameRepository(db);
+const tokenRepo = new TokenRepository(db);
+
+
+
+if (!db.run("SHOW TABLES")) {
     userRepo.createTable();
     userRepo.initialSetup();
     platformRepo.createTable();
@@ -88,22 +91,14 @@ if (!fs.existsSync("./database/unevergamealone.sqlite")) {
     tokenRepo.createTable();
 }
 
-const db = new AppDB("./database/unevergamealone.sqlite", { fileMustExist: true });
-const userRepo = new UserRepository(db);
-const platformRepo = new PlatformRepository(db);
-const userPlatformRepo = new UserPlatformRepository(db);
-const gameRepo = new GameRepository(db);
-const tokenRepo = new TokenRepository(db);
-
-
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};

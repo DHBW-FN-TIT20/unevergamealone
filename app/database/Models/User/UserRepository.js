@@ -18,7 +18,7 @@ class UserRepository {
      * @returns string sql response of the command
      */
     createTable() {
-        const sql = "CREATE TABLE IF NOT EXISTS users(username text PRIMARY KEY, password text, registered text, email text, operating_system text)";
+        const sql = "CREATE TABLE IF NOT EXISTS users(username varchar(100) PRIMARY KEY, password text, registered text, email text, operating_system text)";
         return this.db.run(sql);
     }
 
