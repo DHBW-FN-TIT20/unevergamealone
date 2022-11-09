@@ -17,7 +17,7 @@ COPY ["package.json", "package-lock.json*", "./"]
 RUN npm install --production
 
 # Copy App
-COPY . .
+COPY ./app .
 
 # Create Volumes for DB and uploaded Images
 VOLUME [ "/app/database" ]
