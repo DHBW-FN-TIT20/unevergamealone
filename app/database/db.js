@@ -8,15 +8,35 @@ class AppDB {
      * @param {string} dbFilePath path to the database file
      */
     constructor() {
-        this.db = mariadb.createPool({
-            // host: process.env.DB_NAME,
-            host: "217.160.255.237",
-            database: "unga",
-            user: "root",
-            password: "db_root_password",
-            connectionLimit: 5
-        });
+        // this.pool = mariadb.createPool({
+        //     // host: process.env.DB_NAME,
+        //     host: "http://floqueboque.ddnss.de:8081/",
+        //     database: "unevergamealone",
+        //     user: "root",
+        //     password: "140117",
+        //     connectionLimit: 5
+        // });
     }
+
+    async connect(){
+        try{
+            this.db = await mariadb.createConnection({
+                // host: process.env.DB_NAME,
+                host: "217.160.255.237",
+                database: "unga",
+                user: "root",
+                password: "db_root_password",
+                connectionLimit: 5
+            });
+            console.log("connected to database");
+            const res = await this.db.query("SHOW tables", []);
+            console.log(res);
+        }catch(err){
+            throw err;
+        }
+    }
+
+    
 
     /**
      * Get the first result
@@ -24,8 +44,9 @@ class AppDB {
      * @param {string[]} params the parameters used in the sql statement
      * @returns {object} an object that represents the first row retrieved by the query
      */
-    get(sql, params = []) {
-        return this.run(sql, params);
+    async get(sql, params = []) {
+        let result = await this.run(sql, params);
+        return result[0];
     }
 
     /**
@@ -34,8 +55,8 @@ class AppDB {
      * @param {string[]} params the parameters used in the sql statement
      * @returns {object} an object that represents all row retrieved by the query
      */
-    all(sql, params = []) {
-        return this.run(sql, params);
+    async all(sql, params = []) {
+        return await this.run(sql, params);
     }
 
     /**
@@ -45,17 +66,12 @@ class AppDB {
      * @returns {object} an info object describing any changes made
      */
     async run(sql, params = []) {
-        let result;
-        this.db.query(sql, params)
-            .then(rows => {
-                console.log(rows);
-                result = rows
-            })
-            .catch(err => {
-                console.log(err);
-                throw err;
-            });
-        return result;
+        try{
+            let result = await this.db.query(sql, params)
+            return result;
+        }catch(err){
+            throw err;
+        }        
     }
 }
 

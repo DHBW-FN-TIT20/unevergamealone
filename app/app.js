@@ -20,8 +20,13 @@ const AppDB = require('./database/db');
 const UserRepository = require('./database/Models/User/UserRepository');
 const PlatformRepository = require('./database/Models/Platform/PlatformRepository');
 const UserPlatformRepository = require('./database/Models/UserPlatform/UserPlatformRepository');
-const GameRepository = require('./database/Models/Game/GameRepository')
-const TokenRepository = require('./database/Models/JWT/TokenRepository')
+const GameRepository = require('./database/Models/Game/GameRepository');
+const TokenRepository = require('./database/Models/JWT/TokenRepository');
+
+/**
+ * Create express app
+ */
+ const app = express();
 
 /**
  * Index router
@@ -36,10 +41,7 @@ const usersRouter = require('./routes/users');
  */
 const gamingRouter = require('./routes/gaming');
 
-/**
- * Create express app
- */
-const app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -76,22 +78,6 @@ const userPlatformRepo = new UserPlatformRepository(db);
 const gameRepo = new GameRepository(db);
 const tokenRepo = new TokenRepository(db);
 
-
-
-if (!db.run("SHOW TABLES")) {
-    userRepo.createTable();
-    userRepo.initialSetup();
-    platformRepo.createTable();
-    platformRepo.initialSetup();
-    userPlatformRepo.createTable();
-    userPlatformRepo.initialSetup();
-    gameRepo.createGameTable();
-    gameRepo.createGameUserMappingTable();
-    gameRepo.initialSetup();
-    tokenRepo.createTable();
-}
-
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
@@ -109,6 +95,7 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
+exports.db = db;
 exports.userRepo = userRepo;
 exports.platformRepo = platformRepo;
 exports.userPlatformRepo = userPlatformRepo;

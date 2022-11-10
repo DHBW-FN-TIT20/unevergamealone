@@ -16,19 +16,19 @@ class PlatformRepository {
      * Create the Table platforms if not exist
      * @returns string sql response of the command
      */
-    createTable() {
+    async createTable() {
         const sql = "CREATE TABLE IF NOT EXISTS platforms(id integer PRIMARY KEY, name text)";
-        return this.db.run(sql);
+        return await this.db.run(sql);
     }
     /**
      * Add Steam, Origin, EpicGames, UbisoftConnect and BattleNET to the DB
      */
-    initialSetup() {
-        this.insert(new Platform(1, "Steam"));
-        this.insert(new Platform(2, "Origin"));
-        this.insert(new Platform(3, "EpicGames"));
-        this.insert(new Platform(4, "UbisoftConnect"));
-        this.insert(new Platform(5, "BattleNET"));
+    async initialSetup() {
+        await this.insert(new Platform(1, "Steam"));
+        await this.insert(new Platform(2, "Origin"));
+        await this.insert(new Platform(3, "EpicGames"));
+        await this.insert(new Platform(4, "UbisoftConnect"));
+        await this.insert(new Platform(5, "BattleNET"));
     }
 
     /**
@@ -36,9 +36,9 @@ class PlatformRepository {
      * @param {Platform} platform platform to add
      * @returns string sql response of the command
      */
-    insert(platform) {
+    async insert(platform) {
         const sql = "INSERT INTO platforms(id, name) VALUES (?, ?)";
-        return this.db.run(sql, [platform.id, platform.name]);
+        return await this.db.run(sql, [platform.id, platform.name]);
     }
 
     /**
@@ -46,9 +46,9 @@ class PlatformRepository {
      * @param {string} id id of the platform
      * @returns Platform
      */
-    selectByID(id) {
+    async selectByID(id) {
         const sql = "SELECT * FROM platforms WHERE id = ?";
-        return this.db.get(sql, [id]);
+        return await this.db.get(sql, [id]);
     }
 
     /**
@@ -56,18 +56,18 @@ class PlatformRepository {
      * @param {string} name name of the platform
      * @returns Platform
      */
-    selectByName(name) {
+    async selectByName(name) {
         const sql = "SELECT * FROM platforms WHERE name = ?";
-        return this.db.get(sql, [name]);
+        return await this.db.get(sql, [name]);
     }
 
     /**
      * Get all Platforms in the Database
      * @returns {Platform[]} sql response of the command
      */
-    selectAll() {
+    async selectAll() {
         const sql = "SELECT * FROM platforms";
-        return this.db.all(sql);
+        return await this.db.all(sql);
     }
 }
 
