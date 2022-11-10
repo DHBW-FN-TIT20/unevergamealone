@@ -9,7 +9,8 @@ services:
     environment:
       - JWT_TOKEN=${JWT_TOKEN}
       - DB_NAME=${DB_NAME}
-      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
       - MARIADB_DATABASE=${MARIADB_DATABASE}
       - TZ=Europe/Berlin
     depends_on:
@@ -21,5 +22,7 @@ services:
     environment:
       - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
       - MARIADB_DATABASE=${MARIADB_DATABASE}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
     volumes:
       - ./01_initTables.sql:/docker-entrypoint-initdb.d/01_initTables.sql:ro

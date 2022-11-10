@@ -8,8 +8,8 @@ class AppDB {
             this.db = await mariadb.createConnection({
                 host: process.env.DB_NAME,
                 database: process.env.MARIADB_DATABASE,
-                user: "root",
-                password: process.env.MARIADB_ROOT_PASSWORD,
+                user: process.env.MARIADB_USER,
+                password: process.env.MARIADB_PASSWORD,
                 connectionLimit: 5
             });
         } catch (err) {
