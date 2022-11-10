@@ -75,7 +75,7 @@ module.exports = {
                 }
             }
             //add userdata to db
-            app.userRepo.insert(new User(username, hashedPw, email, os));
+            await app.userRepo.insert(new User(username, hashedPw, email, os));
             for (const userPlatform of userPlatforms) {
                 await app.userPlatformRepo.insert(userPlatform);
             }
@@ -89,7 +89,7 @@ module.exports = {
             msg = "";
             status_code = 500;
 
-            if (error.code === "SQLITE_CONSTRAINT_PRIMARYKEY") {
+            if (error.code === "ER_DUP_ENTRY") {
                 msg = `Der User ${username} existiert bereits`;
                 status_code = 409;
             }

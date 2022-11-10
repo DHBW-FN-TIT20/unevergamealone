@@ -13,15 +13,6 @@ class TokenRepository {
     }
 
     /**
-     * Create the Table invalidToken if not exist
-     * @returns string sql response of the command
-     */
-    async createTable() {
-        const sql = "CREATE TABLE IF NOT EXISTS invalidToken(token text PRIMARY KEY, expiration TIMESTAMP NOT NULL DEFAULT (strftime('%s', 'now')))";
-        return await this.db.run(sql);
-    }
-
-    /**
      * Insert a new invalid Token to the DB
      * @param {Token} token 
      * @returns {object} an info object describing any changes made
