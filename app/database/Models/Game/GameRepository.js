@@ -113,11 +113,8 @@ class GameRepository {
     async selectByName(name) {
         const sql = "SELECT games.id, games.name, games.coverImage, platforms.name AS platformName FROM games JOIN platforms ON platform_id=platforms.id WHERE games.name=?";
         const sql_game = await this.db.get(sql, [name]);
-        if (sql_game) {
-            const game = new Game(sql_game.id, sql_game.platformName, sql_game.name, sql_game.coverImage);
-            return game;
-        }
-        return {id: 0};
+        const game = new Game(sql_game.id, sql_game.platformName, sql_game.name, sql_game.coverImage);
+        return game;
     }
 
     /**
