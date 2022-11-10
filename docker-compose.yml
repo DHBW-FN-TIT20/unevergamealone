@@ -23,6 +23,8 @@ services:
       - MARIADB_DATABASE=${MARIADB_DATABASE}
     ports:
       - "3306:3306"
+    volumes:
+      - ./01_initTables.sql:/docker-entrypoint-initdb.d/01_initTables:ro
 
   adminer:
     image: adminer
