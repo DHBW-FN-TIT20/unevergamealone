@@ -1,4 +1,4 @@
-CREATE DATABASE unga;
+CREATE DATABASE IF NOT EXISTS unga;
 CREATE TABLE IF NOT EXISTS `unga`.`users`(
     username varchar(100) PRIMARY KEY,
     password text,
@@ -38,14 +38,14 @@ CREATE TABLE IF NOT EXISTS `unga`.`gameUserMapping`(
 );
 
 CREATE TABLE IF NOT EXISTS `unga`.`invalidToken`(
-    token varchar(100) PRIMARY KEY,
-    expiration TIMESTAMP DEFAULT CURRENT_TIMESTAMP() NOT NULL
+    token varchar(200) PRIMARY KEY,
+    expiration INTEGER UNSIGNED DEFAULT UNIX_TIMESTAMP() NOT NULL
 );
 
 INSERT INTO users VALUES (
     "demo",
     "$2a$10$9n21zUJBEys29m8HeSaqWedZFcYQJ7JRo.SCxIDOcY/4NZUA7x.MG",
-    "123123",
+    UNIX_TIMESTAMP(),
     "d@d.d",
     "Windows"
 );
@@ -72,7 +72,7 @@ INSERT INTO `unga`.`platforms` VALUES(
 
 INSERT INTO `unga`.`platforms` VALUES(
     5,
-    "BattleNet"
+    "BattleNET"
 );
 
 INSERT INTO `unga`.`userPlatformMapping` VALUES(

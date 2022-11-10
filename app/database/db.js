@@ -3,40 +3,21 @@ const mariadb = require('mariadb');
  * Class representing the database connection.
  */
 class AppDB {
-    /**
-     * @constructor
-     * @param {string} dbFilePath path to the database file
-     */
-    constructor() {
-        // this.pool = mariadb.createPool({
-        //     // host: process.env.DB_NAME,
-        //     host: "http://floqueboque.ddnss.de:8081/",
-        //     database: "unevergamealone",
-        //     user: "root",
-        //     password: "140117",
-        //     connectionLimit: 5
-        // });
-    }
-
-    async connect(){
-        try{
+    async connect() {
+        try {
             this.db = await mariadb.createConnection({
-                // host: process.env.DB_NAME,
-                host: "217.160.255.237",
-                database: "unga",
+                host: process.env.DB_NAME,
+                database: process.env.MARIADB_DATABASE,
                 user: "root",
-                password: "db_root_password",
+                password: process.env.MARIADB_ROOT_PASSWORD,
                 connectionLimit: 5
             });
-            console.log("connected to database");
-            const res = await this.db.query("SHOW tables", []);
-            console.log(res);
-        }catch(err){
+        } catch (err) {
             throw err;
         }
     }
 
-    
+
 
     /**
      * Get the first result
@@ -66,12 +47,12 @@ class AppDB {
      * @returns {object} an info object describing any changes made
      */
     async run(sql, params = []) {
-        try{
+        try {
             let result = await this.db.query(sql, params)
             return result;
-        }catch(err){
+        } catch (err) {
             throw err;
-        }        
+        }
     }
 }
 
