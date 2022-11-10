@@ -13,15 +13,6 @@ class UserPlatformRepository {
     }
 
     /**
-     * Create the Table userPlatformMapping if not exist
-     * @returns string sql response of the command
-     */
-    async createTable() {
-        const sql = "CREATE TABLE IF NOT EXISTS userPlatformMapping(username varchar(100), usernameOfPlatform text, platformId integer, FOREIGN KEY(username) REFERENCES users(username) ON DELETE CASCADE, FOREIGN KEY(platformId) REFERENCES platforms(id) ON DELETE CASCADE, PRIMARY KEY(username, platformId))";
-        return await this.db.run(sql);
-    }
-
-    /**
      * Add a new mapping from user to username of a platform
      * @param {UserPlatform} userPlatform mapping from user to username of the platform
      * @returns string sql response of the command

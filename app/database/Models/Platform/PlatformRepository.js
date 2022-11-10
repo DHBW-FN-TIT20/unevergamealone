@@ -13,15 +13,6 @@ class PlatformRepository {
     }
 
     /**
-     * Create the Table platforms if not exist
-     * @returns string sql response of the command
-     */
-    async createTable() {
-        const sql = "CREATE TABLE IF NOT EXISTS platforms(id integer PRIMARY KEY, name text)";
-        return await this.db.run(sql);
-    }
-
-    /**
      * Add a new platform to the DB
      * @param {Platform} platform platform to add
      * @returns string sql response of the command

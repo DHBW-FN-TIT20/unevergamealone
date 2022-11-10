@@ -14,16 +14,6 @@ class UserRepository {
     }
 
     /**
-     * Create the Table users if not exist
-     * @returns string sql response of the command
-     */
-    async createTable() {
-        const sql = "CREATE TABLE IF NOT EXISTS users(username varchar(100) PRIMARY KEY, password text, registered text, email text, operating_system text)";
-        return await this.db.run(sql);
-    }
-
-
-    /**
      * Add a new user to the DB
      * @param {User} user user to add
      * @returns string sql response of the command
