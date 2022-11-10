@@ -16,21 +16,21 @@ class UserPlatformRepository {
      * Create the Table userPlatformMapping if not exist
      * @returns string sql response of the command
      */
-    createTable() {
+    async createTable() {
         const sql = "CREATE TABLE IF NOT EXISTS userPlatformMapping(username varchar(100), usernameOfPlatform text, platformId integer, FOREIGN KEY(username) REFERENCES users(username) ON DELETE CASCADE, FOREIGN KEY(platformId) REFERENCES platforms(id) ON DELETE CASCADE, PRIMARY KEY(username, platformId))";
-        return this.db.run(sql);
+        return await this.db.run(sql);
     }
 
     /**
      * Add the usernames demo_steam, demo_origin, demo_epic, demo_ubisoft and demo_battlenet
      * to the user demo
      */
-    initialSetup() {
-        this.insert(new UserPlatform("demo", "demo_steam", 1))
-        this.insert(new UserPlatform("demo", "demo_origin", 2))
-        this.insert(new UserPlatform("demo", "demo_epic", 3))
-        this.insert(new UserPlatform("demo", "demo_ubisoft", 4))
-        this.insert(new UserPlatform("demo", "demo_battlenet", 5))
+    async initialSetup() {
+        await this.insert(new UserPlatform("demo", "demo_steam", 1));
+        await this.insert(new UserPlatform("demo", "demo_origin", 2));
+        await this.insert(new UserPlatform("demo", "demo_epic", 3));
+        await this.insert(new UserPlatform("demo", "demo_ubisoft", 4));
+        await this.insert(new UserPlatform("demo", "demo_battlenet", 5));
     }
 
     /**
@@ -38,9 +38,9 @@ class UserPlatformRepository {
      * @param {UserPlatform} userPlatform mapping from user to username of the platform
      * @returns string sql response of the command
      */
-    insert(userPlatform) {
+    async insert(userPlatform) {
         const sql = "INSERT INTO userPlatformMapping(username, usernameOfPlatform, platformId) VALUES (?, ?, ?)";
-        return this.db.run(sql, [userPlatform.username, userPlatform.usernameOfPlatform, userPlatform.platform]);
+        return await this.db.run(sql, [userPlatform.username, userPlatform.usernameOfPlatform, userPlatform.platform]);
     }
 
     /**
@@ -48,9 +48,9 @@ class UserPlatformRepository {
      * @param {string} username name of the user
      * @returns {UserPlatform[]}
      */
-    selectAllByUsername(username) {
+    async selectAllByUsername(username) {
         const sql = "SELECT * FROM userPlatformMapping WHERE username = ?";
-        return this.db.all(sql, [username]);
+        return await this.db.all(sql, [username]);
     }
 
     /**
@@ -59,9 +59,9 @@ class UserPlatformRepository {
      * @param {Platform} platform platform to search
      * @returns {UserPlatform}
      */
-    selectUsernameOfPlatform(username, platform) {
+    async selectUsernameOfPlatform(username, platform) {
         const sql = "SELECT * FROM userPlatformMapping WHERE username = ? AND platform = ?";
-        return this.db.get(sql, [username, platform]);
+        return await this.db.get(sql, [username, platform]);
     }
 }
 

@@ -2,7 +2,7 @@
  * Controller for all user functions
  * @module usersController
  */
-const app = require('../app')
+const app = require('../app');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../database/Models/User/User');
@@ -27,8 +27,8 @@ module.exports = {
      * @param {*} next Control to the next handler
      * @returns str rendered HTML string
      */
-    getSignUp: function(req, res, next) {
-        let platforms = app.platformRepo.selectAll();
+    getSignUp: async function(req, res, next) {
+        let platforms = await app.platformRepo.selectAll();
         res.render('sign-up', { platforms: platforms, title: "Registrieren" });
     },
 
@@ -39,12 +39,12 @@ module.exports = {
      * @param {*} next Control to the next handler
      * @returns Redirect Redirect to /index.html
      */
-    logout: function (req, res, next) {
+    logout: async function (req, res, next) {
         const user_token = req.cookies['jwt'];
         const exp = req.userData.exp;
         const token = new Token(user_token, exp);
     
-        app.tokenRepo.insert(token);
+        await app.tokenRepo.insert(token);
     
         return res.redirect(302, '/');
     },
@@ -56,14 +56,14 @@ module.exports = {
      * @param {*} next Control to the next handler
      * @returns (str|Redirect) JSON with more infos or Redirect to /gaming/ if already logged in
      */
-    signUp: function(req, res, next) {
+    signUp: async function(req, res, next) {
         let response;
         let salt = bcrypt.genSaltSync(10);
         let hashedPw = bcrypt.hashSync(req.body.password, salt);
         let username = req.body.username;
         let email = req.body.email;
         let os = req.body.os;
-        let platforms = app.platformRepo.selectAll();
+        let platforms = await app.platformRepo.selectAll();
 
         try {
             //get all checked platforms with username
@@ -77,7 +77,7 @@ module.exports = {
             //add userdata to db
             app.userRepo.insert(new User(username, hashedPw, email, os));
             for (const userPlatform of userPlatforms) {
-                app.userPlatformRepo.insert(userPlatform);
+                await app.userPlatformRepo.insert(userPlatform);
             }
 
             response = res.status(201).json({
@@ -109,10 +109,11 @@ module.exports = {
      * @param {*} next Control to the next handler
      * @returns (str|Redirect) JSON with more infos or Redirect to /gaming/ if already logged in
      */
-    signIn: function(req, res, next) {
+    signIn: async function(req, res, next) {
+        await app.db.connect();
         const username = req.body.username;
         const password = req.body.password;
-        let user = app.userRepo.selectByUsername(username);
+        let user = await app.userRepo.selectByUsername(username);
         if (!user) {
             return res.status(401).json({
                 msg: "Username oder Passwort ist falsch."
