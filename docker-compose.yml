@@ -25,4 +25,4 @@ services:
       - MARIADB_USER=${MARIADB_USER}
       - MARIADB_PASSWORD=${MARIADB_PASSWORD}
     volumes:
-      - ./01_initTables.sql:/docker-entrypoint-initdb.d/01_initTables.sql:ro
+      - ./app/database/01_initTables.sql:/docker-entrypoint-initdb.d/01_initTables.sql:ro
