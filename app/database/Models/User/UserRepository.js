@@ -22,14 +22,6 @@ class UserRepository {
         return await this.db.run(sql);
     }
 
-    /**
-     * Add the user demo with the password "password" to the DB
-     */
-    async initialSetup() {
-        let salt = bcrypt.genSaltSync(10);
-        let hashedPw = bcrypt.hashSync("password", salt);
-        await this.insert(new User("demo", hashedPw, "d@d.d", "Windows"));
-    }
 
     /**
      * Add a new user to the DB

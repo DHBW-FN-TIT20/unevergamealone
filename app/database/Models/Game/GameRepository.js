@@ -32,16 +32,6 @@ class GameRepository {
     }
 
     /**
-     * Add Battlefield 2042 and Battlefield V to the DB and add the Games to the demo-User
-     */
-    async initialSetup() {
-        await this.insertNewGame(new GameCreate("Battlefield 2042", "/images/upload/bf2042.jpg"), 2);
-        await this.addGameToUser(this.selectByName("Battlefield 2042").id, "demo");
-        await this.insertNewGame(new GameCreate("Battlefield V", "/images/upload/bf5.jpg"), 2);
-        await this.addGameToUser(this.selectByName("Battlefield V").id, "demo");
-    }
-
-    /**
      * Add a new Game to the DB
      * @param {GameCreate} game Game to Add
      * @param {int} platformID Id 

@@ -22,18 +22,6 @@ class UserPlatformRepository {
     }
 
     /**
-     * Add the usernames demo_steam, demo_origin, demo_epic, demo_ubisoft and demo_battlenet
-     * to the user demo
-     */
-    async initialSetup() {
-        await this.insert(new UserPlatform("demo", "demo_steam", 1));
-        await this.insert(new UserPlatform("demo", "demo_origin", 2));
-        await this.insert(new UserPlatform("demo", "demo_epic", 3));
-        await this.insert(new UserPlatform("demo", "demo_ubisoft", 4));
-        await this.insert(new UserPlatform("demo", "demo_battlenet", 5));
-    }
-
-    /**
      * Add a new mapping from user to username of a platform
      * @param {UserPlatform} userPlatform mapping from user to username of the platform
      * @returns string sql response of the command

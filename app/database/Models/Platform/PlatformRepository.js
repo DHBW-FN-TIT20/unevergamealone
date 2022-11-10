@@ -20,16 +20,6 @@ class PlatformRepository {
         const sql = "CREATE TABLE IF NOT EXISTS platforms(id integer PRIMARY KEY, name text)";
         return await this.db.run(sql);
     }
-    /**
-     * Add Steam, Origin, EpicGames, UbisoftConnect and BattleNET to the DB
-     */
-    async initialSetup() {
-        await this.insert(new Platform(1, "Steam"));
-        await this.insert(new Platform(2, "Origin"));
-        await this.insert(new Platform(3, "EpicGames"));
-        await this.insert(new Platform(4, "UbisoftConnect"));
-        await this.insert(new Platform(5, "BattleNET"));
-    }
 
     /**
      * Add a new platform to the DB
