@@ -4,14 +4,14 @@ services:
     build: .
     container_name: unevergamealone
     restart: unless-stopped
+    ports:
+      - 80:80
     environment:
       - JWT_TOKEN=${JWT_TOKEN}
       - DB_NAME=${DB_NAME}
       - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
       - MARIADB_DATABASE=${MARIADB_DATABASE}
       - TZ=Europe/Berlin
-    volumes:
-      - ./images:/app/public/images/upload':rw
     depends_on:
       - db
 
@@ -21,13 +21,5 @@ services:
     environment:
       - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
       - MARIADB_DATABASE=${MARIADB_DATABASE}
-    ports:
-      - "3306:3306"
     volumes:
-      - ./01_initTables.sql:/docker-entrypoint-initdb.d/01_initTables:ro
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
+      - ./01_initTables.sql:/docker-entrypoint-initdb.d/01_initTables.sql:ro
