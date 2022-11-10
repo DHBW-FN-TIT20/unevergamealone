@@ -2,9 +2,18 @@ name: Docker
 
 on:
   workflow_dispatch:
-    environment:
-        description: 'Environment deploy to DockerHub'
-        type: environment
+    inputs:
+      DOCKERHUB_USERNAME:
+        description: 'Username to login on Docker Hub'
+        type: string
+        required: true
+      DOCKERHUB_TOKEN:
+        description: 'Token for your Docker Hub'
+        type: string
+        required: true
+      DOCKERHUB_TAG:
+        description: 'Tag to push to Docker Hub'
+        type: string
         required: true
 
 jobs:
