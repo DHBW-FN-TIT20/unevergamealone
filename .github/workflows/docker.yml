@@ -2,6 +2,10 @@ name: Docker
 
 on:
   workflow_dispatch:
+    environment:
+        description: 'Environment deploy to DockerHub'
+        type: environment
+        required: true
 
 jobs:
   docker:
@@ -18,12 +22,12 @@ jobs:
         name: Login to DockerHub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ inputs.DOCKERHUB_USERNAME }}
+          password: ${{ inputs.DOCKERHUB_TOKEN }}
       -
         name: Build and push
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: floskinner/unga:latest
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          tags: ${{ inputs.DOCKERHUB_TAG }}
+          platforms: linux/amd64,linux/arm64
