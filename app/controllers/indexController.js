@@ -13,7 +13,7 @@ module.exports = {
      */
     showIndex: async function (req, res, next) {        
         await app.db.connect();
-        res.sendFile("i.html", { root: __dirname + "/../public/" });
+        res.sendFile("home.html", { root: __dirname + "/../public/" });
     },
 
     /**
