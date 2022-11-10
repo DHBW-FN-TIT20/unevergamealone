@@ -1,0 +1,28 @@
+version: '3.5'
+services:
+  unga:
+    build: .
+    container_name: unevergamealone
+    restart: unless-stopped
+    ports:
+      - 80:80
+    environment:
+      - JWT_TOKEN=${JWT_TOKEN}
+      - DB_NAME=${DB_NAME}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
+      - TZ=Europe/Berlin
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:latest
+    restart: unless-stopped
+    environment:
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+    volumes:
+      - ./app/database/01_initTables.sql:/docker-entrypoint-initdb.d/01_initTables.sql:ro
