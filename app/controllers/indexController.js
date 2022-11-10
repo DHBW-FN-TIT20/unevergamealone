@@ -1,3 +1,4 @@
+const app = require('../app');
 /**
  * Controller for all static files
  * @module indexController
@@ -10,8 +11,9 @@ module.exports = {
      * @param {*} next Control to the next handler
      * @returns str static index.html
      */
-    showIndex: function (req, res, next) {
-        res.sendFile("index.html");
+    showIndex: async function (req, res, next) {        
+        await app.db.connect();
+        res.sendFile("home.html", { root: __dirname + "/../public/" });
     },
 
     /**
@@ -21,7 +23,7 @@ module.exports = {
      * @param {*} next Control to the next handler
      * @returns str static impressum.html
      */
-    showImpressum: function (req, res, next) {
+    showImpressum: async function (req, res, next) {
         res.sendFile("impressum.html", { root: __dirname + "/../public/" });
     },
 
@@ -32,7 +34,7 @@ module.exports = {
      * @param {*} next Control to the next handler
      * @returns str static sitemap.xml
      */
-    showSitemap: function (req, res, next) {
+    showSitemap: async function (req, res, next) {
         res.sendFile("sitemap.xml", { root: __dirname + "/../public/" });
     },
 
@@ -43,7 +45,7 @@ module.exports = {
      * @param {*} next Control to the next handler
      * @returns str static robots.txt
      */
-    showRobots: function (req, res, next) {
+    showRobots: async function (req, res, next) {
         res.sendFile("robots.txt", { root: __dirname + "/../public/" });
     }
 };

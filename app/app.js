@@ -20,8 +20,13 @@ const AppDB = require('./database/db');
 const UserRepository = require('./database/Models/User/UserRepository');
 const PlatformRepository = require('./database/Models/Platform/PlatformRepository');
 const UserPlatformRepository = require('./database/Models/UserPlatform/UserPlatformRepository');
-const GameRepository = require('./database/Models/Game/GameRepository')
-const TokenRepository = require('./database/Models/JWT/TokenRepository')
+const GameRepository = require('./database/Models/Game/GameRepository');
+const TokenRepository = require('./database/Models/JWT/TokenRepository');
+
+/**
+ * Create express app
+ */
+ const app = express();
 
 /**
  * Index router
@@ -36,10 +41,7 @@ const usersRouter = require('./routes/users');
  */
 const gamingRouter = require('./routes/gaming');
 
-/**
- * Create express app
- */
-const app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -69,41 +71,20 @@ app.use('/gaming/add', gamingRouter);
 app.use('/gaming/new', gamingRouter);
 
 //Configure database
-if (!fs.existsSync("./database/unevergamealone.sqlite")) {
-    const db = new AppDB("./database/unevergamealone.sqlite");
-    const userRepo = new UserRepository(db);
-    const platformRepo = new PlatformRepository(db);
-    const userPlatformRepo = new UserPlatformRepository(db);
-    const gameRepo = new GameRepository(db);
-    const tokenRepo = new TokenRepository(db);
-    userRepo.createTable();
-    userRepo.initialSetup();
-    platformRepo.createTable();
-    platformRepo.initialSetup();
-    userPlatformRepo.createTable();
-    userPlatformRepo.initialSetup();
-    gameRepo.createGameTable();
-    gameRepo.createGameUserMappingTable();
-    gameRepo.initialSetup();
-    tokenRepo.createTable();
-}
-
-const db = new AppDB("./database/unevergamealone.sqlite", { fileMustExist: true });
+const db = new AppDB();
 const userRepo = new UserRepository(db);
 const platformRepo = new PlatformRepository(db);
 const userPlatformRepo = new UserPlatformRepository(db);
 const gameRepo = new GameRepository(db);
 const tokenRepo = new TokenRepository(db);
 
-
-
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -114,6 +95,7 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+exports.db = db;
 exports.userRepo = userRepo;
 exports.platformRepo = platformRepo;
 exports.userPlatformRepo = userPlatformRepo;

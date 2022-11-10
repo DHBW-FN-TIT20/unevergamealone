@@ -52,7 +52,7 @@ const validateRegister = (req, res, next) => {
  * @param {*} next Control to the next handler
  * @returns str JSON with more infos
  */
-let isLoggedIn = (req, res, next) => {
+let isLoggedIn = async (req, res, next) => {
     const sign_in_or_sign_up = req.path.includes("sign-in") || req.path.includes("sign-up");
     try {
         let token = req.cookies['jwt'];
@@ -66,7 +66,7 @@ let isLoggedIn = (req, res, next) => {
             process.env.JWT_TOKEN
         );
 
-        const invalid = app.tokenRepo.selectToken(new Token(token, decoded.exp));
+        const invalid = await app.tokenRepo.selectToken(new Token(token, decoded.exp));
 
         req.userData = decoded;
 

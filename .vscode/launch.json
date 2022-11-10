@@ -12,6 +12,7 @@
         "program": "${workspaceFolder}/bin/www",
         "restart": true,
         "console": "integratedTerminal",
-        "internalConsoleOptions": "neverOpen"
+        "internalConsoleOptions": "neverOpen",
+        "envFile": "${workspaceFolder}/.env"
     }]
 }

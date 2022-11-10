@@ -3,13 +3,13 @@
     "recurseDepth": 10,
     "source": {
         "include": [
-            "bin",
-            "controllers",
-            "database",
-            "handlers",
-            "routes",
-            "views",
-            "public/javascripts"
+            "app/bin",
+            "app/controllers",
+            "app/database",
+            "app/handlers",
+            "app/routes",
+            "app/views",
+            "app/public/javascripts"
         ],
         "exclude": [
             "node_modules",

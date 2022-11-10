@@ -1,6 +1,7 @@
 node_modules
 .vscode
 .gitignore
+.github
 README.md
-todo
 Makefile
+LICENSE

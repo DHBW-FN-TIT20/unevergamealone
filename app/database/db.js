@@ -1,15 +1,23 @@
-const Database = require('better-sqlite3');
+const mariadb = require('mariadb');
 /**
  * Class representing the database connection.
  */
 class AppDB {
-    /**
-     * @constructor
-     * @param {string} dbFilePath path to the database file
-     */
-    constructor(dbFilePath) {
-        this.db = new Database(dbFilePath, { verbose: console.log });
+    async connect() {
+        try {
+            this.db = await mariadb.createConnection({
+                host: process.env.DB_NAME,
+                database: process.env.MARIADB_DATABASE,
+                user: process.env.MARIADB_USER,
+                password: process.env.MARIADB_PASSWORD,
+                connectionLimit: 5
+            });
+        } catch (err) {
+            throw err;
+        }
     }
+
+
 
     /**
      * Get the first result
@@ -17,9 +25,9 @@ class AppDB {
      * @param {string[]} params the parameters used in the sql statement
      * @returns {object} an object that represents the first row retrieved by the query
      */
-    get(sql, params = []) {
-        const statement = this.db.prepare(sql);
-        return statement.get(params);
+    async get(sql, params = []) {
+        let result = await this.run(sql, params);
+        return result[0];
     }
 
     /**
@@ -28,9 +36,8 @@ class AppDB {
      * @param {string[]} params the parameters used in the sql statement
      * @returns {object} an object that represents all row retrieved by the query
      */
-    all(sql, params = []) {
-        const statement = this.db.prepare(sql);
-        return statement.all(params);
+    async all(sql, params = []) {
+        return await this.run(sql, params);
     }
 
     /**
@@ -39,8 +46,13 @@ class AppDB {
      * @param {array} params the parameters used in the sql statement
      * @returns {object} an info object describing any changes made
      */
-    run(sql, params = []) {
-        return this.db.prepare(sql).run(params);
+    async run(sql, params = []) {
+        try {
+            let result = await this.db.query(sql, params)
+            return result;
+        } catch (err) {
+            throw err;
+        }
     }
 }
 
