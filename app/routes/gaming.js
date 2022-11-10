@@ -4,7 +4,7 @@
  */
 
 let express = require('express');
-let router = express.Router();
+let router = require('express-promise-router')();
 const { v4: uuidv4 } = require('uuid');
 const fs = require("fs");
 const multer = require('multer')
@@ -37,43 +37,59 @@ const upload = multer({ storage: storage });
 /**
  * GET of /gaming/
  */
-router.get('/', userValidater.isLoggedIn, gamingController.showPlatforms);
+router.get('/', userValidater.isLoggedIn, async function(req, res, next){
+    await gamingController.showPlatforms(req, res, next);
+});
 
 /**
  * GET of /gaming/show/:games
  */
-router.get('/show/:games', userValidater.isLoggedIn, gamingController.showGames);
+router.get('/show/:games', userValidater.isLoggedIn, async function(req, res, next){
+    await gamingController.showGames(req, res, next);
+});
 
 /**
  * GET of /gaming/manage
  */
-router.get('/manage', userValidater.isLoggedIn, gamingController.showManageGames);
+router.get('/manage', userValidater.isLoggedIn, async function(req, res, next){
+    await gamingController.showManageGames(req, res, next);
+});
 
 
 /**
  * GET of /gaming/new
  */
-router.get('/new', userValidater.isLoggedIn, gamingController.showNewGames);
+router.get('/new', userValidater.isLoggedIn, async function(req, res, next){
+    await gamingController.showNewGames(req, res, next);
+});
 
 /**
  * GET of /gaming/game/:gamename
  */
-router.get('/game/:gamename', userValidater.isLoggedIn, gamingController.getGameByName);
+router.get('/game/:gamename', userValidater.isLoggedIn, async function(req,res,next){
+    await gamingController.getGameByName(req, res, next);
+});
 
 /**
  * POST of /gaming/manage
  */
-router.post('/manage', userValidater.isLoggedIn, gamingController.addGameToUser);
+router.post('/manage', userValidater.isLoggedIn, async function(req,res,next){
+    await gamingController.addGameToUser(req, res, next);
+});
 
 /**
  * POST of /gaming/new
  */
-router.post('/new', upload.single('cover'), userValidater.isLoggedIn, gamingController.insertNewGame);
+router.post('/new', upload.single('cover'), userValidater.isLoggedIn, async function(req,res,next){
+    await gamingController.insertNewGame(req, res, next);
+});
 
 /**
  * POST of /gaming/delete
  */
-router.post('/delete', userValidater.isLoggedIn, gamingController.deleteGame);
+router.post('/delete', userValidater.isLoggedIn, async function(req,res,next){
+    await gamingController.deleteGame(req, res, next);
+});
 
 
 module.exports = router;
