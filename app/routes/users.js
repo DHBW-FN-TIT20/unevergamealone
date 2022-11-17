@@ -18,7 +18,7 @@ router.get("/logout", userValidater.isLoggedIn, async function(req, res, next){
  * GET of /users/sign-up
  */
 router.get('/sign-up', userValidater.isLoggedIn, async function(req, res, next){
-    userController.getSignUp(req, res, next);
+    await userController.getSignUp(req, res, next);
 });
 
 /**
