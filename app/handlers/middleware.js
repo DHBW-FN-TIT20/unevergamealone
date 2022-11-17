@@ -83,7 +83,9 @@ let isLoggedIn = async (req, res, next) => {
         if (sign_in_or_sign_up) {
             next();
         }
-        return res.status(401).redirect('/users/sign-in');
+        else {
+            return res.status(401).redirect('/users/sign-in');
+        }
     }
 }
 
