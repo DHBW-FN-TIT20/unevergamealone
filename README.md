@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="public/images/UNeverGameAloneLogo.png" alt="Logog"/>
+  <img src="app/public/images/UNeverGameAloneLogo.png" alt="Logog"/>
 </p>
 
 # UNGA - U Never Game Alone 
-[![Website](https://img.shields.io/website?down_message=Offline&label=Demo&up_message=Online&url=https%3A%2F%2Funevergamealone.ddnss.de) ](https://unevergamealone.ddnss.de) [![Website](https://img.shields.io/website?down_message=Offline&label=Docs&up_message=Online&url=https%3A%2F%2Fdhbw-fn-tit20.github.io%2Funevergamealone%2F)](https://dhbw-fn-tit20.github.io/unevergamealone/)
+[![Website](https://img.shields.io/website?down_message=Offline&label=Demo&up_message=Online&url=https%3A%2F%2Funevergamealone.ddnss.de) ](https://unevergamealone.ddnss.de) [![Website](https://img.shields.io/website?down_message=Offline&label=Docs&up_message=Online&url=https%3A%2F%2Fdhbw-fn-tit20.github.io%2Funevergamealone%2F)](https://dhbw-fn-tit20.github.io/unevergamealone/) ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/floskinner/unga?sort=date)
 
 This is a student project of the DHBW RV Campus FN. The purpose of this webapp is that gamers can find other gamers playing the same game. Gamers have to register and afterwards they can add existing games to their profille or create new games.
 
@@ -20,7 +20,8 @@ This is a student project of the DHBW RV Campus FN. The purpose of this webapp i
   - [Run the Container](#run-the-container)
 # Manually
 Here you can see how to run the application manually.<br />
-Be sure you have **Node.js v16.x:** and **npm** installed! See [README.md](https://github.com/nodesource/distributions/blob/master/README.md)
+Be sure you have **Node.js v16.x:** and **npm** installed! See [README.md](https://github.com/nodesource/distributions/blob/master/README.md) <br>
+You also need **mariadb** that is setup like [initScript](app/database/01_initTables.sql)
 
 ## Clone the repo:
 Run:
@@ -48,13 +49,17 @@ npm config set python /usr/bin/python3
 ```
 
 ## Configuration
-**Port**: <br/>
-Default Port is set to 3000. If you want to change it you habe to set the ENV `PORT`:
+Default Port is set to 3000.<br>
+You also need to set the setting for the DB:
 ```bash
 # Set it in the bash
-export PORT=80
+export PORT=80                              # Default 3000
+export DB_NAME=db                           # Hostname of the DB
+export MARIADB_DATABASE=unga                # Default Database
+export MARIADB_USER=unga                    # User with read / write permission
+export MARIADB_PASSWORD=db_unga_password    # Password for the user
 
-# Set it in the .env
+# OR set it in the .env
 nano .env
 ```
 
@@ -107,16 +112,32 @@ cd unevergamealone
 make build
 ```
 
+## Get it from DockerHub
+```
+docker pull floskinner/unga
+```
+
 ## Run the Container
 ```bash
 docker run \
     --rm \
     -d \
     -e JWT_TOKEN=SECRET_KEY \
-    -v database:/app/database \
+    -e DB_NAME=db \
+    -e MARIADB_ROOT_PASSWORD=db_root_password \
+    -e MARIADB_DATABASE=unga \
+    -e MARIADB_USER=unga \
+    -e MARIADB_PASSWORD=db_unga_password \
     -v uploads:/app/public/images/upload \
     -p 80:3000 \
-    --name my-container-name \
-    unevergamealone
+    --name unga \
+    floskinner/unga
 ```
 
+## Docker-Compose
+You also can use Docker-Compose. Note that you need to set the [ENVs](#configuration). Also note that it will build the container from the source in the example docker-compose.yml <br>
+<br>
+Start the service:
+```
+docker-compose up
+```
